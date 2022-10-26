@@ -46,17 +46,7 @@
 
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
-        <br>
-    <hr>
-  
-    <div class="w3-bar-block">
-      <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-light-blue w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-      <a href="../index.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-xl" ></i>  Home</a>
-      <a href="assignment1.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-xl"></i>  Assignment 1</a>
-      <a href="weight.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-xl"></i>  Assignment 2</a>
-      <a href="kcal.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-xl"></i>  Assignment 3</a>
-      <a href="walk.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-chart-line fa-xl"></i>  Assignment 4</a>
-    </div>
+ 
     </nav>
 
 
@@ -113,14 +103,14 @@
             overlayBg.style.display = "none";
         }
         $(function () {
-            $("#includeFooter").load("../components/footer.html");
+            $("#includeFooter").load("./components/footer.html");
         });
         $(function () {
-            $("#includeTopContainer").load("../components/top-container.html");
+            $("#includeTopContainer").load("./components/top-container.html");
         });
-        // $(function () {
-        //     $("#mySidebar").load("../components/sidebar.html");
-        // });
+        $(function () {
+            $("#mySidebar").load("./components/sidebar.html");
+        });
 
 
 
@@ -182,7 +172,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
     </script>
     <!-- <script type="module" src="./js/script.js"></script> -->
-    <script type="module" src="./assignment1.js"></script>
+    <script type="module" src="./First_Week/assignment1.js"></script>
     <script src="https://kit.fontawesome.com/22c153e680.js" crossorigin="anonymous"></script>
 
 </body>

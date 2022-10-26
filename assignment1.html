@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/style.css">
+    <!--D3.js table-->
+    <script src="https://d3js.org/d3.v4.js"></script>
     <style>
         html,
         body,
@@ -56,10 +58,10 @@
 
         <!-- Header -->
         <header class="w3-container" style="padding-top:22px; margin-bottom: 3%;">
-            <h5 style="font-size: 30px;"><b><i class="fa fa-person-biking fa-2xl"></i> Activity Type </b></h5>
+            <h5 style="font-size: 30px;"><b><i class="fa fa-person-biking fa-2xl"></i> Assignment 1 </b></h5>
         </header>
 
-        <div class="w3-row-padding w3-margin-bottom">
+        <div id="char1" class="w3-row-padding w3-margin-bottom">
             <section class="heart-page-section bg-light">
                 <div class="container">
                     <div>
@@ -118,6 +120,64 @@
         $(function () {
             $("#mySidebar").load("./components/sidebar.html");
         });
+
+
+
+
+    var margin = {top: 20, right: 30, bottom: 40, left: 90},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Parse the Data
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function(data) {
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 13000])
+    .range([ 0, width]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-45)")
+      .style("text-anchor", "end");
+
+  // Y axis
+  var y = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.Country; }))
+    .padding(.1);
+  svg.append("g")
+    .call(d3.axisLeft(y))
+
+  //Bars
+  svg.selectAll("myRect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", x(0) )
+    .attr("y", function(d) { return y(d.Country); })
+    .attr("width", function(d) { return x(d.Value); })
+    .attr("height", y.bandwidth() )
+    .attr("fill", "#69b3a2")
+
+
+    // .attr("x", function(d) { return x(d.Country); })
+    // .attr("y", function(d) { return y(d.Value); })
+    // .attr("width", x.bandwidth())
+    // .attr("height", function(d) { return height - y(d.Value); })
+    // .attr("fill", "#69b3a2")
+
+})
 
     </script>
     <!-- <script type="module" src="./js/script.js"></script> -->

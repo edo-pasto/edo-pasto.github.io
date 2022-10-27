@@ -11,8 +11,14 @@ var svg = d3.select("#char1")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-const geo_url = "https://raw.githubusercontent.com/Jeko83/TrentoTreeMap/master/data/geo_data_trees.geojson";
+const geo_url = "https://raw.githubusercontent.com/edo-pasto/edo-pasto.github.io/main/data/geo_data_trees.csv";
 
+
+// d3.csv(geo_url,function (data){
+// data.map(function (d){
+//     console.log(d);
+// })
+// });
 
 
 //test_url="https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv"

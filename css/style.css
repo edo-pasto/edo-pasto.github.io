@@ -491,9 +491,7 @@ a i:hover{
 	margin-left: 10%;
 	margin-right: 10%;
   }
-  #buttonAssignment1{
-	text-align: center;
-  }
+
 
  ul{
 	text-align: justify;
@@ -512,4 +510,14 @@ a i:hover{
 } */
 .task_container {
 	column-count: 2;
+}
+
+#containerBtnAssgn1{
+	
+	margin-left: 40%;
+	
+}
+.w3-third{
+	margin: auto;
+	margin-top: 10px;
 }

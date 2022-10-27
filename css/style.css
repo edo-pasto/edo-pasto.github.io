@@ -172,7 +172,7 @@
 /* GENERAL CSS */
 body {
 	background-color: #fff;
-	font-family: roboto, sans-serif;
+	
 }
 /* GLOBAL CSS */
 section {
@@ -285,215 +285,6 @@ section {
 	background-color: rgb(170, 46, 37);
 	color: white;
 }
-
-/* HERO SECTION */
-.hero {
-	background: linear-gradient(rgba(0, 0, 0, 0.829), rgba(0, 0, 0, 0.5)),
-		url("../images/hero-bg.png") top center;
-	background-repeat: no-repeat;
-	width: 100%;
-	height: 370px;
-	background-size: cover;
-}
-.hero-description {
-	line-height: 1.8;
-}
-
-.feture-bar {
-	display: flex;
-	justify-content: center;
-	padding: 20px;
-	background-color: #00649e;
-	border-radius: 10px;
-}
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-	color: white;
-	background-color: #ed4c4c;
-}
-
-.nav-link:focus,
-.nav-link:hover {
-	color: #7ac2fc;
-}
-.autocomplete {
-	position: relative;
-	display: inline-block;
-}
-.autocomplete-items {
-	position: absolute;
-	border: 1px solid #d4d4d4;
-	border-bottom: none;
-	border-top: none;
-	z-index: 99;
-	top: 100%;
-	left: 0;
-	right: 0;
-}
-.autocomplete-items div {
-	padding: 10px;
-	cursor: pointer;
-	background-color: #fff;
-	border-bottom: 1px solid #d4d4d4;
-}
-.autocomplete-items div:hover {
-	background-color: #e9e9e9;
-}
-.autocomplete-active {
-	background-color: DodgerBlue !important;
-	color: #ffffff;
-}
-
-/* COVID SECTION  */
-.service-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 30px;
-	border-radius: 20px;
-	color: rgb(45, 55, 72);
-	background-color: rgb(255, 255, 255);
-	box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-	transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-}
-
-.service-wrapper:hover {
-	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
-.service-wrapper .inner-box {
-	width: 150px;
-	height: 60px;
-	margin-bottom: 16px;
-	border-radius: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.covid-num {
-	font-size: 25px;
-	font-weight: 700;
-}
-.box-purple {
-	background-color: #f3e5f5;
-	color: rgb(156, 39, 176);
-}
-
-.box-green {
-	background-color: rgb(232, 245, 233);
-	color: rgb(76, 175, 80);
-}
-
-.box-blue {
-	background-color: rgb(227, 242, 253);
-	color: rgb(33, 150, 243);
-}
-
-.box-pink {
-	background-color: rgb(252, 228, 236);
-	color: rgb(233, 30, 99);
-}
-
-.service-wrapper .header {
-	font-size: 1.25rem;
-	font-weight: 500;
-	text-align: center;
-}
-
-/* about us start */
-
-.aboutUs {
-	padding-top: 450px;
-	padding-bottom: 10px;
-	background-image: url("../images/aboutUs2.jpeg");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-
-.footer-social-links {
-	padding: 20px;
-	font-size: 30px;
-}
-
-.footer-social-links.fab {
-	padding: 10px;
-	font-size: 30px;
-	width: 30px;
-	text-align: center;
-	text-decoration: none;
-	margin: 10px 2px;
-	border-radius: 50%;
-	color: #fff;
-}
-
-.footer-social-links.fas {
-	padding: 10px;
-	font-size: 30px;
-	width: 30px;
-	text-align: center;
-	text-decoration: none;
-	margin: 10px 2px;
-	border-radius: 50%;
-	color: #fff;
-}
-.footer-social-links.fas:hover {
-	opacity: 0.7;
-}
-
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-.flip-card {
-	background-color: transparent;
-	width: 350px;
-	height: 200px;
-	padding-left: 30px;
-	padding-right: 30px;
-	perspective: 1000px; /*Remove this if you don't want the 3D effect */
-}
-
-/* This container is needed to position the front and back side */
-.flip-card-inner {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	transition: transform 0.8s;
-	transform-style: preserve-3d;
-}
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
-	transform: rotateY(180deg);
-}
-
-/* Position the front and back side */
-.flip-card-front,
-.flip-card-back {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-
-	-webkit-backface-visibility: hidden; /* Safari */
-	backface-visibility: hidden;
-}
-
-/* Style the front side (fallback if image is missing) */
-.flip-card-front {
-	padding-top: 10px;
-	background-color: #00649e;
-	color: white;
-}
-
-/* Style the back side */
-.flip-card-back {
-	padding-top: 30px;
-	background-color: #111111;
-	color: white;
-	transform: rotateY(180deg);
-}
-
-/* about us end */
-
 /*--------------------------------------------------------------
 # Footer Area
 --------------------------------------------------------------*/
@@ -656,33 +447,12 @@ a:focus {
     color: white;
   }
 
-  #closeHeartTable{
-    margin-left: 0px;
-    margin-bottom: 1000px;
-    color: black;
-    font-weight: bold;
-    float: right;
-    font-size: 65px;
-    line-height: 40px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
   a:hover {
-	color:white;
+	color:black;
   }
 a i:hover{
 	color: white;
 }
-#tableHospitals:hover {
-	color: #7ac2fc;
-
-  }
-  #tableHospitals:hover a:hover{
-	color: white;
-
-  }
-
   .responsive{
 	height: 100%;
 	width: auto;
@@ -690,13 +460,6 @@ a i:hover{
   .fa{
 	color: #0d6efc;
 	
-  }
-  #moreinfo1:hover{
-	color: #0d6efc;
-  }
-  
-  #infoHeart:hover{
-	color: #0d6efc;
   }
 
   @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100&display=swap');
@@ -708,13 +471,27 @@ a i:hover{
 	margin: 0 0 24px;
 
   }
+  h2{
+	font-family: 'Roboto Slab', sans-serif;
+	text-align: center;
+	margin: 0 0 24px;
+  }
   h3{
 	font-family: 'Roboto Slab', sans-serif;
 
 	margin: 0 0 24px;
   }
+  h4{
+	font-family: 'Roboto Slab', sans-serif;
+
+  }
   p{
 	/*font-family: 'Fira Sans';*/
+	text-align: center;
+	margin-left: 10%;
+	margin-right: 10%;
+  }
+  #buttonAssignment1{
 	text-align: center;
   }
 

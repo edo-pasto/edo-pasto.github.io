@@ -728,3 +728,11 @@ a i:hover{
 	align-items: center;
 	justify-content: center;
 }
+/* .task_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+} */
+.task_container {
+	column-count: 2;
+}

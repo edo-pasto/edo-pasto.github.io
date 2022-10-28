@@ -1,82 +1,81 @@
-.site-footer
-{
-  /* background-color:#26272b; */
-  background-color:#7ac2fc;
-  padding:45px 0 20px;
-  font-size:15px;
-  line-height:24px;
-  color: black;
-}
-.site-footer hr
-{
-  border-top-color:#bbb;
-  opacity:0.5
-}
-.site-footer hr.small
-{
-  margin:20px 0
-}
-.site-footer h6
-{
-  color:#fff;
-  font-size:16px;
-  text-transform:uppercase;
-  margin-top:5px;
-  letter-spacing:2px
-}
-.site-footer a
-{
-  color:black;
-}
-.site-footer a:hover
-{
-  color:white;
-  text-decoration:none;
-}
-.footer-links
-{
-  padding-left:0;
-  list-style:none
-}
-.footer-links li
-{
-  display:block
-}
-.footer-links a
-{
-  color:black
-}
-.footer-links a:active,.footer-links a:focus,.footer-links a:hover
-{
-  color:white;
-  text-decoration:none;
-}
-.footer-links.inline li
-{
-  display:inline-block
+.site-footer {
+	/* background-color:#26272b; */
+	background-color: #7ac2fc;
+	padding: 45px 0 20px;
+	font-size: 15px;
+	line-height: 24px;
+	color: black;
 }
 
-.copyright-text
-{
-  margin:0
+.site-footer hr {
+	border-top-color: #bbb;
+	opacity: 0.5
 }
-@media (max-width:991px)
-{
-  .site-footer [class^=col-]
-  {
-    margin-bottom:30px
-  }
+
+.site-footer hr.small {
+	margin: 20px 0
 }
-@media (max-width:767px)
-{
-  .site-footer
-  {
-    padding-bottom:0
-  }
-  .site-footer .copyright-text,.site-footer .social-icons
-  {
-    text-align:center
-  }
+
+.site-footer h6 {
+	color: #fff;
+	font-size: 16px;
+	text-transform: uppercase;
+	margin-top: 5px;
+	letter-spacing: 2px
+}
+
+.site-footer a {
+	color: black;
+}
+
+.site-footer a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.footer-links {
+	padding-left: 0;
+	list-style: none
+}
+
+.footer-links li {
+	display: block
+}
+
+.footer-links a {
+	color: black
+}
+
+.footer-links a:active,
+.footer-links a:focus,
+.footer-links a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.footer-links.inline li {
+	display: inline-block
+}
+
+.copyright-text {
+	margin: 0
+}
+
+@media (max-width:991px) {
+	.site-footer [class^=col-] {
+		margin-bottom: 30px
+	}
+}
+
+@media (max-width:767px) {
+	.site-footer {
+		padding-bottom: 0
+	}
+
+	.site-footer .copyright-text,
+	.site-footer .social-icons {
+		text-align: center
+	}
 }
 
 
@@ -86,34 +85,42 @@
 /* GENERAL CSS */
 body {
 	background-color: #fff;
-	
+
 }
+
 /* GLOBAL CSS */
 section {
 	padding: 40px 0px;
 }
+
 .bg-custom-blue {
 	background-color: #0076bc;
 	color: #fff;
 }
+
 .bg-grey {
 	background-color: #f7f7f7;
 }
+
 .text-custom-white {
 	color: rgba(238, 238, 238, 0.685);
 }
+
 /* NAVBAR */
 .navbar {
 	background-color: #fff;
 }
+
 .navbar-nav .nav-item {
 	margin-left: 25px;
 	transition: all 0.5s;
 	border-radius: 0.25rem;
 }
+
 .navbar-nav .nav-item:hover {
 	background-color: #7ac2fc;
 }
+
 .navbar-nav .nav-item .nav-link {
 	color: #7ac2fc;
 	font-size: 18px;
@@ -129,20 +136,24 @@ section {
 	box-shadow: rgb(0 0 0 / 31%) 0px 0px 1px 0px,
 		rgb(0 0 0 / 25%) 0px 7px 16px -4px;
 }
+
 .modal-top {
 	display: flex;
 	padding: 24px 18px 16px;
 }
+
 .modal-heading {
 	color: rgb(23, 43, 77);
 	margin: 0;
 	padding-top: 7px;
 }
+
 .modal-description {
 	margin: 8px 0px 0px;
 	font-size: 0.875rem;
 	color: rgb(107, 119, 140);
 }
+
 .danger-icon {
 	display: flex;
 	align-items: center;
@@ -156,19 +167,23 @@ section {
 	color: rgb(244, 67, 54);
 	margin-right: 16px;
 }
+
 .modal-bottom {
 	display: flex;
 	justify-content: flex-end;
 	padding: 12px 24px;
 }
+
 .btn-custom-danger {
 	background-color: rgb(244, 67, 54);
 	color: white;
 }
+
 .btn-custom-danger:hover {
 	background-color: rgb(170, 46, 37);
 	color: white;
 }
+
 /*--------------------------------------------------------------
 # Footer Area
 --------------------------------------------------------------*/
@@ -180,12 +195,15 @@ section {
 	line-height: 25px;
 	margin: 0 0 15px 0;
 }
+
 .footer img {
 	width: 70%;
 }
+
 .footer a {
 	text-decoration: none;
 }
+
 .footer ul {
 	padding-left: 0;
 }
@@ -193,6 +211,7 @@ section {
 .footer input:focus {
 	outline: none;
 }
+
 .footer a:hover,
 a:focus {
 	text-decoration: none;
@@ -205,20 +224,25 @@ a:focus {
 	background: #111111;
 	padding-top: 70px;
 }
+
 .footer-about {
 	margin-bottom: 30px;
 }
+
 .footer-about .footer-logo {
 	margin-bottom: 25px;
 	width: 350px;
 }
+
 .footer-about p {
 	color: #b7b7b7;
 	margin-bottom: 30px;
 }
+
 .footer-widget {
 	margin-bottom: 30px;
 }
+
 .footer-widget h6 {
 	color: #ffffff;
 	font-size: 15px;
@@ -227,14 +251,17 @@ a:focus {
 	letter-spacing: 2px;
 	margin-bottom: 20px;
 }
+
 .footer-widget ul li {
 	line-height: 36px;
 	list-style: none;
 }
+
 .footer-widget ul li a {
 	color: #b7b7b7;
 	font-size: 14px;
 }
+
 .footer-widget ul li a:hover {
 	color: white;
 }
@@ -244,13 +271,16 @@ a:focus {
 	padding: 20px 0;
 	margin-top: 40px;
 }
+
 .footer-copyright-text p {
 	color: #b7b7b7;
 	margin-bottom: 0;
 }
+
 .footer-copyright-text p i {
 	color: #e53637;
 }
+
 .footer-copyright-text p a {
 	font-weight: bolder;
 	color: white;
@@ -281,75 +311,82 @@ a:focus {
 
 
 .alert {
-    padding: 20px;
-    background-color: #0d6efc;
-    color: white;
-  }
-  
-  .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .closebtn:hover {
-    color: white;
-  }
-
-  a:hover {
-	color:black;
-  }
-a i:hover{
+	padding: 20px;
+	background-color: #0d6efc;
 	color: white;
 }
-  .responsive{
+
+.closebtn {
+	margin-left: 15px;
+	color: white;
+	font-weight: bold;
+	float: right;
+	font-size: 22px;
+	line-height: 20px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.closebtn:hover {
+	color: white;
+}
+
+/* a:hover {
+	color:white;
+  } */
+/* a i:hover{
+	color: white;
+} */
+.responsive {
 	height: 100%;
 	width: auto;
-  }
-  .fa{
+}
+
+.fa {
 	color: #0d6efc;
-	
-  }
 
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100&display=swap');
+}
 
-  h1{
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100&display=swap');
+
+h1 {
 	font-family: 'Roboto Slab', sans-serif;
 	text-align: center;
 	text-transform: uppercase;
 	margin: 0 0 24px;
 
-  }
-  h2{
+}
+
+h2 {
 	font-family: 'Roboto Slab', sans-serif;
 	text-align: center;
 	margin: 0 0 24px;
-  }
-  h3{
-	font-family: 'Roboto Slab', sans-serif;
+}
 
+h3 {
+	font-family: 'Roboto Slab', sans-serif;
+	text-align: center;
 	margin: 0 0 24px;
-  }
-  h4{
+}
+
+h4 {
 	font-family: 'Roboto Slab', sans-serif;
 
-  }
-  p{
+}
+
+p {
 	/*font-family: 'Fira Sans';*/
-	text-align: center;
+	text-align: justify;
+	text-justify: values;
+	/* text-align: center; */
 	margin-left: 10%;
 	margin-right: 10%;
-  }
+}
 
 
- ul{
+ul {
 	text-align: justify;
- }
+}
 
 /* random css for sidebar link => TODO: maybe to clean this huge amount here above i dont wanna read :D */
 .sidebar-link {
@@ -360,64 +397,75 @@ a i:hover{
 
 
 
-#containerBtnAssgn1{
+#containerBtnAssgn1 {
 	/* margin-left: 40%; */
 	display: flex;
-    justify-content: center;
+	justify-content: center;
 
 }
-#pageContent{
+
+#pageContent {
 	position: absolute;
 	overflow-x: auto;
 	z-index: 2;
 	margin-top: 15px;
 	margin-left: 300px;
 }
-#assignm1PageContent{
+
+#assignm1PageContent {
 	/* position: absolute;  */
-	overflow-x: auto; 
+	overflow-x: auto;
 	z-index: 2;
 	margin-top: 15px;
 	margin-left: 300px;
 }
-#includeHeader{
+
+#includeHeader {
 	position: relative;
 	z-index: 4;
 	max-height: 64px;
-	
+
 }
-#header{
+
+#header {
 	background-color: #7ac2fc;
 	max-height: 64px;
-	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;
+	display: -webkit-box;
+	/* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;
+	/* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;
+	/* TWEENER - IE 10 */
+	display: -webkit-flex;
+	/* NEW - Chrome */
+	display: flex;
 }
 
 
-#mySidebar{
+#mySidebar {
 	z-index: 3;
 	width: 300px;
 	margin-top: 45px;
 }
 
-#mySidebarHome{
+#mySidebarHome {
 	z-index: 3;
 	width: 300px;
 	margin-top: 45px;
 }
-#HomePageTitle{
+
+#HomePageTitle {
 	padding-top: 22px;
 	margin-top: 70px;
 }
-#assignm1Title{
+
+#assignm1Title {
 	padding-top: 22px;
 	margin-top: 90px;
 }
-.task-container{
-	
+
+.task-container {
+
 	display: flex;
-    justify-content: center;
+	justify-content: center;
 }

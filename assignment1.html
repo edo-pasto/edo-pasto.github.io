@@ -55,18 +55,23 @@
 
         <div class="w3-row-padding w3-margin-bottom">
             <br>
-            <h2>Chart 1</h2>
+            <h2>Chart 1 - BarChart</h2>
             <div class="task-container" id="task1"></div>
             <hr>
             <br>
-            <h2>Chart 2</h2>
+            <h2>Chart 2 - Stacked BarChart</h2>
             <div class="task-container" id="task2"></div>
             <hr>
             <br>
+            <h2>Chart 3 - Small Multiple</h2>
             <div class="task-container" id="task3"></div>
-
+            <hr>
+            <br>
+            <h2>Chart 4 - Percent Stacked BarChart</h2>
             <div class="task-container" id="task4"></div>
-
+            <hr>
+            <br>
+            <h2>Chart 5 - Waffle Chart</h2>
             <div class="task-container" id="task5"></div>
         </div>
 
@@ -129,15 +134,16 @@
 
         // -------------- First Chart -------------
 
-        const margin = { top: 20, right: 30, bottom: 40, left: 120 },
+        const margin = { top: 20, right: 30, bottom: 40, left: 250 },
             width = 800 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
         const svg = d3.select("#task1")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            // .attr("width", width + margin.left + margin.right)
+            // .attr("height", height + margin.top + margin.bottom)
+            .attr("viewBox", `0 0 1000 500`)
             .append("g")
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
@@ -210,7 +216,7 @@
                 })
                 .attr("width", function (d) {
                     return x(d.Count);
-                 
+
                 })
                 .attr("height", y.bandwidth())
                 .attr("fill", "#69b3a2")
@@ -224,14 +230,14 @@
             // .attr("width", x.bandwidth())
             // .attr("height", function(d) { return height - y(d.Value); })
             // .attr("fill", "#69b3a2")
-            
+
             //Animation
-        //     svg.selectAll("rect")
-        //         .transition()
-        //         .duration(800)
-        //         .attr("x", function (d) { return x(d.Count); })
-        //         .attr("width", function (d) { return width - x(d.Count) })
-        //         .delay(function (d, i) { console.log(i); return (i * 100) })
+            //     svg.selectAll("rect")
+            //         .transition()
+            //         .duration(800)
+            //         .attr("x", function (d) { return x(d.Count); })
+            //         .attr("width", function (d) { return width - x(d.Count) })
+            //         .delay(function (d, i) { console.log(i); return (i * 100) })
 
         })
 
@@ -241,8 +247,9 @@
 
         var svg2 = d3.select("#task2")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            // .attr("width", width + margin.left + margin.right)
+            // .attr("height", height + margin.top + margin.bottom)
+            .attr("viewBox", `0 0 1000 500`)
             .append("g")
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
@@ -272,7 +279,7 @@
             // color palette = one color per subgroup
             var color = d3.scaleOrdinal()
                 .domain(subgroups)
-                .range(['#e41a1c', '#377eb8', '#4daf4a','#3c51ae','#fff1a9','#bb3366'])
+                .range(['#e41a1c', '#377eb8', '#4daf4a', '#3c51ae', '#fff1a9', '#bb3366'])
             //stack the data? --> stack per subgroup
             var stackedData = d3.stack()
                 .keys(subgroups)
@@ -303,6 +310,156 @@
                 })
                 .attr("width", x.bandwidth())
         })
+
+
+        //----------- Third Chart --------------
+
+
+        //Read the data
+        d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function (data) {
+
+            // group the data: I want to draw one line per group
+            var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+                .key(function (d) { return d.name; })
+                .entries(data);
+
+            // What is the list of groups?
+            allKeys = sumstat.map(function (d) { return d.key })
+
+            // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
+            var svg3 = d3.select("#task3")
+                .selectAll("uniqueChart")
+                .data(sumstat)
+                .enter()
+                .append("svg")
+                // .attr("width", width + margin.left + margin.right)
+                // .attr("height", height + margin.top + margin.bottom)
+                .attr("viewBox", `0 0 1000 500`)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+
+            // Add X axis --> it is a date format
+            var x = d3.scaleLinear()
+                .domain(d3.extent(data, function (d) { return d.year; }))
+                .range([0, width]);
+            svg3
+                .append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x).ticks(3));
+
+            //Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) { return +d.n; })])
+                .range([height, 0]);
+            svg3.append("g")
+                .call(d3.axisLeft(y).ticks(5));
+
+            // color palette
+            var color = d3.scaleOrdinal()
+                .domain(allKeys)
+                .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
+
+            // Draw the line
+            svg3
+                .append("path")
+                .attr("fill", "none")
+                .attr("stroke", function (d) { return color(d.key) })
+                .attr("stroke-width", 1.9)
+                .attr("d", function (d) {
+                    return d3.line()
+                        .x(function (d) { return x(d.year); })
+                        .y(function (d) { return y(+d.n); })
+                        (d.values)
+                })
+
+            // Add titles
+            svg3
+                .append("text")
+                .attr("text-anchor", "start")
+                .attr("y", -5)
+                .attr("x", 0)
+                .text(function (d) { return (d.key) })
+                .style("fill", function (d) { return color(d.key) })
+
+        })
+
+        //----------- Fourth Chart --------------
+
+        var svg4 = d3.select("#task4")
+            .append("svg")
+            // .attr("width", width + margin.left + margin.right)
+            // .attr("height", height + margin.top + margin.bottom)
+            .attr("viewBox", `0 0 1000 500`)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Parse the Data
+        d3.csv("/data/top_trees_neighborhood.csv", function (data) {
+
+            // List of subgroups = header of the csv files = soil condition here
+            var subgroups = data.columns.slice(1)
+
+            // List of groups = species here = value of the first column called group -> I show them on the X axis
+            var groups = d3.map(data, function (d) { return (d.Neighborhood) }).keys()
+
+            // Add X axis
+            var x = d3.scaleBand()
+                .domain(groups)
+                .range([0, width])
+                .padding([0.2])
+            svg4.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x).tickSizeOuter(0));
+
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, 100])
+                .range([height, 0]);
+            svg4.append("g")
+                .call(d3.axisLeft(y));
+
+            // color palette = one color per subgroup
+            var color = d3.scaleOrdinal()
+                .domain(subgroups)
+                .range(['#e41a1c', '#377eb8', '#4daf4a'])
+
+            // Normalize the data -> sum of each group must be 100!
+            console.log(data)
+            dataNormalized = []
+            data.forEach(function (d) {
+                // Compute the total
+                tot = 0
+                for (i in subgroups) { name = subgroups[i]; tot += +d[name] }
+                // Now normalize
+                for (i in subgroups) { name = subgroups[i]; d[name] = d[name] / tot * 100 }
+            })
+
+            //stack the data? --> stack per subgroup
+            var stackedData = d3.stack()
+                .keys(subgroups)
+                (data)
+
+            // Show the bars
+            svg4.append("g")
+                .selectAll("g")
+                // Enter in the stack data = loop key per key = group per group
+                .data(stackedData)
+                .enter().append("g")
+                .attr("fill", function (d) { return color(d.key); })
+                .selectAll("rect")
+                // enter a second time = loop subgroup per subgroup to add all rectangles
+                .data(function (d) { return d; })
+                .enter().append("rect")
+                .attr("x", function (d) { return x(d.data.Neighborhood); })
+                .attr("y", function (d) { return y(d[1]); })
+                .attr("height", function (d) { return y(d[0]) - y(d[1]); })
+                .attr("width", x.bandwidth())
+
+        })
+
+        //----------- Fifth Chart --------------
 
     </script>
 

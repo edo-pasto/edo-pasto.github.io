@@ -51,7 +51,7 @@
         <header class="w3-container" id="assignm1Title">
             <h1><i class="fa fa-chart-line fa-2xl"></i> Assignment 1</h1>
         </header>
-
+<br>
 
         <div class="w3-row-padding w3-margin-bottom">
             <br>
@@ -197,8 +197,8 @@
             }
             const mousemove = function (d) {
                 tooltip
-                    .style("left", (d3.mouse(this)[0] + 400) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-                    .style("top", (d3.mouse(this)[1] + 200) + "px")
+                    .style("left", (d3.mouse(this)[0] + 750) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+                    .style("top", (d3.mouse(this)[1] + 320) + "px")
             }
             const mouseleave = function (d) {
                 tooltip
@@ -244,7 +244,7 @@
 
 
         //----------- Second Chart --------------
-
+        height2 = 400 - margin.top - margin.bottom;
         var svg2 = d3.select("#task2")
             .append("svg")
             // .attr("width", width + margin.left + margin.right)
@@ -268,12 +268,16 @@
                 .range([0, width])
                 .padding([0.2])
             svg2.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x).tickSizeOuter(0));
+                .attr("transform", "translate(0," + height2 + ")")
+                .call(d3.axisBottom(x).tickSizeOuter(0))
+                .selectAll("text")
+                .attr("transform", "translate(-10,0)rotate(-45)")
+                .style("text-anchor", "end");
+
             // Add Y axis
             var y = d3.scaleLinear()
-                .domain([0, 60])
-                .range([height, 0]);
+                .domain([0, 3000])
+                .range([height2, 0]);
             svg2.append("g")
                 .call(d3.axisLeft(y));
             // color palette = one color per subgroup
@@ -284,6 +288,42 @@
             var stackedData = d3.stack()
                 .keys(subgroups)
                 (data)
+
+
+            // ----------------
+            // Create a tooltip
+            // ----------------
+            var tooltip2 = d3.select("#task2")
+                .append("div")
+                .style("opacity", 0)
+                .attr("class", "tooltip")
+                .style("background-color", "white")
+                .style("border", "solid")
+                .style("border-width", "1px")
+                .style("border-radius", "5px")
+                .style("padding", "10px")
+
+            // Three function that change the tooltip when user hover / move / leave a cell
+            var mouseover2 = function (d) {
+                var subgroupName = d3.select(this.parentNode).datum().key;
+                var subgroupValue = d.data[subgroupName];
+                tooltip2
+                    .html("Tree Type: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
+                    .style("opacity", 1)
+            }
+            var mousemove2 = function (d) {
+                tooltip2
+                    .style("left", (d3.mouse(this)[0] + 700) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+                    .style("top", (d3.mouse(this)[1] + 1000) + "px")
+            }
+            var mouseleave2 = function (d) {
+                tooltip2
+                    .style("opacity", 0)
+            }
+
+
+
+
             // Show the bars
             svg2.append("g")
                 .selectAll("g")
@@ -309,6 +349,9 @@
                     return y(d[0]) - y(d[1]);
                 })
                 .attr("width", x.bandwidth())
+                .on("mouseover", mouseover2)
+                .on("mousemove", mousemove2)
+                .on("mouseleave", mouseleave2)
         })
 
 
@@ -385,7 +428,7 @@
         })
 
         //----------- Fourth Chart --------------
-
+        height4 = 400 - margin.top - margin.bottom;
         var svg4 = d3.select("#task4")
             .append("svg")
             // .attr("width", width + margin.left + margin.right)
@@ -410,13 +453,16 @@
                 .range([0, width])
                 .padding([0.2])
             svg4.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x).tickSizeOuter(0));
+                .attr("transform", "translate(0," + height4 + ")")
+                .call(d3.axisBottom(x).tickSizeOuter(0))
+                .selectAll("text")
+                .attr("transform", "translate(-10,0)rotate(-45)")
+                .style("text-anchor", "end");
 
             // Add Y axis
             var y = d3.scaleLinear()
                 .domain([0, 100])
-                .range([height, 0]);
+                .range([height4, 0]);
             svg4.append("g")
                 .call(d3.axisLeft(y));
 
@@ -441,6 +487,37 @@
                 .keys(subgroups)
                 (data)
 
+
+            var tooltip4 = d3.select("#task4")
+                .append("div")
+                .style("opacity", 0)
+                .attr("class", "tooltip")
+                .style("background-color", "white")
+                .style("border", "solid")
+                .style("border-width", "1px")
+                .style("border-radius", "5px")
+                .style("padding", "10px")
+
+            // Three function that change the tooltip when user hover / move / leave a cell
+            var mouseover4 = function (d) {
+                var subgroupName = d3.select(this.parentNode).datum().key;
+                var subgroupValue = d.data[subgroupName];
+                tooltip4
+                    .html("Tree Type: " + subgroupName + "<br>" + "Amount: " + subgroupValue.toFixed(2) + "%")
+                    .style("opacity", 1)
+            }
+            var mousemove4 = function (d) {
+                tooltip4
+                    .style("left", (d3.mouse(this)[0] + 700) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+                    .style("top", (d3.mouse(this)[1] + 2000) + "px")
+            }
+            var mouseleave4 = function (d) {
+                tooltip4
+                    .style("opacity", 0)
+            }
+
+
+
             // Show the bars
             svg4.append("g")
                 .selectAll("g")
@@ -456,6 +533,9 @@
                 .attr("y", function (d) { return y(d[1]); })
                 .attr("height", function (d) { return y(d[0]) - y(d[1]); })
                 .attr("width", x.bandwidth())
+                .on("mouseover", mouseover4)
+                .on("mousemove", mousemove4)
+                .on("mouseleave", mouseleave4)
 
         })
 

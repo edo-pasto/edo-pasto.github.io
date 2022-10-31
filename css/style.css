@@ -1,7 +1,7 @@
 .site-footer {
 	/* background-color:#26272b; */
 	background-color: #7ac2fc;
-	padding: 45px 0 20px;
+	padding: 15px 0 0;
 	font-size: 15px;
 	line-height: 24px;
 	color: black;
@@ -13,14 +13,14 @@
 }
 
 .site-footer hr.small {
-	margin: 20px 0
+	margin: 0 0
 }
 
 .site-footer h6 {
 	color: #fff;
 	font-size: 16px;
 	text-transform: uppercase;
-	margin-top: 5px;
+	margin-top: 0;
 	letter-spacing: 2px
 }
 
@@ -184,116 +184,6 @@ section {
 	color: white;
 }
 
-/*--------------------------------------------------------------
-# Footer Area
---------------------------------------------------------------*/
-
-.footer p {
-	font-size: 15px;
-	color: #252429;
-	font-weight: 400;
-	line-height: 25px;
-	margin: 0 0 15px 0;
-}
-
-.footer img {
-	width: 70%;
-}
-
-.footer a {
-	text-decoration: none;
-}
-
-.footer ul {
-	padding-left: 0;
-}
-
-.footer input:focus {
-	outline: none;
-}
-
-.footer a:hover,
-a:focus {
-	text-decoration: none;
-	outline: none;
-	color: white;
-	/* font-size: 17px; */
-}
-
-.footer {
-	background: #111111;
-	padding-top: 70px;
-}
-
-.footer-about {
-	margin-bottom: 30px;
-}
-
-.footer-about .footer-logo {
-	margin-bottom: 25px;
-	width: 350px;
-}
-
-.footer-about p {
-	color: #b7b7b7;
-	margin-bottom: 30px;
-}
-
-.footer-widget {
-	margin-bottom: 30px;
-}
-
-.footer-widget h6 {
-	color: #ffffff;
-	font-size: 15px;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	margin-bottom: 20px;
-}
-
-.footer-widget ul li {
-	line-height: 36px;
-	list-style: none;
-}
-
-.footer-widget ul li a {
-	color: #b7b7b7;
-	font-size: 14px;
-}
-
-.footer-widget ul li a:hover {
-	color: white;
-}
-
-.footer-copyright-text {
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
-	padding: 20px 0;
-	margin-top: 40px;
-}
-
-.footer-copyright-text p {
-	color: #b7b7b7;
-	margin-bottom: 0;
-}
-
-.footer-copyright-text p i {
-	color: #e53637;
-}
-
-.footer-copyright-text p a {
-	font-weight: bolder;
-	color: white;
-}
-
-.footer-copyright-text p a:hover {
-	/* font-size: 17px; */
-	color: white;
-}
-
-
-
-
 
 
 
@@ -397,12 +287,28 @@ ul {
 
 
 
-#containerBtnAssgn1 {
+#containerBtnAssgn1{
 	/* margin-left: 40%; */
 	display: flex;
 	justify-content: center;
 
 }
+
+ #containerBtnAssgn2 {
+	/* margin-left: 40%; */
+	display: flex;
+	justify-content: center;
+
+}
+#containerBtnAssgn3 {
+	/* margin-left: 40%; */
+	display: flex;
+	justify-content: center;
+
+}
+
+
+
 
 #pageContent {
 	position: absolute;

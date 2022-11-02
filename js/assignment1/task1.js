@@ -14,8 +14,9 @@ const svg = d3.select("#task1")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-const geo_url = "https://raw.githubusercontent.com/edo-pasto/edo-pasto.github.io/main/data/top_10_trees.csv";
+// const geo_url = "https://raw.githubusercontent.com/edo-pasto/edo-pasto.github.io/main/data/top_10_trees.csv";
 
+const geo_url = "../../data/top_20_trees.csv";
 //test_url="https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv"
 // Parse the Data
 d3.csv(geo_url, function (data) {
@@ -81,7 +82,8 @@ d3.csv(geo_url, function (data) {
             return y(d.Name);
         })
         .attr("width", function (d) {
-            return x(d.Count);
+            // return x(d.Count);
+            return x(0);
 
         })
         .attr("height", y.bandwidth())
@@ -98,11 +100,11 @@ d3.csv(geo_url, function (data) {
     // .attr("fill", "#69b3a2")
 
     //Animation
-    //     svg.selectAll("rect")
-    //         .transition()
-    //         .duration(800)
-    //         .attr("x", function (d) { return x(d.Count); })
-    //         .attr("width", function (d) { return width - x(d.Count) })
-    //         .delay(function (d, i) { console.log(i); return (i * 100) })
+        svg.selectAll("rect")
+            .transition()
+            .duration(800)
+            .attr("x", function (d) { return x(0); })
+            .attr("width", function (d) { return width - (width - x(d.Count)) })
+            .delay(function (d, i) { console.log(i); return (i * 100) })
 
 })

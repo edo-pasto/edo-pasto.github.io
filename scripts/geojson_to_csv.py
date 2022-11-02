@@ -14,7 +14,7 @@ df = gpd.read_file(f'{DATA_PATH}/geo_data_trees.geojson')#.to_csv(f'{DATA_PATH}/
 '''
 bar chart showing top X (ex: top 10) trees type, their numbers and the average canopy size
 '''
-top = 10
+top = 20
 
 canopy_cover = df[['Name', 'Canopy Cover (m2)']][:-1] # remove the last line because is the total
 canopy_cover['Canopy Cover (m2)'] = canopy_cover['Canopy Cover (m2)'].apply(float) # cast string to float values

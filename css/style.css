@@ -244,20 +244,37 @@ h1 {
 	font-family: 'Roboto Slab', sans-serif;
 	text-align: center;
 	text-transform: uppercase;
+	font-size: 45px;
 	margin: 0 0 24px;
 
+}
+.h1-mainPage{
+	color: #000;
+	text-shadow:
+    -2px -2px 0 #fff,
+    2px -2px 0 #fff,
+    -2px 2px 0 #fff,
+    2px 2px 0 #fff;
+	padding: 80px;
 }
 
 h2 {
 	font-family: 'Roboto Slab', sans-serif;
 	text-align: center;
 	margin: 0 0 24px;
+
 }
 
 h3 {
 	font-family: 'Roboto Slab', sans-serif;
 	text-align: center;
 	margin: 0 0 24px;
+	/* text-shadow:
+    -0.5px -0.5px 0 #7ac2fc,
+    0.5px -0.5px 0 #7ac2fc,
+    -0.5px 0.5px 0 #7ac2fc,
+    0.5px 0.5px 0 #7ac2fc; */
+	
 }
 
 h4 {
@@ -286,10 +303,17 @@ ul {
 	justify-content: center;
 }
 
+#headersContainer{
+	background-image: url("../images/dataViz.jpg");
+	height: 250px;
+	margin-bottom: 20px;
+	
+}
 
 
 #containerBtnAssgn1{
 	/* margin-left: 40%; */
+	margin-top: 50px;
 	display: flex;
 	justify-content: center;
 
@@ -297,12 +321,14 @@ ul {
 
  #containerBtnAssgn2 {
 	/* margin-left: 40%; */
+	margin-top: 50px;
 	display: flex;
 	justify-content: center;
 
 }
 #containerBtnAssgn3 {
 	/* margin-left: 40%; */
+	margin-top: 50px;
 	display: flex;
 	justify-content: center;
 
@@ -346,7 +372,14 @@ ul {
 	display: flex;
 }
 
-
+#trentoTreeMapImg{
+	width: 40%;
+	height: 40%;
+}
+#containerImgTrentomap{
+	text-align: center;
+	margin-bottom: 40px;
+}
 #mySidebar {
 	z-index: 3;
 	width: 300px;

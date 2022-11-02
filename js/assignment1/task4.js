@@ -80,7 +80,7 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
     var mousemove4 = function (d) {
         tooltip4
             .style("left", (d3.mouse(this)[0] + 700) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-            .style("top", (d3.mouse(this)[1] + 2000) + "px")
+            .style("top", (d3.mouse(this)[1] + 2200) + "px")
     }
     var mouseleave4 = function (d) {
         tooltip4

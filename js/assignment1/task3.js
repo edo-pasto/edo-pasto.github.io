@@ -27,15 +27,18 @@ d3.csv("/data/top_10_trees.csv", function (data) {
             "translate(" + margin3.left + "," + margin3.top + ")");
 
     // Add X axis 
-    var x = d3.scaleLinear()
+    var x = d3.scaleBand()
+            .range([0, width3])
     .domain(data.map(function (d) {
         return d.Name;
-    }))
-        .range([0, width3]);
+    }));
+
     svg3
         .append("g")
         .attr("transform", "translate(0," + height3 + ")")
-        .call(d3.axisBottom(x).ticks(3));
+        .call(d3.axisBottom(x).ticks(3)).selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
 
     //Add Y axis
     var y = d3.scaleLinear()
@@ -50,17 +53,15 @@ d3.csv("/data/top_10_trees.csv", function (data) {
         .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
 
     // Draw the line
-    svg3
+   svg3.selectAll("mybar")
+        .data(data)
+        .enter()
         .append("rect")
-        .attr("fill", "none")
-        .attr("stroke", function (d) { return color(d.key) })
-        .attr("stroke-width", 1.9)
-        .attr("d", function (d) {
-            return d3.line()
-                .x(function (d) { return x(d.Name); })
-                .y(function (d) { return y(+d.n); })
-                (d.values)
-        })
+        .attr("x", function(d) { return x(d.Name); })
+        .attr("y", function(d) { return y(d.Count); })
+        .attr("width", x.bandwidth())
+        .attr("height", function(d) { return height3 - y(d.Count); })
+
 
     // Add titles
     svg3

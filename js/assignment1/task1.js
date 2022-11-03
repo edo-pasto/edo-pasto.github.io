@@ -105,6 +105,6 @@ d3.csv(geo_url, function (data) {
             .duration(800)
             .attr("x", function (d) { return x(0); })
             .attr("width", function (d) { return width - (width - x(d.Count)) })
-            .delay(function (d, i) { console.log(i); return (i * 100) })
+            .delay(function (d, i) {  return (i * 100) })
 
 })

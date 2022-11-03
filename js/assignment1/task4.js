@@ -43,7 +43,7 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
         .range(['#e41a1c', '#377eb8', '#4daf4a'])
 
     // Normalize the data -> sum of each group must be 100!
-    console.log(data)
+    // console.log(data)
     dataNormalized = []
     data.forEach(function (d) {
         // Compute the total

@@ -41,7 +41,7 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
     // color palette = one color per subgroup
     var color = d3.scaleOrdinal()
         .domain(subgroups)
-        .range(['#3c51ae', '#fff1a9', '#bb3366', '#e41a1c', '#377eb8', '#4daf4a'])
+        .range(['#3c51ae', '#ffd43b', '#7fff00', '#e41a1c', '#377eb8', '#4daf4a'])
 
     // Normalize the data -> sum of each group must be 100!
     // console.log(data)

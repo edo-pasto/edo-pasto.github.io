@@ -63,9 +63,11 @@ d3.csv(geo_url, function (data) {
             .style("opacity", 1)
     }
     const mousemove = function (d) {
+        var offsetX =  (42 * (screen.width / 100))
+        var offsetY =  (33 * (screen.height / 100))
         tooltip
-            .style("left", (d3.mouse(this)[0] + 750) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-            .style("top", (d3.mouse(this)[1] + 320) + "px")
+            .style("left", (d3.mouse(this)[0] + offsetX) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+            .style("top", (d3.mouse(this)[1] + offsetY) + "px")
     }
     const mouseleave = function (d) {
         tooltip

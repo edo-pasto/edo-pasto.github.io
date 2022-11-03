@@ -38,7 +38,7 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
   // color palette = one color per subgroup
   var color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#e41a1c', '#377eb8', '#4daf4a', '#3c51ae', '#fff1a9', '#bb3366'])
+    .range(['#3c51ae', '#fff1a9', '#bb3366', '#e41a1c', '#377eb8', '#4daf4a'])
   //stack the data? --> stack per subgroup
   var stackedData = d3.stack()
     .keys(subgroups)
@@ -68,7 +68,7 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
   }
   var mousemove2 = function (d) {
     var offsetX =  (42  * (screen.width / 100))
-    var offsetY =  (130 * (screen.height / 100))
+    var offsetY =  (132 * (screen.height / 100))
 
     console.log(screen.height)
     tooltip2

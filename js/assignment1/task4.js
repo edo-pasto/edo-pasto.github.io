@@ -1,5 +1,6 @@
 //----------- Fourth Chart --------------
 height4 = 400 - margin.top - margin.bottom;
+
 var svg4 = d3.select("#task4")
     .append("svg")
     // .attr("width", width + margin.left + margin.right)
@@ -40,7 +41,7 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
     // color palette = one color per subgroup
     var color = d3.scaleOrdinal()
         .domain(subgroups)
-        .range(['#e41a1c', '#377eb8', '#4daf4a'])
+        .range(['#3c51ae', '#fff1a9', '#bb3366', '#e41a1c', '#377eb8', '#4daf4a'])
 
     // Normalize the data -> sum of each group must be 100!
     // console.log(data)
@@ -78,9 +79,11 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
             .style("opacity", 1)
     }
     var mousemove4 = function (d) {
+        var offsetX =  (42  * (screen.width / 100))
+        var offsetY =  (220 * (screen.height / 100))
         tooltip4
-            .style("left", (d3.mouse(this)[0] + 700) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-            .style("top", (d3.mouse(this)[1] + 2200) + "px")
+            .style("left", (d3.mouse(this)[0] + offsetX) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+            .style("top", (d3.mouse(this)[1] + offsetY) + "px")
     }
     var mouseleave4 = function (d) {
         tooltip4

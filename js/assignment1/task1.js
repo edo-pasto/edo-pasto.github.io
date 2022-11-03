@@ -87,7 +87,7 @@ d3.csv(geo_url, function (data) {
 
         })
         .attr("height", y.bandwidth())
-        .attr("fill", "#69b3a2")
+        .attr("fill", "#4daf49")
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)

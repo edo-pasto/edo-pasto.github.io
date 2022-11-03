@@ -7,15 +7,20 @@ var margin3 = {top: 30, right: 0, bottom: 30, left: 50},
 d3.csv("/data/top_trees_neighborhood_reordered.csv", function (data) {
 
 
-    console.log("Daataaaaaaaaaa ",data)
+
 
     // group the data: I want to draw one line per group
     var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
         .key(function (d) { return d.Neighborhood; })
         .entries(data);
-
+    console.log("Daataaaaaaaaaa ",data,sumstat)
     // What is the list of groups?
     allKeys = sumstat.map(function (d) { return d.key })
+    // let trees_nest=d3.nest() // nest function allows to group the calculation per level of a factor
+    //     .key(function (d) { return d.Name; })
+    //     .entries(data);
+    // alltrees=trees_nest.map(function (d) { return d.key })
+    // console.log("keeyss ",alltrees)
 
     // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
     var svg3 = d3.select("#task3")
@@ -61,16 +66,29 @@ d3.csv("/data/top_trees_neighborhood_reordered.csv", function (data) {
         .domain(allKeys)
         .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
 
-    // Draw the Bar
-   svg3.selectAll("mybar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", function(d) {console.log(x(d.Name)); return x(d.Name); })
-        .attr("y", function(d) {console.log(y(d.Count)); return y(d.Count); })
-        .attr("width", x.bandwidth())
-        .attr("height", function(d) { return height3 - y(d.Count); })
+    // create the Bar
 
+   svg3.selectAll("mybar")
+       .data(function (d){return d.values})
+       .enter()
+        .append("rect")
+
+       // .attr("stroke", function(d){ return color(d.key) })
+        .attr("x", function(d,i) { console.log(i, d.Neighborhood);return x(d.Name); })
+        .attr("y", function(d,i) { return y(d.Count); })
+        .attr("width", x.bandwidth())
+        .attr("height", function(d,i) { return height3 - y(d.Count); })
+
+    // svg3.selectAll("mybar").data(data).enter().each(function (bar,index){
+    //     console.log(data,"sdfdddddddddd")
+    //
+    //     d3.select(this)
+    //         .append("rect"+(index%6).toString())
+    //         .attr("x", function(d) {console.log("aaaaaaaaaaaaaaaa",d.Name, index , d.Neighborhood,"adsssssssssssssssss"); return x(d.Name); })
+    //          .attr("y", function(d) { return y(d.Count); })
+    //          .attr("width", x.bandwidth())
+    //          .attr("height", function(d) { return height3 - y(d.Count); })
+    // })
 
 
     // Add titles

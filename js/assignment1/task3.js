@@ -4,7 +4,7 @@ var margin3 = {top: 30, right: 0, bottom: 30, left: 50},
     height3 = 210 - margin3.top - margin3.bottom
 
 //Read the data
-d3.csv("/data/top_trees_neighborhood_reordered.csv", function (data) {
+d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
 
 

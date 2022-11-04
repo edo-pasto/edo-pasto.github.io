@@ -28,9 +28,9 @@ top_trees['Mean Canopy Cover (m2)'] = canopy_cover.groupby('Name').mean().round(
 top_trees = top_trees.sort_values(by='Count', ascending=False)[:top]
 top_trees.to_csv(f'{DATA_PATH}/top_{top}_trees.csv', index=False)
 
-# Task 2-3-4
+# Task 2-4
 '''
-stacked bar chart comparing neighborhood and tree types (top 5 + others)
+stacked bar chart comparing neighborhoods and tree types (top 5 + others)
 '''
 top = 5
 
@@ -69,3 +69,18 @@ pivot_data = pd.pivot_table(data, index='Neighborhood', columns='Name', values='
 pivot_data = pivot_data[['Neighborhood'] + top_X_trees + ['Other']]
 # save into csv
 pivot_data.to_csv('../data/top_trees_neighborhood.csv', index=False)
+
+# Task 3
+'''
+bar chart as the stacked ones (comparing neighborhoods and tree types) but using the small multiples
+'''
+unpivot_data = data.groupby(by=['Neighborhood', 'Name']).sum().reset_index()
+unpivot_data.to_csv('../data/top_trees_neighborhood_unpivot.csv', index=False)
+
+# Task 5
+'''
+waffle chart (showing the percentage of each tree)
+data are separated for each neighborhood
+'''
+for nbh in data['Neighborhood'].unique():
+    unpivot_data[unpivot_data['Neighborhood'] == nbh].to_csv(f'../data/single_neighborhoods/top_trees_{nbh}.csv', index=False)

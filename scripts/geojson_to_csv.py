@@ -83,4 +83,4 @@ waffle chart (showing the percentage of each tree)
 data are separated for each neighborhood
 '''
 for nbh in data['Neighborhood'].unique():
-    unpivot_data[unpivot_data['Neighborhood'] == nbh].to_csv(f'../data/single_neighborhoods/top_trees_{nbh}.csv', index=False)
+    unpivot_data[unpivot_data['Neighborhood'] == nbh].sort_values(by='Count', ascending=False).to_csv(f'../data/single_neighborhood/top_trees_{nbh}.csv', index=False)

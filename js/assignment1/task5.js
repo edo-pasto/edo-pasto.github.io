@@ -6,8 +6,7 @@ var widthWaffle,
     heightSquares = 5,
     squareSize = 25,
     squareValue = 0,
-    gap = 1,
-    theData = [];
+    gap = 1;
 
 var color = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -26,9 +25,27 @@ neighborhoods = {
     'VILLAZZANO' : 12,
 }
 
+color_map = {
+    'Other': 0,
+    'Celtis australis': 1,
+    'Carpinus betulus': 2,
+    'Platanus x hispanica': 3,
+    'Aesculus hippocastanum': 4,
+    'Tilia cordata': 5,
+}
+tree_map = {
+    0: 'Other',
+    1: 'Celtis australis',
+    2: 'Carpinus betulus',
+    3: 'Platanus x hispanica',
+    4: 'Aesculus hippocastanum',
+    5: 'Tilia cordata',
+}
 for (nbh in neighborhoods) {
 
     d3.csv(`../../data/single_neighborhood/top_trees_${nbh}.csv`, function (err, data) {
+
+        theData = []
 
         //total
         total = d3.sum(data, function (d) { return d.Count; });
@@ -47,7 +64,7 @@ for (nbh in neighborhoods) {
                         squareValue: squareValue,
                         units: d.units,
                         population: d.Count,
-                        groupIndex: i
+                        groupIndex: color_map[d.Name]
                     };
                 })
             );
@@ -82,7 +99,8 @@ for (nbh in neighborhoods) {
             })
             .append("title")
             .text(function (d, i) {
-                return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%" + "\nNeighborhood: " + data[d.groupIndex].Neighborhood
+                console.log(theData)
+                return "Tree type: " + theData[d.groupIndex].Name + "; \nAbundance: " + d.population + "; \nPercentage: " + d.units + "%" + "\nNeighborhood: " + theData[d.groupIndex].Neighborhood
             });
 
             // svg5
@@ -175,7 +193,7 @@ d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err,
     legend.append("rect")
         .attr("width", 18)
         .attr("height", 18)
-        .style("fill", function (d, i) { return color(i) });
+        .style("fill", function (d, i) { return color(color_map[d.Name]) });
     legend.append("text")
         .attr("x", 25)
         .attr("y", 13)

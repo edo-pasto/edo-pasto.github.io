@@ -413,23 +413,8 @@ ul {
 }
 
 
-#task5 {
-	margin-bottom: 30px;
-
-}
-
-#task5-2 {
-	margin-bottom: 30px;
-
-}
-
-#task5-3 {
-	margin-bottom: 30px;
-
-}
-
-#task5-4 {
-	margin-bottom: 30px;
+#task5, #task5-2, #task5-3, #task5-4, #task5-5, #task5-6, #task5-7, #task5-8, #task5-9, #task5-10, #task5-11, #task5-12   {
+	margin-bottom: 15px;
 }
 
 #legend {

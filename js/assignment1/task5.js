@@ -56,8 +56,8 @@ for (nbh in neighborhoods) {
         widthWaffle = (squareSize * widthSquares) + widthSquares * gap + 25;
         heightWaffle = (squareSize * heightSquares) + heightSquares * gap + 25;
     
-        d3.select(`#task5-${neighborhoods[data[0]['Neighborhood']]}`)
-            .append("svg")
+      let waffle = d3.select(`#task5-${neighborhoods[data[0]['Neighborhood']]}`)
+           let svg5 = waffle.append("svg")
             .attr("width", widthWaffle)
             .attr("height", heightWaffle)
             .append("g")
@@ -67,7 +67,7 @@ for (nbh in neighborhoods) {
             .append("rect")
             .attr("width", squareSize)
             .attr("height", squareSize)
-            //   .attr('title', d.Neighborhood)
+
             .attr("fill", function (d) {
                 return color(d.groupIndex);
             })
@@ -82,8 +82,18 @@ for (nbh in neighborhoods) {
             })
             .append("title")
             .text(function (d, i) {
-                return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%"
+                return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%" + "\nNeighborhood: " + data[d.groupIndex].Neighborhood
             });
+
+            // svg5
+            // .append("text")
+            // .attr("text-anchor", "start")
+            // .attr("y", -5)
+            // .attr("x", 0)
+            // .text(function(d){ return(nbh)})
+            // .style("fill", function(d, i){ return color(i)});
+
+  
     
     });
 

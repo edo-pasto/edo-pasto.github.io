@@ -94,13 +94,6 @@ d3.csv(geo_url, function (data) {
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
 
-
-    // .attr("x", function(d) { return x(d.Country); })
-    // .attr("y", function(d) { return y(d.Value); })
-    // .attr("width", x.bandwidth())
-    // .attr("height", function(d) { return height - y(d.Value); })
-    // .attr("fill", "#69b3a2")
-
     //Animation
         svg.selectAll("rect")
             .transition()

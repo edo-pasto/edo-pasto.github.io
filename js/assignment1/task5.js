@@ -149,42 +149,41 @@ for (nbh in neighborhoods) {
 //             return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%"
 //         });
 
+d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err, data) {
 
+    //add legend with categorical data
+    var legend = d3.select("#legend")
+        .append("svg")
+        .attr('width', 300)
+        .attr('height', 200)
+        .append('g')
+        .selectAll("div")
+        .data(data)
+        .enter()
+        .append("g")
+        .attr('transform', function (d, i) { return "translate(0," + i * 20 + ")"; });
+    legend.append("rect")
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", function (d, i) { return color(i) });
+    legend.append("text")
+        .attr("x", 25)
+        .attr("y", 13)
+        .text(function (d) { return d.Name });
 
-//     //add legend with categorical data
-//     var legend = d3.select("#legend")
-//         .append("svg")
-//         .attr('width', 300)
-//         .attr('height', 200)
-//         .append('g')
-//         .selectAll("div")
-//         .data(data)
-//         .enter()
-//         .append("g")
-//         .attr('transform', function (d, i) { return "translate(0," + i * 20 + ")"; });
-//     legend.append("rect")
-//         .attr("width", 18)
-//         .attr("height", 18)
-//         .style("fill", function (d, i) { return color(i) });
-//     legend.append("text")
-//         .attr("x", 25)
-//         .attr("y", 13)
-//         .text(function (d) { return d.Name });
+    //add value of a unit square
+    var legend2 = d3.select("#legend")
+        .select('svg')
+        .append('g')
+        .attr('transform', "translate(100,0)");
 
-//     //add value of a unit square
-//     var legend2 = d3.select("#legend")
-//         .select('svg')
-//         .append('g')
-//         .attr('transform', "translate(100,0)");
+    legend2.append("text")
+        .attr('y', '14')
+        .attr('font-size', '18px')
+        // .text("Total: " + total)
+        .attr("fill", "#444444");
 
-//     legend2.append("text")
-//         .attr('y', '14')
-//         .attr('font-size', '18px')
-//         // .text("Total: " + total)
-//         .attr("fill", "#444444");
-// });
-
-
+});
 
 // // ---- Bondone -----
 

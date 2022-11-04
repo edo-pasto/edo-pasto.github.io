@@ -80,7 +80,7 @@ d3.csv("/data/top_trees_neighborhood.csv", function (data) {
     }
     var mousemove4 = function (d) {
         var offsetX =  (42  * (screen.width / 100))
-        var offsetY =  (220 * (screen.height / 100))
+        var offsetY =  (240 * (screen.height / 100))
         tooltip4
             .style("left", (d3.mouse(this)[0] + offsetX) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
             .style("top", (d3.mouse(this)[1] + offsetY) + "px")

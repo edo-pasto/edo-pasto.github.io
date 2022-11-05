@@ -63,8 +63,10 @@ for (nbh in neighborhoods) {
                     return {
                         squareValue: squareValue,
                         units: d.units,
-                        population: d.Count,
-                        groupIndex: color_map[d.Name]
+                        abundance: d.Count,
+                        groupIndex: color_map[d.Name],
+                        name: d.Name,
+                        neigh: d.Neighborhood
                     };
                 })
             );
@@ -100,7 +102,7 @@ for (nbh in neighborhoods) {
             .append("title")
             .text(function (d, i) {
                 console.log(theData)
-                return "Tree type: " + theData[d.groupIndex].Name + "; \nAbundance: " + d.population + "; \nPercentage: " + d.units + "%" + "\nNeighborhood: " + theData[d.groupIndex].Neighborhood
+                return "Tree type: " + d.name + "; \nAbundance: " + d.abundance + "; \nPercentage: " + d.units + "%" + "\nNeighborhood: " + d.neigh
             });
 
             // svg5

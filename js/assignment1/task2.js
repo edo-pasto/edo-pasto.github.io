@@ -54,7 +54,7 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
     .attr("class", "tooltip")
     .style("background-color", "white")
     .style("border", "solid")
-    .style("border-width", "1px")
+    .style("border-width", "2px")
     .style("border-radius", "5px")
     .style("padding", "10px")
 
@@ -72,8 +72,10 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
 
     // console.log(screen.height)
     tooltip2
-      .style("left", (d3.mouse(this)[0] + offsetX) + "px" ) // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-      .style("top", (d3.mouse(this)[1] + offsetY) + "px")
+    .style('left', (event.pageX+30) + 'px')
+    .style('top', (event.pageY+10) + 'px')
+      // .style("left", (d3.mouse(this)[0] + offsetX) + "px" ) // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      // .style("top", (d3.mouse(this)[1] + offsetY) + "px")
   }
   var mouseleave2 = function (d) {
     tooltip2

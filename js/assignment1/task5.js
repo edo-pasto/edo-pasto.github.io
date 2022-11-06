@@ -74,13 +74,14 @@ for (nbh in neighborhoods) {
     
         widthWaffle = (squareSize * widthSquares) + widthSquares * gap + 25;
         heightWaffle = (squareSize * heightSquares) + heightSquares * gap + 25;
-    
+
       let waffle = d3.select(`#task5-${neighborhoods[data[0]['Neighborhood']]}`)
            let svg5 = waffle.append("svg")
-            .attr("viewBox", `0 0 275 275`)
-            // .attr("width", widthWaffle)
-            // .attr("height", heightWaffle)
+            .attr("viewBox", `0 0 ${widthWaffle} ${heightWaffle}`)
+            .attr("width", widthWaffle * 2)
+            .attr("height", heightWaffle * 2)
             .append("g")
+            .attr("transform", `translate(${squareSize/2},0)`)
             .selectAll("div")
             .data(theData)
             .enter()
@@ -114,36 +115,38 @@ for (nbh in neighborhoods) {
 d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err, data) {
 
     //add legend with categorical data
-    var legend = d3.select("#legend")
+    var legend = d3.select("#waffle_legend")
         .append("svg")
+        // .attr("viewBox", `0 0 50 50`)
         .attr('width', 300)
         .attr('height', 200)
         .append('g')
+        .attr("transform", `translate(50,0)`)
         .selectAll("div")
         .data(data)
         .enter()
         .append("g")
-        .attr('transform', function (d, i) { return "translate(0," + i * 20 + ")"; });
+        .attr('transform', function (d, i) { return "translate(0," + i * 30 + ")"; });
     
     legend.append("rect")
-        .attr("width", 18)
-        .attr("height", 18)
+        .attr("width", 20)
+        .attr("height", 20)
         .style("fill", function (d, i) { return color(color_map[d.Name]) });
     
     legend.append("text")
         .attr("x", 25)
-        .attr("y", 13)
+        .attr("y", 15)
         .text(function (d) { return d.Name });
 
     //add value of a unit square
-    var legend2 = d3.select("#legend")
+    var legend2 = d3.select("#waffle_legend")
         .select('svg')
         .append('g')
         .attr('transform', "translate(100,0)");
 
     legend2.append("text")
-        .attr('y', '14')
-        .attr('font-size', '18px')
+        .attr('y', '15')
+        .attr('font-size', '20px')
         // .text("Total: " + total)
         .attr("fill", "#444444");
 

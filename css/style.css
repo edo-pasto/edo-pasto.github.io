@@ -405,13 +405,20 @@ ul {
 }
 
 
-#task5, #task5-2, #task5-3, #task5-4, #task5-5, #task5-6, #task5-7, #task5-8, #task5-9, #task5-10, #task5-11, #task5-12   {
+#task5, #task5-1, #task5-2, #task5-3, #task5-4, #task5-5, #task5-6, #task5-7, #task5-8, #task5-9, #task5-10, #task5-11, #task5-12   {
 	margin-bottom: 15px;
 	display: flex;
 	justify-content: center;
 	text-align: center;
 }
 
-#legend {
-	font: 13px;
+#waffle_legend {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.waffle_row {
+	display:flex;
+	justify-content: space-around;
 }

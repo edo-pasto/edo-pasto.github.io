@@ -63,7 +63,7 @@ for (nbh in neighborhoods) {
         //remap data
         data.forEach(function (d, i) {
             d.Count = +d.Count;
-            d.units = Math.floor(d.Count / squareValue);
+            d.units = Math.round(d.Count / squareValue);
             theData = theData.concat(
                 Array(d.units + 1).join(1).split('').map(function () {
                     return {
@@ -77,6 +77,14 @@ for (nbh in neighborhoods) {
                 })
             );
         });
+
+        if (theData.length < 100) {
+            for (let i=0; i<100-theData.length; i++) {
+                theData = theData.slice(0, 1).concat(theData)
+            }
+        }
+
+        theData = theData.slice(0,100)
     
         widthWaffle = (squareSize * widthSquares) + widthSquares * gap + 25;
         heightWaffle = (squareSize * heightSquares) + heightSquares * gap + 25;

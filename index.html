@@ -41,64 +41,64 @@
     <div class="w3-main" id="pageContent">
         <div class="container" id="headersContainer">
             <header class="w3-container" id="HomePageTitle">
-                <h1 class="h1-mainPage">
-                    <b> EcoBenefits Project</b>
-                </h1>
+                <h1 class="h1-mainPage"> <b>EcoBenefits Project</b> </h1>
             </header>
             <br>
         </div>
 
             <div class="w3-row-padding w3-margin-bottom">
                 <h3><b>Group Name:</b> MammaMia!</h3>
-                <h3><b>Group Member: </b>
-                    Pastorino Edoardo,
-                    Ivan Gallo,
-                    Diana Ivan,
-                    Mahyar Sadeghi Garjan,
-                    Emilia Kunst.
-                </h3>
+                <h3><b>Group Members (alphabetic order):</b></h3>
+                <div id="members">
+                    <ul>
+                        <li>Gallo Ivan</li>
+                        <li>Ivan Diana</li>
+                        <li>Kunst Emilia</li>
+                        <li>Pastorino Edoardo</li>
+                        <li>Sadeghi Garjan Mahyar</li>
+                    </ul>
+                </div>
             </div>
         
         <h2>
-            The Project and The Data
+            <b>About Project and Data</b>
         </h2>
-        <div id="containerImgTrentomap">
-            <img src="./images/trentoTreeMap.png" alt="Trento Tree Map" class=".img-fluid"  id="trentoTreeMapImg">
-        </div>
 
         <div id="description">
-            <!--class="w3-row-padding w3-margin-bottom"-->
             <p>
-                This Website offers the possibility to view all the charts relative to the different assignments of the
-                Data Visualization course, of the academic year 2022/2023, made by the MammaMia! group.
+                The website offers the possibility to view all the charts relative to the different assignments of the
+                Data Visualization course @UniGe,academic year 2022/2023, made by the <span><b>MammaMia!</b></span> group.
                 <br>
-                The data are taken by a GitHub Repository <a
-                    href="https://github.com/Jeko83/TrentoTreeMap">(https://github.com/Jeko83/TrentoTreeMap)</a> that
-                contains some geojson and json files.
-                These files contains all the informations about the trees of the city of Trento, also devided in the
-                different "circoscrizioni" of the city.
+                In the subpages relative to the different assignments is possible to find different charts with various techniques of data visualization, to show the data and present conclusions on them.
                 <br>
-                In the subpages relative to the different assignments we can find many different kind of data
-                visualization that show conclusions about the data.
+                <br>
+                The data come from a <a href="https://github.com/Jeko83/TrentoTreeMap">GitHub Repository</a> about trees abundance and position in the municipality of Trento, mainly in form of json and geojson files.
+
             </p>
         </div>
 
         <br>
+
+        <div id="containerImgTrentomap">
+            <img src="./images/trentoTreeMap.png" alt="Trento Tree Map" class=".img-fluid"  id="trentoTreeMapImg">
+            <p><i>(image from the <a href="https://jeko83.github.io/TrentoTreeMap/">online TrentoTreeMap</a>)</i></p>
+        </div>
+
         <hr>
+
         <h2>
             Assignment 1 - Comparing Categories
         </h2>
         <div id="descriptionAssignment1">
             <p>
-                For the first assignment we have compared tree species abundance of the Trento's city.
+                In the first assignment we have to compare the tree species abundance and distribution, also with regard to the various "circoscrizioni" (neighborhood) in which the trees are placed.
                 <br>
-                Specifically we have created five charts: the first one is a simple barchart that shows the sorted tree
-                abundance (top 10) and others info;
-                the second one compares the neighborhood and tree type (for the top 5 tree type) with a stacked
-                barchart;
-                the third chart's purpose is the same but in this case we have used small multiple, and also for the
-                fifth one, but using the percentage in the stacked barchart;
-                finally we have created a waffle chart representing neighborhood of the top 5 category.
+                Specifically we created five charts: <br>
+                The first one is a simple barchart that shows the sorted tree abundance (top 20) and others info. <br>
+                The second one compares the neighborhood and the tree types (for the top 5 tree type) with a stacked barchart. <br>
+                The third chart's purpose is the same of the previous one, but in this case we used small multiple charts, dividing for each tree specie. <br>
+                The fourth one is again a variant version of the second one, showing a stacked bar chart using the percentage of the tree species distribution. <br>
+                The fifth one shows the distribution of the tree species in percentage divided by neighborhood, using some waffle charts. <br>
             </p>
         </div>
 

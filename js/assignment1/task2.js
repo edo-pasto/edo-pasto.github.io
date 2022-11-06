@@ -1,5 +1,5 @@
 //----------- Second Chart --------------
-height2 = 400 - margin.top - margin.bottom;
+height2 = 500 - margin.top - margin.bottom;
 var svg2 = d3.select("#task2")
   .append("svg")
   // .attr("width", width + margin.left + margin.right)
@@ -18,10 +18,10 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
     return (d.Neighborhood)
   }).keys()
   // Add X axis
-  var x = d3.scaleBand()
-    .domain(groups)
+  var x = d3.scaleLinear()
+    .domain([0, 3000])
     .range([0, width])
-    .padding([0.2])
+
   svg2.append("g")
     .attr("transform", "translate(0," + height2 + ")")
     .call(d3.axisBottom(x).tickSizeOuter(0))
@@ -30,9 +30,10 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
     .style("text-anchor", "end");
 
   // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([0, 3000])
-    .range([height2, 0]);
+  var y = d3.scaleBand()
+    .domain(groups)
+    .range([0, height2])
+    .padding([0.2]);
   svg2.append("g")
     .call(d3.axisLeft(y));
   // color palette = one color per subgroup
@@ -66,12 +67,12 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
     tooltip2
       .html("Tree Type: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
       .style("opacity", 1);
-      d3.select(this).attr("fill", "#0e6efc");
+    d3.select(this).attr("fill", "#0e6efc");
   }
   var mousemove2 = function (d) {
     tooltip2
-    .style('left', (event.pageX+30) + 'px')
-    .style('top', (event.pageY+10) + 'px')
+      .style('left', (event.pageX + 30) + 'px')
+      .style('top', (event.pageY + 10) + 'px')
 
   }
 
@@ -95,20 +96,21 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
     })
     .enter().append("rect")
     .attr("x", function (d) {
-      return x(d.data.Neighborhood);
+      // return x(d.data.Neighborhood);
+      return x(d[0])
     })
     .attr("y", function (d) {
-      return y(d[1]);
+      return y(d.data.Neighborhood);
     })
-    .attr("height", function (d) {
-      return y(d[0]) - y(d[1]);
+    .attr("height", y.bandwidth())
+    .attr("width", function (d) {
+      return x(d[1]) - x(d[0])
     })
-    .attr("width", x.bandwidth())
     .on("mouseover", mouseover2)
     .on("mousemove", mousemove2)
-    .on("mouseleave", function(){
+    .on("mouseleave", function () {
       tooltip2
-      .style("opacity", 0);
+        .style("opacity", 0);
       d3.select(this).attr("fill", function (d) {
         return color;
       })

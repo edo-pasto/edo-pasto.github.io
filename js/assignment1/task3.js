@@ -1,9 +1,7 @@
 //----------- Third Chart --------------
-// var margin3 = { top: 30, right: 200, bottom: 30, left: 35 },
-//     width3 = 500 - margin3.left - margin3.right,
-//     height3 = 300 - margin3.top - margin3.bottom
-var margin3 = { top: 30, right: 0, bottom: 150, left: 75 },
-    width3 = 310 - margin3.left - margin3.right,
+
+var margin3 = { top: 30, right: 0, bottom: 150, left: 110 },
+    width3 = 400 - margin3.left - margin3.right,
     height3 = 400 - margin3.top - margin3.bottom;
 //Read the data
 d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
@@ -29,12 +27,10 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
             "translate(" + margin3.left + "," + margin3.top + ")");
 
     // Add X axis 
-    var x = d3.scaleBand()
+    var x = d3.scaleLinear()
         .range([0, width3])
-        .padding(.1)
-        .domain(data.map(function (d) {
-            return d.Neighborhood;
-        }));
+        .domain([0, d3.max(data, function (d) { return +d.Count; })]
+           );
 
     svg3
         .append("g")
@@ -43,18 +39,20 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end");
 
-    //Add Y axis
-    // var y = d3.scaleLinear()
-    //     .domain([0,1300])
-    //     .range([height3, 0]);
 
-    var y = d3.scaleLinear()
-        .domain([0, d3.max(data, function (d) { return +d.Count; })])
-        // .domain([0, 600])
-        .range([height3, 0]);
+    var y = d3.scaleBand()
+        .domain( data.map(function (d) {
+            return d.Neighborhood;
+        }))
+        .range([0, height3])
+        .padding(.2);
 
     svg3.append("g")
-        .call(d3.axisLeft(y).ticks(5));
+        .call(d3.axisLeft(y).ticks(5))
+        .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
+
 
 
     // color palette
@@ -80,7 +78,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         tooltip3
             .html("Tree Type: " + treeType3 + "<br>" + "Total Amount: " + totalAmount3)
             .style("opacity", 1);
-        d3.select(this).attr("fill", "#0e6efc");
+            
     }
     const mousemove3 = function (d) {
         tooltip3
@@ -93,22 +91,17 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .style("opacity", 0);
     }
 
-    // var colorBars = d3.scaleOrdinal(d3.schemeCategory10);
-
-
     // create the Bar
 
     svg3.selectAll("mybar")
         .data(function (d) { return d.values })
         .enter()
         .append("rect")
-        // .attr("stroke", function(d){ return color(d.key) })
-        // .attr("fill", "#4daf49")
         .style("fill", function (d, i) { return colorTitles(d.Name) })
-        .attr("x", function (d, i) { return x(d.Neighborhood); })
-        .attr("y", function (d, i) { return y(d.Count); })
-        .attr("width", x.bandwidth())
-        .attr("height", function (d, i) { return height3 - y(d.Count); })
+        .attr("x", function (d, i) { return x(0); })
+        .attr("y", function (d, i) { return y(d.Neighborhood); })
+        .attr("height", y.bandwidth())
+        .attr("width", function (d, i) { return width3 -( width3 - x(d.Count)); })
         .on("mouseover", mouseover3)
         .on("mousemove", mousemove3)
         .on("mouseleave", mouseleave3);

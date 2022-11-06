@@ -1,5 +1,5 @@
 //----------- Fourth Chart --------------
-height4 = 400 - margin.top - margin.bottom;
+height4 = 500 - margin.top - margin.bottom;
 
 var svg4 = d3.select("#task4")
     .append("svg")
@@ -20,21 +20,19 @@ d3.csv("../../data/top_trees_neighborhood_stacked.csv", function (data) {
     var groups = d3.map(data, function (d) { return (d.Neighborhood) }).keys()
 
     // Add X axis
-    var x = d3.scaleBand()
-        .domain(groups)
+    var x = d3.scaleLinear()
+        .domain([0, 100])
         .range([0, width])
-        .padding([0.2])
     svg4.append("g")
         .attr("transform", "translate(0," + height4 + ")")
         .call(d3.axisBottom(x).tickSizeOuter(0))
-        .selectAll("text")
-        .attr("transform", "translate(-10,0)rotate(-45)")
-        .style("text-anchor", "end");
+
 
     // Add Y axis
-    var y = d3.scaleLinear()
-        .domain([0, 100])
-        .range([height4, 0]);
+    var y = d3.scaleBand()
+        .domain(groups)
+        .range([0, height4])
+        .padding([0.2]);
     svg4.append("g")
         .call(d3.axisLeft(y));
 
@@ -101,10 +99,10 @@ d3.csv("../../data/top_trees_neighborhood_stacked.csv", function (data) {
         // enter a second time = loop subgroup per subgroup to add all rectangles
         .data(function (d) { return d; })
         .enter().append("rect")
-        .attr("x", function (d) { return x(d.data.Neighborhood); })
-        .attr("y", function (d) { return y(d[1]); })
-        .attr("height", function (d) { return y(d[0]) - y(d[1]); })
-        .attr("width", x.bandwidth())
+        .attr("x", function (d) { return x(d[0]); })
+        .attr("y", function (d) { return y(d.data.Neighborhood); })
+        .attr("width", function (d) { return x(d[1]) - x(d[0]); })
+        .attr("height", y.bandwidth())
         .on("mouseover", mouseover4)
         .on("mousemove", mousemove4)
         .on("mouseleave", function(){

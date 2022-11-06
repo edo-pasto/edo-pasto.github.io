@@ -93,9 +93,14 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     // color palette
     var colorTitles = d3.scaleOrdinal()
         .domain(allKeys)
-        .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#a65628', '#f781bf', '#999999'])
+        // .range(['#3c51ae', '#ffd43b', '#4daf4a', '#e41a1c', '#377eb8', '#adb5bd', '#f781bf', '#999999'])
+        .range(['#ffd43b','#4daf4a', '#3c51ae', '#adb5bd', '#377eb8', '#e41a1c'])
 
     var colorBars = d3.scaleOrdinal(d3.schemeCategory10);
+    
+    // var colorBars = d3.scaleOrdinal()
+    // .domain(subgroups)
+    // .range(['#3c51ae', '#ffd43b', '#4daf4a', '#e41a1c', '#377eb8', '#adb5bd'])
 
     // console.log(colorBars)
     // console.log(colorTitles)

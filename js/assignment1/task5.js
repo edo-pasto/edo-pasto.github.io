@@ -8,7 +8,9 @@ var widthWaffle,
     squareValue = 0,
     gap = 1;
 
-var color = d3.scaleOrdinal(d3.schemeCategory10);
+// var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+
 
 neighborhoods = {
     'ARGENTARIO' : 1,
@@ -33,6 +35,10 @@ color_map = {
     'Aesculus hippocastanum': 4,
     'Tilia cordata': 5,
 }
+var color = d3.scaleOrdinal()
+.domain(color_map)
+// .range(['#ffd43b','#4daf4a', '#3c51ae', '#adb5bd', '#377eb8', '#e41a1c'])
+.range(['#adb5bd', '#3c51ae','#4daf4a', '#377eb8', '#ffd43b', '#e41a1c' ])
 tree_map = {
     0: 'Other',
     1: 'Celtis australis',

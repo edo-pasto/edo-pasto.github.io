@@ -5,26 +5,28 @@
     <title>MammaMia - Data Visualization Assignments</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
+    <!-- favicon -->
     <link type="image/png" sizes="32x32" rel="icon" href="images/favicon.ico">
     <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.1.js"
-        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    
     <!-- Google Font CDN -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Fontawesome -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/style.css">
-    <!--D3.js table-->
+
+    <!--D3.js table -->
     <script src="https://d3js.org/d3.v4.js"></script>
-    <!--D3.js utils-->
+    <!--D3.js utils -->
     <script src="js/utils/d3waffle.js"></script>
 
 </head>
@@ -51,30 +53,52 @@
 
         <!-- Header -->
         <header class="w3-container" id="assignm1Title">
-            <h1> Assignment 1</h1>
+            <h1><b>Assignment 1</b></h1>
             <!-- <i class="fa fa-chart-line fa-2xl"></i> -->
         </header>
         <br>
 
         <div class="w3-row-padding w3-margin-bottom">
             <br>
-            <h2>1.BarChart - Top 20 Tree Type Abundance</h2>
+            <h2><b>Popular Trees</b></h2>
+            <h4>
+                Abundance of top 20 tree species present in the municipality of Trento. <br>
+                Hovering each bar the mean canopy size (m2) is also shown.
+            </h4>
             <div class="task-container" id="task1"></div>
             <hr>
             <br>
-            <h2>2.Stacked BarChart - Tree Neighborhood Distribution </h2>
+
+            <h2><b>Tree Distribution by Neighborhood</b></h2>
+            <h4>
+                Top 5 trees species (+ "others") distribution divided by neighborhood.
+            </h4>
             <div class="task-container" id="task2"></div>
             <hr>
             <br>
-            <h2>3.Small Multiple - Tree Neighborhood Distribution </h2>
+            
+            <h2><b>Tree Distribution by Neighborhood</b></h2>
+            <h4>
+                Top 5 trees species (+ "others") distribution divided by neighborhood. <br>
+                Each chart represents the distribution over the neighborhood of a specific tree specie.
+            </h4>
             <div  id="task3"></div>
             <hr>
             <br>
-            <h2>4.Percent Stacked BarChart - Tree Neighborhood Percentage </h2>
+            
+            <h2><b>Tree Percentage Distribution by Neighborhood</b></h2>
+            <h4>
+                Top 5 trees species (+ "others") distribution, in percentage, divided by neighborhood. <br>
+            </h4>
             <div class="task-container" id="task4"></div>
             <hr>
             <br>
-            <h2>5.Waffle Chart - Tree Neighborhood Percentage </h2>
+            
+            <h2><b>Tree Percentage Distribution by Neighborhood</b></h2>
+            <h4>
+                Top 5 trees species (+ "others") distribution, in percentage, divided by neighborhood. <br>
+                Each waffle chart represents the tree species distribution of a neighborhood.
+            </h4>
             <div id="waffle_legend"></div>
             <!-- <div class="w3-half" id="task5-0"></div> -->
 
@@ -86,7 +110,7 @@
                 <div class="w3-half" id="task5-1"></div>
                 <div class="w3-half" id="task5-2"></div>
             </div>
-
+            <br><br><br>
             <div class="waffle_row">
                 <h3>Centro Storico Piedicastello</h3>
                 <h3>Gardolo</h3>
@@ -95,7 +119,7 @@
                 <div class="w3-half" id="task5-3"></div>
                 <div class="w3-half" id="task5-4"></div>
             </div>
-
+            <br><br><br>
             <div class="waffle_row">
                 <h3>Mattarello</h3>
                 <h3>Meano</h3>
@@ -104,7 +128,7 @@
                 <div class="w3-half" id="task5-5"></div>
                 <div class="w3-half" id="task5-6"></div>
             </div>
-
+            <br><br><br>
             <div class="waffle_row">
                 <h3>Oltrefersina</h3>
                 <h3>Povo</h3>
@@ -113,7 +137,7 @@
                 <div class="w3-half" id="task5-7"></div>
                 <div class="w3-half" id="task5-8"></div>
             </div>
-
+            <br><br><br>
             <div class="waffle_row">
                 <h3>Ravina-Romagnano</h3>
                 <h3>San Giuseppe - Santa Chiara</h3>
@@ -122,7 +146,7 @@
                 <div class="w3-half" id="task5-9"></div>
                 <div class="w3-half" id="task5-10"></div>
             </div>
-
+            <br><br><br>
             <div class="waffle_row">
                 <h3>Sardagna</h3>
                 <h3>Villazzano</h3>

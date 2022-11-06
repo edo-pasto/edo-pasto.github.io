@@ -239,9 +239,13 @@ section {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100&display=swap');
+/* 
+h1, h2, h3, h4 {
+	font-weight: bold;
+} */
 
 h1 {
-	font-family: 'Roboto Slab', sans-serif;
+	font-family: 'Roboto Slab', serif;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: 45px;
@@ -259,28 +263,10 @@ h1 {
 	/* padding: 80px; */
 }
 
-h2 {
-	font-family: 'Roboto Slab', sans-serif;
+h2, h3, h4 {
+	font-family: 'Roboto Slab', serif;
 	text-align: center;
 	margin: 0 0 24px;
-
-}
-
-h3 {
-	font-family: 'Roboto Slab', sans-serif;
-	text-align: center;
-	margin: 0 0 24px;
-	/* text-shadow:
-    -0.5px -0.5px 0 #7ac2fc,
-    0.5px -0.5px 0 #7ac2fc,
-    -0.5px 0.5px 0 #7ac2fc,
-    0.5px 0.5px 0 #7ac2fc; */
-
-}
-
-h4 {
-	font-family: 'Roboto Slab', sans-serif;
-
 }
 
 p {
@@ -420,5 +406,13 @@ ul {
 
 .waffle_row {
 	display:flex;
-	justify-content: space-around;
+	/* justify-content: space-around; */
+}
+
+.waffle_row h3 {
+	width: 50%;
+}
+
+span {
+	font-family: 'Roboto Slab', serif;
 }

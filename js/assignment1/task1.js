@@ -60,7 +60,8 @@ d3.csv(geo_url, function (data) {
         const canopyMean = d["Mean Canopy Cover (m2)"];
         tooltip
             .html("Tree Type: " + treeType + "<br>" + "Total Amount: " + totalAmount + "<br>" + "Canopy mean: " + canopyMean)
-            .style("opacity", 1)
+            .style("opacity", 1);
+            d3.select(this).attr("fill", "#0e6efc");
     }
     const mousemove = function (d) {
         var offsetX =  (42 * (screen.width / 100))
@@ -74,7 +75,8 @@ d3.csv(geo_url, function (data) {
     }
     const mouseleave = function (d) {
         tooltip
-            .style("opacity", 0)
+            .style("opacity", 0);
+        d3.select(this).attr("fill", "#4daf49");
     }
 
     //Bars

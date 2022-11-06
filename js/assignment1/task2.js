@@ -38,7 +38,8 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
   // color palette = one color per subgroup
   var color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#3c51ae', '#ffd43b', '#4daf4a', '#e41a1c', '#377eb8', '#adb5bd'])
+    .range(['#3c51ae', '#ffd43b', '#4daf4a', '#e41a1c', '#FFBCD9', '#adb5bd'])
+
   //stack the data? --> stack per subgroup
   var stackedData = d3.stack()
     .keys(subgroups)
@@ -64,23 +65,19 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
     var subgroupValue = d.data[subgroupName];
     tooltip2
       .html("Tree Type: " + subgroupName + "<br>" + "Amount: " + subgroupValue)
-      .style("opacity", 1)
+      .style("opacity", 1);
+      d3.select(this).attr("fill", "#0e6efc");
   }
   var mousemove2 = function (d) {
     var offsetX =  (42  * (screen.width / 100))
     var offsetY =  (132 * (screen.height / 100))
-
-    // console.log(screen.height)
     tooltip2
     .style('left', (event.pageX+30) + 'px')
     .style('top', (event.pageY+10) + 'px')
       // .style("left", (d3.mouse(this)[0] + offsetX) + "px" ) // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
       // .style("top", (d3.mouse(this)[1] + offsetY) + "px")
   }
-  var mouseleave2 = function (d) {
-    tooltip2
-      .style("opacity", 0)
-  }
+
 
 
 
@@ -112,5 +109,11 @@ d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
     .attr("width", x.bandwidth())
     .on("mouseover", mouseover2)
     .on("mousemove", mousemove2)
-    .on("mouseleave", mouseleave2)
+    .on("mouseleave", function(){
+      tooltip2
+      .style("opacity", 0);
+      d3.select(this).attr("fill", function (d) {
+        return color;
+      })
+    })
 })

@@ -41,6 +41,7 @@ tree_map = {
     4: 'Aesculus hippocastanum',
     5: 'Tilia cordata',
 }
+
 for (nbh in neighborhoods) {
 
     d3.csv(`../../data/single_neighborhood/top_trees_${nbh}.csv`, function (err, data) {
@@ -57,7 +58,6 @@ for (nbh in neighborhoods) {
         data.forEach(function (d, i) {
             d.Count = +d.Count;
             d.units = Math.floor(d.Count / squareValue);
-            var perc = (d.Count / squareValue).toFixed(2);
             theData = theData.concat(
                 Array(d.units + 1).join(1).split('').map(function () {
                     return {
@@ -77,7 +77,7 @@ for (nbh in neighborhoods) {
     
       let waffle = d3.select(`#task5-${neighborhoods[data[0]['Neighborhood']]}`)
            let svg5 = waffle.append("svg")
-           .attr("viewBox", `0 0 525 265`)
+            .attr("viewBox", `0 0 525 265`)
             // .attr("width", widthWaffle)
             // .attr("height", heightWaffle)
             .append("g")
@@ -103,20 +103,9 @@ for (nbh in neighborhoods) {
             })
             .append("title")
             .text(function (d, i) {
-                console.log(theData)
+                // console.log(theData)
                 return "Tree type: " + d.name + "; \nAbundance: " + d.abundance + "; \nPercentage: " + d.units + "%" + "\nNeighborhood: " + d.neigh
-            });
-
-            // svg5
-            // .append("text")
-            // .attr("text-anchor", "start")
-            // .attr("y", -5)
-            // .attr("x", 0)
-            // .text(function(d){ return(nbh)})
-            // .style("fill", function(d, i){ return color(i)});
-
-  
-    
+            });    
     });
 
 }
@@ -135,10 +124,12 @@ d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err,
         .enter()
         .append("g")
         .attr('transform', function (d, i) { return "translate(0," + i * 20 + ")"; });
+    
     legend.append("rect")
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", function (d, i) { return color(color_map[d.Name]) });
+    
     legend.append("text")
         .attr("x", 25)
         .attr("y", 13)
@@ -158,3 +149,29 @@ d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err,
 
 });
 
+
+// var data = [
+//     { "name": "type 1", "value": 102},
+//     { "name": "type 2", "value": 65},
+//     { "name": "type 3", "value": 43},
+//     { "name": "type 4", "value": 12}
+//   ];
+
+// let id_prova = "#task5-0"
+
+// var chart3 = d3waffle()
+//   .rows(5)
+//   .scale(1/3)
+//   .icon("")
+//   .adjust(0.425)
+//   .colorscale(color)
+//   .appearancetimes(function(d, i){
+//     mod = 13;
+//     val = i % mod;
+//     return val / mod * 1500;
+//   })
+//   .height(200);
+
+// d3.select(id_prova)
+// .datum(data)
+// .call(chart3);

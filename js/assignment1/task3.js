@@ -107,7 +107,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         // .attr("stroke", function(d){ return color(d.key) })
         // .attr("fill", "#4daf49")
         .style("fill", function (d, i) { return colorBars(i) })
-        .attr("x", function (d, i) { console.log(i, d.Neighborhood); return x(d.Name); })
+        .attr("x", function (d, i) { return x(d.Name); })
         .attr("y", function (d, i) { return y(d.Count); })
         .attr("width", x.bandwidth())
         .attr("height", function (d, i) { return height3 - y(d.Count); })

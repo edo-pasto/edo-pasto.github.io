@@ -38,7 +38,7 @@ color_map = {
 let subgroups = ["Celtis australis","Aesculus hippocastanum","Carpinus betulus","Tilia cordata","Platanus x hispanica","Other"]
 var color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#3c51ae', '#ffd43b', '#4daf4a', '#e41a1c', '#FFBCD9', '#adb5bd'])
+    .range(['#adb5bd', '#3c51ae','#4daf4a', '#ffbcd9', '#ffd43b', '#e41a1c' ])
 
 tree_map = {
     0: 'Celtis australis',

@@ -76,12 +76,31 @@ d3.csv(geo_url, function (data) {
         tooltip
             .style("opacity", 0)
     }
+    let scolor = d3.scaleSequential()
+        .domain([0, d3.max(data, d => d.Count)])
+        .interpolator(d3.interpolateGreens);
 
+    // const expScale = d3.scalePow()
+    //     .exponent(Math.E)
+    //     .domain([ d3.min(data, d => d.Count),d3.max(data, d => d.Count)])
+    // const logScale = d3.scaleLog()
+    //     .domain([ d3.max(data, d => d.Count),d3.min(data, d => d.Count)])
+    // let scolor2 = d3.scaleSequential(
+    //     (d) => d3.interpolateReds(logScale(d))
+    //   )
+    
+    let scolor2 = d3.scaleSequential()
+        // .domain([d3.min(data, d => d.Count),d3.max(data, d => d.Count)])
+        .domain([300, 270])
+        .interpolator(d3.interpolateGreys);
+    
     //Bars
-    svg.selectAll("myRect")
+    console.log(x(70))
+    let bar = svg.selectAll("myRect")
         .data(data)
         .enter()
-        .append("rect")
+
+    bar.append("rect")
         .attr("x", x(0))
         .attr("y", function (d) {
             return y(d.Name);
@@ -92,10 +111,26 @@ d3.csv(geo_url, function (data) {
 
         })
         .attr("height", y.bandwidth())
-        .attr("fill", "#4daf49")
+        .attr("fill", function (d) {
+            // return x(d.Count);
+            return scolor(d.Count);
+
+        })
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+    bar.append('text').text((d)=>d.Count)
+        .attr("x", function(d) { return x(d.Count) - 30 ; })
+        .attr("y", function(d) { return y(d.Name)+14; })
+        .attr("text-anchor", "right")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "11px")
+        .attr("fill", function (d) {
+            // return x(d.Count);
+            return scolor2(d.Count);
+
+        })
+
 
     //Animation
         svg.selectAll("rect")

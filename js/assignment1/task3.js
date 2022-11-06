@@ -11,7 +11,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
     // group the data: I want to draw one line per group
     var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-        .key(function (d) { return d.Neighborhood; })
+        .key(function (d) { return d.Name; })
         .entries(data);
     // console.log("Daataaaaaaaaaa ",data,sumstat)
     // What is the list of groups?
@@ -39,7 +39,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     var x = d3.scaleBand()
         .range([0, width3])
         .domain(data.map(function (d) {
-            return d.Name;
+            return d.Neighborhood;
         }));
 
     svg3
@@ -97,9 +97,12 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     // color palette
     var colorTitles = d3.scaleOrdinal()
         .domain(allKeys)
-        .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
+        .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#a65628', '#f781bf', '#999999'])
 
     var colorBars = d3.scaleOrdinal(d3.schemeCategory10);
+
+    // console.log(colorBars)
+    // console.log(colorTitles)
 
     // create the Bar
 
@@ -109,8 +112,8 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .append("rect")
         // .attr("stroke", function(d){ return color(d.key) })
         // .attr("fill", "#4daf49")
-        .style("fill", function (d, i) { return colorBars(i) })
-        .attr("x", function (d, i) { return x(d.Name); })
+        .style("fill", function (d, i) { return colorTitles(d.Name) })
+        .attr("x", function (d, i) { return x(d.Neighborhood); })
         .attr("y", function (d, i) { return y(d.Count); })
         .attr("width", x.bandwidth())
         .attr("height", function (d, i) { return height3 - y(d.Count); })

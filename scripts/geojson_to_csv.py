@@ -65,10 +65,18 @@ data['Count'] = 1
 
 # pivot the dataframe and fill the holes
 pivot_data = pd.pivot_table(data, index='Neighborhood', columns='Name', values='Count', aggfunc=sum).fillna(0).astype(int).reset_index()
+
 # order columns following the order of the top X trees (just because my brain wants to see them ordered)
-pivot_data = pivot_data[['Neighborhood'] + top_X_trees + ['Other']]
+pivot_data = pivot_data[['Neighborhood'] + top_X_trees + ['Other']].sort_values(by='Other', ascending=False)
+
+# (for stacked bar chart) order data according to the "Other" percentage
+pivot_data_stacked = pivot_data.copy()
+pivot_data_stacked['Other_perc'] = pivot_data_stacked['Other'] / pivot_data_stacked[top_X_trees + ['Other']].sum(axis=1)
+pivot_data_stacked = pivot_data_stacked.sort_values(by='Other_perc').drop(columns='Other_perc')
+
 # save into csv
 pivot_data.to_csv('../data/top_trees_neighborhood.csv', index=False)
+pivot_data_stacked.to_csv('../data/top_trees_neighborhood_stacked.csv', index=False)
 
 # Task 3
 '''

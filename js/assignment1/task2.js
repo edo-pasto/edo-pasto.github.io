@@ -10,7 +10,7 @@ var svg2 = d3.select("#task2")
     "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("/data/top_trees_neighborhood.csv", function (data) {
+d3.csv("../../data/top_trees_neighborhood.csv", function (data) {
   // List of subgroups = header of the csv files = soil condition here
   var subgroups = data.columns.slice(1)
   // List of groups = species here = value of the first column called group -> I show them on the X axis

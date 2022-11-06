@@ -2,8 +2,8 @@
 var total = 0;
 var widthWaffle,
     heightWaffle,
-    widthSquares = 20,
-    heightSquares = 5,
+    widthSquares = 10,
+    heightSquares = 10,
     squareSize = 25,
     squareValue = 0,
     gap = 1;
@@ -77,7 +77,7 @@ for (nbh in neighborhoods) {
     
       let waffle = d3.select(`#task5-${neighborhoods[data[0]['Neighborhood']]}`)
            let svg5 = waffle.append("svg")
-            .attr("viewBox", `0 0 525 265`)
+            .attr("viewBox", `0 0 275 275`)
             // .attr("width", widthWaffle)
             // .attr("height", heightWaffle)
             .append("g")
@@ -157,20 +157,33 @@ d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err,
 //     { "name": "type 4", "value": 12}
 //   ];
 
+// let data = [
+//     {"name": "Other", "value": 349},
+//     {"name": "Celtis australis", "value": 61},
+//     {"name": "Carpinus betulus", "value": 18},
+//     {"name": "Platanus x hispanica", "value": 12},
+//     {"name": "Aesculus hippocastanum", "value": 9},
+//     {"name": "Tilia cordata", "value": 5},
+// ]
+
+
+
+
+
 // let id_prova = "#task5-0"
 
 // var chart3 = d3waffle()
-//   .rows(5)
-//   .scale(1/3)
-//   .icon("")
-//   .adjust(0.425)
-//   .colorscale(color)
-//   .appearancetimes(function(d, i){
+// .rows(9)
+// .scale(1/3)
+// .icon("")
+// .adjust(0.425)
+// .colorscale(color)
+// .appearancetimes(function(d, i){
 //     mod = 13;
 //     val = i % mod;
 //     return val / mod * 1500;
-//   })
-//   .height(200);
+// })
+// .height(400);
 
 // d3.select(id_prova)
 // .datum(data)

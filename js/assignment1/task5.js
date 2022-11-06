@@ -28,25 +28,25 @@ neighborhoods = {
 }
 
 color_map = {
-    'Other': 0,
-    'Celtis australis': 1,
+    'Celtis australis': 0,
+    'Aesculus hippocastanum': 1,
     'Carpinus betulus': 2,
-    'Platanus x hispanica': 3,
-    'Aesculus hippocastanum': 4,
-    'Tilia cordata': 5,
+    'Tilia cordata': 3,
+    'Platanus x hispanica': 4,
+    'Other': 5
 }
-let subgroups = ["Neighborhood","Celtis australis","Aesculus hippocastanum","Carpinus betulus","Tilia cordata","Platanus x hispanica","Other"]
+let subgroups = ["Celtis australis","Aesculus hippocastanum","Carpinus betulus","Tilia cordata","Platanus x hispanica","Other"]
 var color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#adb5bd', '#3c51ae', '#4daf4a', '#FFBCD9', '#ffd43b', '#e41a1c'])
+    .range(['#3c51ae', '#ffd43b', '#4daf4a', '#e41a1c', '#FFBCD9', '#adb5bd'])
 
 tree_map = {
-    0: 'Other',
-    1: 'Celtis australis',
+    0: 'Celtis australis',
+    1: 'Aesculus hippocastanum',
     2: 'Carpinus betulus',
-    3: 'Platanus x hispanica',
-    4: 'Aesculus hippocastanum',
-    5: 'Tilia cordata',
+    3: 'Tilia cordata',
+    4: 'Platanus x hispanica',
+    5: 'Other',
 }
 
 for (nbh in neighborhoods) {
@@ -114,17 +114,6 @@ for (nbh in neighborhoods) {
                 // console.log(theData)
                 return "Tree type: " + d.name + "; \nAbundance: " + d.abundance + "; \nPercentage: " + d.units + "%" + "\nNeighborhood: " + d.neigh
             })
-            .on("mouseover", function(){
-                d3.select(this).attr("fill", "#0e6efc");
-            })
-            .on("mousemove", function(){
-
-            })
-            .on("mouseleave", function () {
-                d3.select(this).attr("fill", function (d) {
-                    return color;
-                })
-            })
     });
 
 }
@@ -154,7 +143,7 @@ d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err,
     legend.append("text")
         .attr("x", 25)
         .attr("y", 15)
-        .text(function (d) { return d.Name });
+    .text(function (d, i) { return d.Name });
 
     //add value of a unit square
     var legend2 = d3.select("#waffle_legend")

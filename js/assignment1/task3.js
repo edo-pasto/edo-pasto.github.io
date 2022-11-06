@@ -83,13 +83,14 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         d3.select(this).attr("fill", "#0e6efc");
     }
     const mousemove3 = function (d) {
-        var offsetX = (32 * (screen.width / 100))
-        var offsetY = (230 * (screen.height / 100))
         tooltip3
             .style('left', (event.pageX + 20) + 'px')
             .style('top', (event.pageY + 10) + 'px')
-        // .style("left", (d3.mouse(this)[0] + offsetX) + "px") 
-        // .style("top", (d3.mouse(this)[1] + offsetY) + "px")
+
+    }
+    const mouseleave3 = function (d) {
+        tooltip3
+        .style("opacity", 0);
     }
 
     // var colorBars = d3.scaleOrdinal(d3.schemeCategory10);
@@ -108,22 +109,9 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .attr("y", function (d, i) { return y(d.Count); })
         .attr("width", x.bandwidth())
         .attr("height", function (d, i) { return height3 - y(d.Count); })
-        .on("mouseover", function (){
-            let totalAmount3 = d.Count;
-            let treeType3 = d.Name;
-            tooltip3
-                .html("Tree Type: " + treeType3 + "<br>" + "Total Amount: " + totalAmount3)
-                .style("opacity", 1);
-            d3.select(this).attr("fill", "#0e6efc");
-        })
+        .on("mouseover", mouseover3)
         .on("mousemove", mousemove3)
-        .on("mouseleave", function () {
-            tooltip3
-                .style("opacity", 0);
-            d3.select(this).attr("fill", function (d) {
-                return colorTitles;
-            })
-        })
+        .on("mouseleave", mouseleave3);
 
 
     // Add titles

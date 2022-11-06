@@ -2,9 +2,9 @@
 // var margin3 = { top: 30, right: 200, bottom: 30, left: 35 },
 //     width3 = 500 - margin3.left - margin3.right,
 //     height3 = 300 - margin3.top - margin3.bottom
-var margin3 = {top: 30, right: 0, bottom: 90, left: 70},
+var margin3 = {top: 30, right: 0, bottom: 150, left: 75},
     width3 = 310 - margin3.left - margin3.right,
-    height3 = 310 - margin3.top - margin3.bottom;
+    height3 = 400 - margin3.top - margin3.bottom;
 //Read the data
 d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
@@ -13,14 +13,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
         .key(function (d) { return d.Name; })
         .entries(data);
-    // console.log("Daataaaaaaaaaa ",data,sumstat)
-    // What is the list of groups?
     allKeys = sumstat.map(function (d) { return d.key })
-    // let trees_nest=d3.nest() // nest function allows to group the calculation per level of a factor
-    //     .key(function (d) { return d.Name; })
-    //     .entries(data);
-    // alltrees=trees_nest.map(function (d) { return d.key })
-    // console.log("keeyss ",alltrees)
 
     // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
     var svg3 = d3.select("#task3")
@@ -38,6 +31,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     // Add X axis 
     var x = d3.scaleBand()
         .range([0, width3])
+        .padding(.1)
         .domain(data.map(function (d) {
             return d.Neighborhood;
         }));
@@ -86,8 +80,10 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         var offsetX = (32 * (screen.width / 100))
         var offsetY = (230 * (screen.height / 100))
         tooltip3
-            .style("left", (d3.mouse(this)[0] + offsetX) + "px") 
-            .style("top", (d3.mouse(this)[1] + offsetY) + "px")
+        .style('left', (event.pageX+20) + 'px')
+        .style('top', (event.pageY+10) + 'px')
+            // .style("left", (d3.mouse(this)[0] + offsetX) + "px") 
+            // .style("top", (d3.mouse(this)[1] + offsetY) + "px")
     }
     const mouseleave3 = function (d) {
         tooltip3
@@ -120,17 +116,6 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .on("mouseover", mouseover3)
         .on("mousemove", mousemove3)
         .on("mouseleave", mouseleave3)
-
-    // svg3.selectAll("mybar").data(data).enter().each(function (bar,index){
-    //     console.log(data,"sdfdddddddddd")
-    //
-    //     d3.select(this)
-    //         .append("rect"+(index%6).toString())
-    //         .attr("x", function(d) {console.log("aaaaaaaaaaaaaaaa",d.Name, index , d.Neighborhood,"adsssssssssssssssss"); return x(d.Name); })
-    //          .attr("y", function(d) { return y(d.Count); })
-    //          .attr("width", x.bandwidth())
-    //          .attr("height", function(d) { return height3 - y(d.Count); })
-    // })
 
 
     // Add titles

@@ -1,13 +1,45 @@
-.site-footer {
+:root{
+--primary-color:#c4e4b5;
+--icon-color:#79c484;
+--bg-color:#55b467;
+--title-color:#00441b;
+}
+
+#includeFooter{
+	height:120px;
+	background-color: var(--primary-color);
+}
+#F_container {
+	overflow:hidden;
+	height:100%;
 	/* background-color:#26272b; */
-	background-color: #7ac2fc;
-	padding: 15px 0 0;
+	background-color: var(--primary-color);
+	/* padding: 15px 0 0; */
 	font-size: 15px;
 	line-height: 24px;
 	color: black;
+	/* height:100px; */
+	display:grid;
+	grid-template-columns:40% 20% 40%;
+	justify-items: center;
 }
-
-.site-footer hr {
+#F_container #down{
+	grid-column:1/span 3;
+	grid-row:2;
+}
+#F_container #left{
+	grid-column:1/span 1;
+	grid-row:1/span 1 ;
+	display:flex;
+	flex-direction:column;
+}
+#F_container #right{
+	grid-column: 3 /span1;
+	grid-row:1/span 1;
+	display:flex;
+	flex-direction:column;
+}
+#F_container hr {
 	border-top-color: #bbb;
 	opacity: 0.5
 }
@@ -16,12 +48,14 @@
 	margin: 0 0
 }
 
-.site-footer h6 {
+#F_container h6 {
 	color: #fff;
 	font-size: 16px;
 	text-transform: uppercase;
-	margin-top: 0;
-	letter-spacing: 2px
+	margin: 0;
+	letter-spacing: 2px;
+	padding-top:10px;
+	
 }
 
 .site-footer a {
@@ -58,7 +92,8 @@
 }
 
 .copyright-text {
-	margin: 0
+	margin: 0;
+	margin-top:-10px;
 }
 
 @media (max-width:991px) {
@@ -118,11 +153,11 @@ section {
 }
 
 .navbar-nav .nav-item:hover {
-	background-color: #7ac2fc;
+	background-color: var(--primary-color);
 }
 
 .navbar-nav .nav-item .nav-link {
-	color: #7ac2fc;
+	color: var(--primary-color);
 	font-size: 18px;
 	font-weight: 400;
 }
@@ -203,7 +238,7 @@ section {
 
 .alert {
 	padding: 20px;
-	background-color: #0d6efc;
+	background-color: var(--icon-color);
 	color: white;
 }
 
@@ -234,7 +269,7 @@ section {
 }
 
 .fa {
-	color: #0d6efc;
+	color: var(--icon-color);
 
 }
 
@@ -267,6 +302,7 @@ h2, h3, h4 {
 	font-family: 'Roboto Slab', serif;
 	text-align: center;
 	margin: 0 0 24px;
+	color:var(--title-color)
 }
 
 p {
@@ -330,9 +366,12 @@ ul {
 	max-height: 64px;
 
 }
-
+#headerTitle{
+	color:var(--title-color);
+	font-weight:700 !important;
+}
 #header {
-	background-color: #7ac2fc;
+	background-color: var(--primary-color);
 	max-height: 64px;
 	display: -webkit-box;
 	/* OLD - iOS 6-, Safari 3.1-6 */
@@ -415,4 +454,7 @@ ul {
 
 span {
 	font-family: 'Roboto Slab', serif;
+}
+.w3-light-blue{
+	background-color:var(--bg-color) !important;
 }

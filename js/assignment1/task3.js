@@ -1,8 +1,10 @@
 //----------- Third Chart --------------
-var margin3 = { top: 30, right: 200, bottom: 30, left: 35 },
-    width3 = 300 - margin3.left - margin3.right,
-    height3 = 300 - margin3.top - margin3.bottom
-
+// var margin3 = { top: 30, right: 200, bottom: 30, left: 35 },
+//     width3 = 500 - margin3.left - margin3.right,
+//     height3 = 300 - margin3.top - margin3.bottom
+var margin3 = {top: 30, right: 0, bottom: 90, left: 70},
+    width3 = 310 - margin3.left - margin3.right,
+    height3 = 310 - margin3.top - margin3.bottom;
 //Read the data
 d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
@@ -26,6 +28,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .data(sumstat)
         .enter()
         .append("svg")
+        // .attr("viewBox", `0 0 1000 500`)
         .attr("width", width3 + margin3.left + margin3.right)
         .attr("height", height3 + margin3.top + margin3.bottom)
         .append("g")
@@ -80,8 +83,8 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
             .style("opacity", 1)
     }
     const mousemove3 = function (d) {
-        var offsetX = (28 * (screen.width3 / 100))
-        var offsetY = (240 * (screen.height3 / 100))
+        var offsetX = (32 * (screen.width / 100))
+        var offsetY = (230 * (screen.height / 100))
         tooltip3
             .style("left", (d3.mouse(this)[0] + offsetX) + "px") 
             .style("top", (d3.mouse(this)[1] + offsetY) + "px")

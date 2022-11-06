@@ -77,13 +77,15 @@ for (nbh in neighborhoods) {
     
       let waffle = d3.select(`#task5-${neighborhoods[data[0]['Neighborhood']]}`)
            let svg5 = waffle.append("svg")
-            .attr("width", widthWaffle)
-            .attr("height", heightWaffle)
+           .attr("viewBox", `0 0 525 265`)
+            // .attr("width", widthWaffle)
+            // .attr("height", heightWaffle)
             .append("g")
             .selectAll("div")
             .data(theData)
             .enter()
             .append("rect")
+            
             .attr("width", squareSize)
             .attr("height", squareSize)
 
@@ -119,65 +121,6 @@ for (nbh in neighborhoods) {
 
 }
 
-
-    // // ---- Argentario -----
-
-// d3.csv("./data/ArgentarioWaffle.csv", function (error, data) {
-//     //total
-//     total = d3.sum(data, function (d) { return d.Count; });
-
-//     //value of a square
-//     squareValue = total / (widthSquares * heightSquares);
-
-//     //remap data
-//     data.forEach(function (d, i) {
-//         d.Count = +d.Count;
-//         d.units = Math.floor(d.Count / squareValue);
-//         perc = (d.Count / squareValue).toFixed(2);
-//         theData = theData.concat(
-//             Array(d.units + 1).join(1).split('').map(function () {
-//                 return {
-//                     squareValue: squareValue,
-//                     units: d.units,
-//                     perc: perc,
-//                     population: d.Count,
-//                     groupIndex: i
-//                 };
-//             })
-//         );
-//     });
-
-//     widthWaffle = (squareSize * widthSquares) + widthSquares * gap + 25;
-//     heightWaffle = (squareSize * heightSquares) + heightSquares * gap + 25;
-
-//     var waffle = d3.select("#task5")
-//         .append("svg")
-//         .attr("width", widthWaffle)
-//         .attr("height", heightWaffle)
-//         .append("g")
-//         .selectAll("div")
-//         .data(theData)
-//         .enter()
-//         .append("rect")
-//         .attr("width", squareSize)
-//         .attr("height", squareSize)
-//         //   .attr('title', d.Neighborhood)
-//         .attr("fill", function (d) {
-//             return color(d.groupIndex);
-//         })
-//         .attr("x", function (d, i) {
-//             //group n squares for column
-//             col = Math.floor(i / heightSquares);
-//             return (col * squareSize) + (col * gap);
-//         })
-//         .attr("y", function (d, i) {
-//             row = i % heightSquares;
-//             return (heightSquares * squareSize) - ((row * squareSize) + (row * gap))
-//         })
-//         .append("title")
-//         .text(function (d, i) {
-//             return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%"
-//         });
 
 d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err, data) {
 
@@ -215,184 +158,3 @@ d3.csv(`../../data/single_neighborhood/top_trees_ARGENTARIO.csv`, function (err,
 
 });
 
-// // ---- Bondone -----
-
-// d3.csv("./data/BondoneWaffle.csv", function (error, data) {
-//     //total
-//     total = d3.sum(data, function (d) { return d.Count; });
-
-//     //value of a square
-//     squareValue = total / (widthSquares * heightSquares);
-
-//     //remap data
-//     data.forEach(function (d, i) {
-//         d.Count = +d.Count;
-//         d.units = Math.floor(d.Count / squareValue);
-//         var perc = (d.Count / squareValue).toFixed(2);
-//         theData = theData.concat(
-//             Array(d.units + 1).join(1).split('').map(function () {
-//                 return {
-//                     squareValue: squareValue,
-//                     units: d.units,
-//                     population: d.Count,
-//                     groupIndex: i
-//                 };
-//             })
-//         );
-//     });
-
-//     widthWaffle = (squareSize * widthSquares) + widthSquares * gap + 25;
-//     heightWaffle = (squareSize * heightSquares) + heightSquares * gap + 25;
-
-//     var waffle2 = d3.select("#task5-2")
-//         .append("svg")
-//         .attr("width", widthWaffle)
-//         .attr("height", heightWaffle)
-//         .append("g")
-//         .selectAll("div")
-//         .data(theData)
-//         .enter()
-//         .append("rect")
-//         .attr("width", squareSize)
-//         .attr("height", squareSize)
-//         //   .attr('title', d.Neighborhood)
-//         .attr("fill", function (d) {
-//             return color(d.groupIndex);
-//         })
-//         .attr("x", function (d, i) {
-//             //group n squares for column
-//             col = Math.floor(i / heightSquares);
-//             return (col * squareSize) + (col * gap);
-//         })
-//         .attr("y", function (d, i) {
-//             row = i % heightSquares;
-//             return (heightSquares * squareSize) - ((row * squareSize) + (row * gap))
-//         })
-//         .append("title")
-//         .text(function (d, i) {
-//             return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%"
-//         });
-
-// });
-
-
-// // ------ Centro -------
-
-// d3.csv("./data/CentroWaffle.csv", function (error, data) {
-//     //total
-//     total = d3.sum(data, function (d) { return d.Count; });
-
-//     //value of a square
-//     squareValue = total / (widthSquares * heightSquares);
-
-//     //remap data
-//     data.forEach(function (d, i) {
-//         d.Count = +d.Count;
-//         d.units = Math.floor(d.Count / squareValue);
-//         var perc = (d.Count / squareValue).toFixed(2);
-//         theData = theData.concat(
-//             Array(d.units + 1).join(1).split('').map(function () {
-//                 return {
-//                     squareValue: squareValue,
-//                     units: d.units,
-//                     population: d.Count,
-//                     groupIndex: i
-//                 };
-//             })
-//         );
-//     });
-
-//     widthWaffle = (squareSize * widthSquares) + widthSquares * gap + 25;
-//     heightWaffle = (squareSize * heightSquares) + heightSquares * gap + 25;
-
-//     var waffle3 = d3.select("#task5-3")
-//         .append("svg")
-//         .attr("width", widthWaffle)
-//         .attr("height", heightWaffle)
-//         .append("g")
-//         .selectAll("div")
-//         .data(theData)
-//         .enter()
-//         .append("rect")
-//         .attr("width", squareSize)
-//         .attr("height", squareSize)
-//         //   .attr('title', d.Neighborhood)
-//         .attr("fill", function (d) {
-//             return color(d.groupIndex);
-//         })
-//         .attr("x", function (d, i) {
-//             //group n squares for column
-//             col = Math.floor(i / heightSquares);
-//             return (col * squareSize) + (col * gap);
-//         })
-//         .attr("y", function (d, i) {
-//             row = i % heightSquares;
-//             return (heightSquares * squareSize) - ((row * squareSize) + (row * gap))
-//         })
-//         .append("title")
-//         .text(function (d, i) {
-//             return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%"
-//         });
-
-// });
-
-
-//                     // ------ Gardolo -------
-
-// d3.csv("./data/GardoloWaffle.csv", function (error, data) {
-//     //total
-//     total = d3.sum(data, function (d) { return d.Count; });
-
-//     //value of a square
-//     squareValue = total / (widthSquares * heightSquares);
-
-//     //remap data
-//     data.forEach(function (d, i) {
-//         d.Count = +d.Count;
-//         d.units = Math.floor(d.Count / squareValue);
-//         var perc = (d.Count / squareValue).toFixed(2);
-//         theData = theData.concat(
-//             Array(d.units + 1).join(1).split('').map(function () {
-//                 return {
-//                     squareValue: squareValue,
-//                     units: d.units,
-//                     population: d.Count,
-//                     groupIndex: i
-//                 };
-//             })
-//         );
-//     });
-
-//     widthWaffle = (squareSize * widthSquares) + widthSquares * gap + 25;
-//     heightWaffle = (squareSize * heightSquares) + heightSquares * gap + 25;
-
-//     var waffle3 = d3.select("#task5-4")
-//         .append("svg")
-//         .attr("width", widthWaffle)
-//         .attr("height", heightWaffle)
-//         .append("g")
-//         .selectAll("div")
-//         .data(theData)
-//         .enter()
-//         .append("rect")
-//         .attr("width", squareSize)
-//         .attr("height", squareSize)
-//         //   .attr('title', d.Neighborhood)
-//         .attr("fill", function (d) {
-//             return color(d.groupIndex);
-//         })
-//         .attr("x", function (d, i) {
-//             //group n squares for column
-//             col = Math.floor(i / heightSquares);
-//             return (col * squareSize) + (col * gap);
-//         })
-//         .attr("y", function (d, i) {
-//             row = i % heightSquares;
-//             return (heightSquares * squareSize) - ((row * squareSize) + (row * gap))
-//         })
-//         .append("title")
-//         .text(function (d, i) {
-//             return "Tree type: " + data[d.groupIndex].Name + "; \nAbundance: " + data[d.groupIndex].Count + "; \nPercentage: " + d.units + "%"
-//         });
-
-// });

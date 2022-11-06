@@ -256,7 +256,7 @@ h1 {
 		2px -2px 0 #fff,
 		-2px 2px 0 #fff,
 		2px 2px 0 #fff;
-	padding: 80px;
+	/* padding: 80px; */
 }
 
 h2 {
@@ -306,29 +306,14 @@ ul {
 
 #headersContainer {
 	background-image: url("../images/dataViz.jpg");
+	background-size: cover;
+	background-position: center center;
 	height: 250px;
 	margin-bottom: 20px;
 
 }
 
-
-#containerBtnAssgn1 {
-	/* margin-left: 40%; */
-	margin-top: 50px;
-	display: flex;
-	justify-content: center;
-
-}
-
-#containerBtnAssgn2 {
-	/* margin-left: 40%; */
-	margin-top: 50px;
-	display: flex;
-	justify-content: center;
-
-}
-
-#containerBtnAssgn3 {
+#containerBtnAssgn3, #containerBtnAssgn2, #containerBtnAssgn1  {
 	/* margin-left: 40%; */
 	margin-top: 50px;
 	display: flex;
@@ -377,11 +362,14 @@ ul {
 #trentoTreeMapImg {
 	width: 40%;
 	height: 40%;
+	
 }
 
 #containerImgTrentomap {
-	text-align: center;
+	/* text-align: center; */
 	margin-bottom: 40px;
+	display: flex;
+	justify-content: center;
 }
 
 #mySidebar {

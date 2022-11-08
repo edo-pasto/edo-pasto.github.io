@@ -113,4 +113,27 @@ d3.csv("../../data/top_trees_neighborhood_stacked.csv", function (data) {
                 })
         })
 
+    var legend = d3.select("#task_4_legend")
+        .append("svg")
+        // .attr("viewBox", `0 0 50 50`)
+        .attr('width', 300)
+        .attr('height', 200)
+        .append('g')
+        .attr("transform", `translate(50,0)`)
+        .selectAll("div")
+        .data(subgroups)
+        .enter()
+        .append("g")
+        .attr('transform', function (d, i) { return "translate(0," + i * 30 + ")"; });
+
+    legend.append("rect")
+        .attr("width", 20)
+        .attr("height", 20)
+        .style("fill", function (d, i) { return color(color_map[d]) });
+
+    legend.append("text")
+        .attr("x", 25)
+        .attr("y", 15)
+        .text(function (d, i) { return d });
+
 })

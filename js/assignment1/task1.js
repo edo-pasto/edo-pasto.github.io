@@ -21,6 +21,8 @@ const geo_url = "../../data/top_20_trees.csv";
 // Parse the Data
 d3.csv(geo_url, function (data) {
 
+
+
     // Add X axis
     const x = d3.scaleLinear()
         .domain([0, 1300])

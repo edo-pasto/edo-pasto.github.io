@@ -359,6 +359,14 @@ ul {
 	margin-left: 300px;
 }
 
+#assignm2PageContent {
+	/* position: absolute;  */
+	overflow-x: auto;
+	z-index: 2;
+	margin-top: 15px;
+	margin-left: 300px;
+}
+
 #includeHeader {
 	position: relative;
 	z-index: 4;
@@ -416,6 +424,10 @@ ul {
 }
 
 #assignm1Title {
+	padding-top: 22px;
+	margin-top: 90px;
+}
+#assignm2Title {
 	padding-top: 22px;
 	margin-top: 90px;
 }

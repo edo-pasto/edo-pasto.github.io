@@ -479,3 +479,12 @@ span {
 .w3-light-blue{
 	background-color:var(--bg-color) !important;
 }
+
+.bubbles {
+	stroke-width: 1px;
+	stroke: black;
+	opacity: .8
+  }
+  .bubbles:hover {
+	stroke: black;
+  }

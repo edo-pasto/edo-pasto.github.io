@@ -313,6 +313,9 @@ p {
 	margin-left: 10%;
 	margin-right: 10%;
 }
+#bins{
+	text-align: center;
+}
 
 
 ul {
@@ -433,11 +436,11 @@ ul {
 }
 
 .task-container {
-
 	display: flex;
 	justify-content: center;
 }
-#task3{
+
+#task3, #A2task1{
 	justify-content: center;
 	text-align: center;
 }

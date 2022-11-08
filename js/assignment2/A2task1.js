@@ -1,13 +1,14 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 40},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+var margin = {top: 20, right: 30, bottom: 30, left: 320},
+    width = 800 - margin.left - margin.right,
+    height = 420 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#A2task1")
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    // .attr("width", width + margin.left + margin.right)
+    // .attr("height", height + margin.top + margin.bottom)
+    .attr("viewBox", `0 0 1000 500`)
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
@@ -27,6 +28,38 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
   var y = d3.scaleLinear()
       .range([height, 0]);
   var yAxis = svg.append("g")
+
+
+  var tooltipA2T1 = d3.select("#task1")
+  .append("div")
+  .style("opacity", 0)
+  .attr("class", "tooltip")
+  .style("background-color", "white")
+  .style("border", "solid")
+  .style("border-width", "2px")
+  .style("border-radius", "5px")
+  .style("padding", "10px")
+
+// Three function that change the tooltip when user hover / move / leave a cell
+var mouseoverA2T1 = function (d) {
+  // const totalAmount = d.Count;
+  // const treeType = d.Name;
+  // const canopyMean = d["Mean Canopy Cover (m2)"];
+  // tooltipA2T1
+  //     .html("Tree Type: " + treeType + "<br>" + "Total Amount: " + totalAmount + "<br>" + "Canopy mean: " + canopyMean)
+  //     .style("opacity", 1);
+      d3.select(this).attr("fill", "#0e6efc");
+}
+var mousemoveA2T1 = function (d) {
+  tooltip
+  .style('left', (event.pageX+40) + 'px')
+  .style('top', (event.pageY+5) + 'px')
+}
+var mouseleaveA2T1 = function (d) {
+  tooltipA2T1
+      .style("opacity", 0);
+      d3.select(this).attr("fill", "#69b3a2");
+}
 
   // A function that builds the graph for a specific value of bin
   function update(nBin) {
@@ -63,6 +96,9 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
           .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
           .attr("height", function(d) { return height - y(d.length); })
           .style("fill", "#69b3a2")
+          // .on("mouseover", mouseoverA2T1)
+          // .on("mousemove", mousemoveA2T1)
+          // .on("mouseleave", mouseleaveA2T1)
 
 
     // If less bar in the new histogram, I delete the ones not in use anymore

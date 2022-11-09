@@ -69,11 +69,23 @@
                 The size can be measured in height (m), crown height (m), crown width (m) or canopy cover (m2), which
                 can be selected with the button.
             </h4>
+            <label for="treeSizeMeasures">Choose Tree measure:</label>
+            <select name="treeSizeMeasures" id="treeSizeMeasures">
+                <option value="height">Height</option>
+                <option value="crownHeight">Crown height</option>
+                <option value="crownWidth">Crown width</option>
+                <option value="canopyCover">Canopy cover</option>
+            </select>
+            <br>
+            <br>
+            <label># Bins:</label>
+            <input type="number" min="1" max="100" step="30" value="20" id="nBin">
             <div class="task-container" id="A2task1"></div>
-            <p id="bins">
+           
+            <!-- <p id="bins">
                 <label># Bins:</label>
                 <input type="number" min="1" max="100" step="30" value="20" id="nBin">
-            </p>
+            </p> -->
             <hr>
             <br>
 

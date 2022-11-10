@@ -15,11 +15,11 @@ var svgA2T1 = d3.select("#A2task1")
 
 
 // get the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", function(data) {
+d3.csv("../../data/treesHeight.csv", function(data) {
 
   // X axis: scale and draw:
   var x = d3.scaleLinear()
-      .domain([0, 1000])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+      .domain([0, d3.max(data, function (d) { return +d['Height (m)']; })])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
       .range([0, width]);
       svgA2T1.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -67,7 +67,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
     // set the parameters for the histogram
     var histogram = d3.histogram()
-        .value(function(d) { return d.price; })   // I need to give the vector of value
+        .value(function(d) { return d['Height (m)']; })   // I need to give the vector of value
         .domain(x.domain())  // then the domain of the graphic
         .thresholds(x.ticks(nBin)); // then the numbers of bins
 

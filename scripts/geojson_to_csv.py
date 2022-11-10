@@ -92,3 +92,11 @@ data are separated for each neighborhood
 '''
 for nbh in data['Neighborhood'].unique():
     unpivot_data[unpivot_data['Neighborhood'] == nbh].sort_values(by='Count', ascending=False).to_csv(f'../data/single_neighborhood/top_trees_{nbh}.csv', index=False)
+#-------------------------------------------------
+#                   ASSIGNMENT 2 
+#-------------------------------------------------
+
+#Task1
+height = df[['Height (m)']][:-1]
+height['Height (m)'] = height['Height (m)'].apply(float) 
+height.to_csv(f'{DATA_PATH}/treesHeight.csv', index=False)

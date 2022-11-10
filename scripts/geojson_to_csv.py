@@ -97,6 +97,10 @@ for nbh in data['Neighborhood'].unique():
 #-------------------------------------------------
 
 #Task1
-height = df[['Height (m)']][:-1]
-height['Height (m)'] = height['Height (m)'].apply(float) 
-height.to_csv(f'{DATA_PATH}/treesHeight.csv', index=False)
+measure = df[['Height (m)', 'Crown Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)']][:-1]
+measure['Height (m)'] = measure['Height (m)'].apply(float) 
+measure['Crown Height (m)'] = measure['Crown Height (m)'].apply(float) 
+measure['Crown Width (m)'] = measure['Crown Width (m)'].apply(float) 
+measure['Canopy Cover (m2)'] = measure['Canopy Cover (m2)'].apply(float) 
+
+measure.to_csv(f'{DATA_PATH}/treesMeasures.csv', index=False)

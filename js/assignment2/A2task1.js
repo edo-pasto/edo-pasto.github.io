@@ -14,8 +14,8 @@ var svgA2T1 = d3.select("#A2task1")
           "translate(" + margin.left + "," + margin.top + ")");
 
 
-// get the data
-d3.csv("../../data/treesHeight.csv", function(data) {
+// get the datacd 
+d3.csv("../../data/treesMeasures.csv", function(data) {
 
   // X axis: scale and draw:
   var x = d3.scaleLinear()

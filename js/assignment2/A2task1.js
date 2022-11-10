@@ -14,9 +14,10 @@ var svgA2T1 = d3.select("#A2task1")
           "translate(" + margin.left + "," + margin.top + ")");
 
 
-// get the datacd 
+// get the data
 d3.csv("../../data/treesMeasures.csv", function(data) {
-
+var size = data.length;
+var defaultBins = Math.sqrt(size);
   // X axis: scale and draw:
   var x = d3.scaleLinear()
       .domain([0, d3.max(data, function (d) { return +d['Height (m)']; })])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
@@ -114,7 +115,7 @@ d3.csv("../../data/treesMeasures.csv", function(data) {
 
 
   // Initialize with 20 bins
-  update(20)
+  update(defaultBins)
 
 
   // Listen to the button -> update if user change it

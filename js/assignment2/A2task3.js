@@ -31,6 +31,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
   svg3.append("g")
     .call(d3.axisLeft(y));
 
+  var domain = ["setosa", "versicolor", "virginica" ]
   // Color scale: give me a specie name, I return a color
   var color = d3.scaleOrdinal()
     .domain(["setosa", "versicolor", "virginica" ])
@@ -77,5 +78,28 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
       .style("fill", function (d) { return color(d.Species) } )
     .on("mouseover", highlight)
     .on("mouseleave", doNotHighlight )
+
+  var legend = d3.select("#A2task3_legend")
+    .append("svg")
+    // .attr("viewBox", `0 0 50 50`)
+    .attr('width', 300)
+    .attr('height', 200)
+    .append('g')
+    .attr("transform", `translate(50,0)`)
+    .selectAll("div")
+    .data(domain)
+    .enter()
+    .append("g")
+    .attr('transform', function (d, i) { return "translate(0," + i * 30 + ")"; });
+
+legend.append("rect")
+    .attr("width", 20)
+    .attr("height", 20)
+    .style("fill", function (d, i) { return color(domain[i]) });
+
+legend.append("text")
+    .attr("x", 25)
+    .attr("y", 15)
+    .text(function (d, i) { return d });
 
 })

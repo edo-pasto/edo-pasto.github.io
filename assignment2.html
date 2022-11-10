@@ -82,10 +82,6 @@
             <input type="number" min="1" max="100" step="30" value="20" id="nBin">
             <div class="task-container" id="A2task1"></div>
            
-            <!-- <p id="bins">
-                <label># Bins:</label>
-                <input type="number" min="1" max="100" step="30" value="20" id="nBin">
-            </p> -->
             <hr>
             <br>
 
@@ -95,7 +91,14 @@
                 box plots to show spread and skewness of the tree size,<br>giving information on minima, maxima and
                 means.
             </h4>
-            <div class="task-container" id="task_2_legend"></div>
+            <!-- <div class="task-container" id="task_2_legend"></div> -->
+            <label for="treeSizeMeasures">Choose Tree measure:</label>
+            <select name="treeSizeMeasures" id="treeSizeMeasures">
+                <option value="height">Height</option>
+                <option value="crownHeight">Crown height</option>
+                <option value="crownWidth">Crown width</option>
+                <option value="canopyCover">Canopy cover</option>
+            </select>
             <div class="task-container" id="A2task2"></div>
             <hr>
             <br>
@@ -107,7 +110,7 @@
                 The efficiency can be measured either in CO<sup>2</sup> capturing capacity of the trees or in the total
                 annual benefits in Euro per year (select with button).
             </h4>
-            <div class="task-container" id="task_3_legend"></div>
+            <div class="task-container" id="A2task3_legend"></div>
             <div class="task-container" id="A2task3"></div>
             <hr>
             <br>
@@ -119,7 +122,7 @@
                 The efficiency can be measured either in CO<sup>2</sup> capturing capacity of the trees or in the total
                 annual benefits in Euro per year (select with button).
             </h4>
-            <div class="task-container" id="task_4_legend"></div>
+            <div class="task-container" id="A2task4_legend"></div>
             <div class="task-container" id="A2task4"></div>
             <hr>
             <br>

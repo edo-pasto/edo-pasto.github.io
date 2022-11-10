@@ -8,7 +8,9 @@ import geopandas as gpd
 DATA_PATH = '../data'
 
 # load and convert geojson data into dataframe
-df = gpd.read_file(f'{DATA_PATH}/geo_data_trees.geojson')#.to_csv(f'{DATA_PATH}/geo_data_trees.csv')
+df = gpd.read_file(f'{DATA_PATH}/geo_data_trees.geojson')
+# names=['Celtis australis','Aesculus hippocastanum',
+#               'Carpinus betulus',     'Tilia cordata' ,'Platanus x hispanica'])#.to_csv(f'{DATA_PATH}/geo_data_trees.csv')
 
 # # Task 1
 # '''
@@ -105,13 +107,21 @@ df = gpd.read_file(f'{DATA_PATH}/geo_data_trees.geojson')#.to_csv(f'{DATA_PATH}/
 #
 
 
+# Task4 and 5 I guess
+data_task3 = df[['Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)', 'Crown Height (m)', 'Oxygen Production (kg/yr)',
+                 'Name']][:-1]
+# data_task3=data_task3.loc((data_task3['Name']=="Celtis australis") | (data_task3['Name']=="Aesculus hippocastanum")
+#                           | (data_task3['Name']=="Aesculus hippocastanum") | (data_task3['Name']=="Tilia cordata"))
+data_task3['Height (m)'] = data_task3['Height (m)'].apply(float)
+data_task3['Crown Width (m)'] = data_task3['Crown Width (m)'].apply(float)
+data_task3['Canopy Cover (m2)'] = data_task3['Canopy Cover (m2)'].apply(float)
+data_task3['Crown Height (m)'] = data_task3['Crown Height (m)'].apply(float)
+data_task3['Oxygen Production (kg/yr)'] = data_task3['Oxygen Production (kg/yr)'].apply(float)
 
+# #Keep only the tope 5 trees
+data_task3 = data_task3[
+    (data_task3['Name'] == "Celtis australis") | (data_task3['Name'] == "Aesculus hippocastanum") |
+    (data_task3['Name'] == "Carpinus betulus") | (data_task3['Name'] == "Tilia cordata")]
 
-#Task4 and 5 I guess
-data_task4 = df[['Height (m)','Crown Width (m)','Canopy Cover (m2)', 'Crown Height (m)', 'Name']][:-1]
-data_task4['Height (m)']=data_task4['Height (m)'].apply(float)
-data_task4['Crown Width (m)']=data_task4['Crown Width (m)'].apply(float)
-data_task4['Canopy Cover (m2)']=data_task4['Canopy Cover (m2)'].apply(float)
-data_task4['Crown Height (m)']=data_task4['Crown Height (m)'].apply(float)
-data_task4.to_csv(f'{DATA_PATH}/my_data_for_task4_5_dont_manipulate_please.csv', index=False)
-print(data_task4)
+data_task3.to_csv(f'{DATA_PATH}/my_data_for_task_3_dont_manipulate_please.csv', index=False)
+print(data_task3)

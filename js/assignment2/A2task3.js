@@ -14,11 +14,14 @@ var svg3 = d3.select("#A2task3")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(data) {
+d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function(data) {
+
+  //get names as keys
+   var keys = d3.map(data, function (d) { return (d.Name) }).keys()
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([4, 8])
+    .domain([d3.min(data, d=> d['Height (m)']), 30])
     .range([ 0, width ]);
   svg3.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -26,22 +29,22 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 9])
+    .domain([d3.min(data, d=> d['Oxygen Production (kg/yr)']),d3.max(data, d=> d['Oxygen Production (kg/yr)']) ])
     .range([ height, 0]);
   svg3.append("g")
     .call(d3.axisLeft(y));
 
-  var domain = ["setosa", "versicolor", "virginica" ]
+  var domain = keys
   // Color scale: give me a specie name, I return a color
   var color = d3.scaleOrdinal()
-    .domain(["setosa", "versicolor", "virginica" ])
-    .range([ "#440154ff", "#21908dff", "#fde725ff"])
+    .domain(keys)
+    .range([ "#440154ff", "#21908dff", "#fde725ff","#f00034"])
 
 
   // Highlight the specie that is hovered
   var highlight = function(d){
 
-    selected_specie = d.Species
+
 
     d3.selectAll(".dot")
       .transition()
@@ -49,12 +52,14 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
       .style("fill", "lightgrey")
       .attr("r", 3)
 
-    d3.selectAll("." + selected_specie)
+    d3.selectAll("." + d.Name)
       .transition()
       .duration(200)
-      .style("fill", color(selected_specie))
+      .style("fill", color(d.Name))
       .attr("r", 7)
+
   }
+
 
   // Highlight the specie that is hovered
   var doNotHighlight = function(){
@@ -71,11 +76,11 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
     .data(data)
     .enter()
     .append("circle")
-      .attr("class", function (d) { return "dot " + d.Species } )
-      .attr("cx", function (d) { return x(d.Sepal_Length); } )
-      .attr("cy", function (d) { return y(d.Petal_Length); } )
+      .attr("class", function (d) { return "dot " + d.Name } )
+      .attr("cx", function (d) { return x(d['Height (m)']); } )
+      .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
       .attr("r", 5)
-      .style("fill", function (d) { return color(d.Species) } )
+      .style("fill", function (d) { return color(d.Name) } )
     .on("mouseover", highlight)
     .on("mouseleave", doNotHighlight )
 
@@ -100,6 +105,6 @@ legend.append("rect")
 legend.append("text")
     .attr("x", 25)
     .attr("y", 15)
-    .text(function (d, i) { return d });
+    .text(function (d, i) { return d});
 
 })

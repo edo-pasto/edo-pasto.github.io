@@ -89,7 +89,6 @@
 
 
 
-//----------- Third Chart --------------
 
 var margin3 = { top: 30, right: 0, bottom: 150, left: 110 },
   width3 = 350 - margin3.left - margin3.right,
@@ -163,7 +162,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     .style("padding", "10px")
 
   // Three function that change the tooltip when user hover / move / leave a cell
-  const mouseover3 = function (d) {
+  const mouseoverA2T4 = function (d) {
     let totalAmount3 = d.Count;
     let treeType3 = d.Name;
     tooltipA2T4
@@ -171,13 +170,13 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
       .style("opacity", 1);
 
   }
-  const mousemove3 = function (d) {
+  const mousemoveA2T4 = function (d) {
     tooltipA2T4
       .style('left', (event.pageX + 20) + 'px')
       .style('top', (event.pageY + 10) + 'px')
 
   }
-  const mouseleave3 = function (d) {
+  const mouseleaveA2T4 = function (d) {
     tooltipA2T4
       .style("opacity", 0);
   }
@@ -196,9 +195,9 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     .attr("cx", function (d) { return x(d.Count); })
     .attr("cy", function (d) { return y(d.Neighborhood); })
     .attr("r", 1.5)
-    .on("mouseover", mouseover3)
-    .on("mousemove", mousemove3)
-    .on("mouseleave", mouseleave3);
+    .on("mouseover", mouseoverA2T4)
+    .on("mousemove", mousemoveA2T4)
+    .on("mouseleave", mouseleaveA2T4);
 
 
   // Add titles

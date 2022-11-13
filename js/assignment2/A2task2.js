@@ -103,26 +103,32 @@ d3.csv("../../data/top_5_treesMeasures.csv", function(data) {
   // create a tooltip
   var tooltipA2T2 = d3.select("#A2task2")
     .append("div")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      // .style("min-width", "2px")
       .style("opacity", 0)
       .attr("class", "tooltip")
       .style("font-size", "16px")
   // Three function that change the tooltip when user hover / move / leave a cell
-  var mouseover = function(d) {
+  var mouseoverA2T2 = function(d) {
     tooltipA2T2
       .transition()
       .duration(200)
       .style("opacity", 1)
       tooltipA2T2
-        .html("<span style='color:grey'>Sepal length: </span>" + d['Height (m)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
-        .style("left", (d3.mouse(this)[0]+30) + "px")
-        .style("top", (d3.mouse(this)[1]+30) + "px")
+        .html("<span style='color:grey'>Height (m): </span>" + d['Height (m)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+        .style("left", (event.pageX  + 10) + "px")
+        .style("top", (event.pageY) + "px")
   }
-  var mousemove = function(d) {
+  var mousemoveA2T2 = function(d) {
     tooltipA2T2
-      .style("left", (d3.mouse(this)[0]+30) + "px")
-      .style("top", (d3.mouse(this)[1]+30) + "px")
+      .style("left", (event.pageX + 30) + "px")
+      .style("top", (event.pageY) + "px")
   }
-  var mouseleave = function(d) {
+  var mouseleaveA2T2 = function(d) {
     tooltipA2T2
       .transition()
       .duration(200)
@@ -141,9 +147,9 @@ d3.csv("../../data/top_5_treesMeasures.csv", function(data) {
       .attr("r", 4)
       .style("fill", function(d){ return(myColor(+d['Height (m)'])) })
       .attr("stroke", "black")
-      .on("mouseover", mouseover)
-      .on("mousemove", mousemove)
-      .on("mouseleave", mouseleave)
+      .on("mouseover", mouseoverA2T2)
+      .on("mousemove", mousemoveA2T2)
+      .on("mouseleave", mouseleaveA2T2)
 
 
 })

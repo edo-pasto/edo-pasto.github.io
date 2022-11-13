@@ -104,3 +104,21 @@ measure['Crown Width (m)'] = measure['Crown Width (m)'].apply(float)
 measure['Canopy Cover (m2)'] = measure['Canopy Cover (m2)'].apply(float) 
 
 measure.to_csv(f'{DATA_PATH}/treesMeasures.csv', index=False)
+
+#Task2
+top = 5
+
+measure = df[['Name','Height (m)', 'Crown Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)']][:-1]
+measure['Height (m)'] = measure['Height (m)'].apply(float) 
+measure['Crown Height (m)'] = measure['Crown Height (m)'].apply(float) 
+measure['Crown Width (m)'] = measure['Crown Width (m)'].apply(float) 
+measure['Canopy Cover (m2)'] = measure['Canopy Cover (m2)'].apply(float) 
+
+trees_occurences = df[['Name', 'DBH (cm)']]
+top_trees = trees_occurences.groupby('Name').count().round(2).rename(columns={'DBH (cm)': 'Count'}).reset_index()
+top_trees = top_trees.sort_values(by='Count', ascending=False)[:top]
+trees_name = top_trees['Name'].tolist()
+
+result = measure[measure.Name.isin(trees_name)]
+result = result.sort_values(by='Name')
+result.to_csv(f'{DATA_PATH}/top_{top}_treesMeasures.csv', index=False)

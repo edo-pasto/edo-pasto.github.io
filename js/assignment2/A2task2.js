@@ -14,15 +14,15 @@ var svg2 = d3.select("#A2task2")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Read the data and compute summary statistics for each specie
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function(data) {
+d3.csv("../../data/top_5_treesMeasures.csv", function(data) {
 
   // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-    .key(function(d) { return d.Species;})
+    .key(function(d) { return d.Name;})
     .rollup(function(d) {
-      q1 = d3.quantile(d.map(function(g) { return g.Sepal_Length;}).sort(d3.ascending),.25)
-      median = d3.quantile(d.map(function(g) { return g.Sepal_Length;}).sort(d3.ascending),.5)
-      q3 = d3.quantile(d.map(function(g) { return g.Sepal_Length;}).sort(d3.ascending),.75)
+      q1 = d3.quantile(d.map(function(g) { return g['Height (m)'];}).sort(d3.ascending),.25)
+      median = d3.quantile(d.map(function(g) { return g['Height (m)'];}).sort(d3.ascending),.5)
+      q3 = d3.quantile(d.map(function(g) { return g['Height (m)'];}).sort(d3.ascending),.75)
       interQuantileRange = q3 - q1
       min = q1 - 1.5 * interQuantileRange
       max = q3 + 1.5 * interQuantileRange
@@ -33,7 +33,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
   // Show the Y scale
   var y = d3.scaleBand()
     .range([ height, 0 ])
-    .domain(["setosa", "versicolor", "virginica"])
+    .domain([ 'Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata'])
     .padding(.4);
   svg2.append("g")
     .call(d3.axisLeft(y).tickSize(0))
@@ -41,7 +41,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
 
   // Show the X scale
   var x = d3.scaleLinear()
-    .domain([4,8])
+    .domain([0,d3.max(data, function (d) { return +d['Height (m)']; })])
     .range([0, width])
   svg2.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -51,14 +51,14 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
   // Color scale
   var myColor = d3.scaleSequential()
     .interpolator(d3.interpolateInferno)
-    .domain([4,8])
+    .domain([0,d3.max(data, function (d) { return +d['Height (m)']; })])
 
   // Add X axis label:
   svg2.append("text")
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height + margin.top + 30)
-      .text("Sepal Length");
+      .text("Height (m)");
 
   // Show the main vertical line
   svg2
@@ -101,29 +101,29 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
       .style("width", 80)
 
   // create a tooltip
-  var tooltip = d3.select("#A2task2")
+  var tooltipA2T2 = d3.select("#A2task2")
     .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
       .style("font-size", "16px")
   // Three function that change the tooltip when user hover / move / leave a cell
   var mouseover = function(d) {
-    tooltip
+    tooltipA2T2
       .transition()
       .duration(200)
       .style("opacity", 1)
-    tooltip
-        .html("<span style='color:grey'>Sepal length: </span>" + d.Sepal_Length) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      tooltipA2T2
+        .html("<span style='color:grey'>Sepal length: </span>" + d['Height (m)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
         .style("left", (d3.mouse(this)[0]+30) + "px")
         .style("top", (d3.mouse(this)[1]+30) + "px")
   }
   var mousemove = function(d) {
-    tooltip
+    tooltipA2T2
       .style("left", (d3.mouse(this)[0]+30) + "px")
       .style("top", (d3.mouse(this)[1]+30) + "px")
   }
   var mouseleave = function(d) {
-    tooltip
+    tooltipA2T2
       .transition()
       .duration(200)
       .style("opacity", 0)
@@ -136,10 +136,10 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ir
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function(d){ return(x(d.Sepal_Length))})
-      .attr("cy", function(d){ return( y(d.Species) + (y.bandwidth()/2) - jitterWidth/2 + Math.random()*jitterWidth )})
+      .attr("cx", function(d){ return(x(d['Height (m)']))})
+      .attr("cy", function(d){ return( y(d.Name) + (y.bandwidth()/2) - jitterWidth/2 + Math.random()*jitterWidth )})
       .attr("r", 4)
-      .style("fill", function(d){ return(myColor(+d.Sepal_Length)) })
+      .style("fill", function(d){ return(myColor(+d['Height (m)'])) })
       .attr("stroke", "black")
       .on("mouseover", mouseover)
       .on("mousemove", mousemove)

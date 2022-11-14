@@ -121,7 +121,7 @@ data_task3['Oxygen Production (kg/yr)'] = data_task3['Oxygen Production (kg/yr)'
 # #Keep only the tope 5 trees
 data_task3 = data_task3[
     (data_task3['Name'] == "Celtis australis") | (data_task3['Name'] == "Aesculus hippocastanum") |
-    (data_task3['Name'] == "Carpinus betulus") | (data_task3['Name'] == "Tilia cordata")]
-
+    (data_task3['Name'] == "Carpinus betulus") | (data_task3['Name'] == "Tilia cordata")|(data_task3['Name']=='Platanus x hispanica')]
+data_task3= data_task3.sample(frac = 0.5)
 data_task3.to_csv(f'{DATA_PATH}/my_data_for_task_3_dont_manipulate_please.csv', index=False)
 print(data_task3)

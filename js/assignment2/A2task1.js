@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 30, bottom: 10, left: 240},
+var margin = {top: 20, right: 30, bottom: 10, left: 150},
     width = 800 - margin.left - margin.right,
     height = 420 - margin.top - margin.bottom;
 
@@ -18,13 +18,12 @@ d3.csv("../../data/treesMeasures.csv", function (data) {
 
     var size = data.length;
     var defaultBins = Math.floor(Math.sqrt(size));
-    console.log(defaultBins)
     // X axis: scale and draw:
     var x = d3.scaleLinear()
         .domain([0, d3.max(data, function (d) {
             return +d['Height (m)'];
         })])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
-        .range([0, width]);
+        .range([0, width + 180]);
     svgA2T1.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
@@ -149,7 +148,7 @@ d3.csv("../../data/treesMeasures.csv", function (data) {
 
 d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
     let selectedText_task1 = this.value
-    var margin = {top: 20, right: 30, bottom: 10, left: 240},
+    var margin = {top: 20, right: 30, bottom: 10, left: 170},
         width = 800 - margin.left - margin.right,
         height = 420 - margin.top - margin.bottom;
     d3.select("#the_SVG_ID_taska2_1").remove()
@@ -159,7 +158,7 @@ d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
         .attr('id', 'the_SVG_ID_taska2_1')
         // .attr("width", width + margin.left + margin.right)
         // .attr("height", height + margin.top + margin.bottom)
-        .attr("viewBox", `0 0 700 500`)
+        .attr("viewBox", `0 0 800 600`)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -169,7 +168,6 @@ d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
 
         var size = data.length;
         var defaultBins = Math.floor(Math.sqrt(size));
-        console.log(defaultBins)
         // X axis: scale and draw:
         var x = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) {
@@ -184,6 +182,9 @@ d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
         var y = d3.scaleLinear()
             .range([height, 0]);
         var yAxis = svgA2T1.append("g")
+
+
+
 
 
         // A function that builds the graph for a specific value of bin

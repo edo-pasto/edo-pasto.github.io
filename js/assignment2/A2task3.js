@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 320},
+var margin = {top: 10, right: 30, bottom: 30, left: 220},
     width = 500 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -9,7 +9,7 @@ var svg3 = d3.select("#A2task3")
     .attr("id", "the_SVG_ID")
     // .attr("width", width + margin.left + margin.right)
     // .attr("height", height + margin.top + margin.bottom)
-    .attr("viewBox", `0 0 1000 500`)
+    .attr("viewBox", `0 0 800 500`)
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -171,7 +171,7 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
 d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
     let selectedText_task3 = this.value
 
-    let margin = {top: 10, right: 30, bottom: 30, left: 320},
+    let margin = {top: 10, right: 30, bottom: 30, left: 220},
         width = 709 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
@@ -181,7 +181,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
         .attr("id", "the_SVG_ID")
         // .attr("width", width + margin.left + margin.right)
         // .attr("height", height + margin.top + margin.bottom)
-        .attr("viewBox", `0 0 1000 500`)
+        .attr("viewBox", `0 0 800 500`)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");

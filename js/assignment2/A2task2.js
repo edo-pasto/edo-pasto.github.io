@@ -14,7 +14,7 @@ var svg2 = d3.select("#A2task2")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Read the data and compute summary statistics for each specie
-d3.csv("../../data/top_5_treesMeasures.csv", function(data) {
+d3.csv("../../data/testData_task2Ass2.csv", function(data) {
 
   // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor

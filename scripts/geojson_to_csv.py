@@ -121,4 +121,5 @@ trees_name = top_trees['Name'].tolist()
 
 result = measure[measure.Name.isin(trees_name)]
 result = result.sort_values(by='Name')
+result = result.sample(frac=0.3)
 result.to_csv(f'{DATA_PATH}/top_{top}_treesMeasures.csv', index=False)

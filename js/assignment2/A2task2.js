@@ -36,7 +36,7 @@ d3.csv("../../data/top_5_treesMeasures.csv", function (data) {
                 return g['Height (m)'];
             }).sort(d3.ascending), .75)
             interQuantileRange = q3 - q1
-            min = q1 - 1.5 * interQuantileRange
+            min = q1 - 4
             max = q3 + 1.5 * interQuantileRange
             return ({q1: q1, median: median, q3: q3, interQuantileRange: interQuantileRange, min: min, max: max})
         })

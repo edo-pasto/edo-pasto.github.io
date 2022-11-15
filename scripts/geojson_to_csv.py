@@ -106,7 +106,7 @@ measure['Canopy Cover (m2)'] = measure['Canopy Cover (m2)'].apply(float)
 measure.to_csv(f'{DATA_PATH}/treesMeasures.csv', index=False)
 
 #Task2
-top = 5
+top = 6
 
 measure = df[['Name','Height (m)', 'Crown Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)']][:-1]
 measure['Height (m)'] = measure['Height (m)'].apply(float) 

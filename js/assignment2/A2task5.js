@@ -13,15 +13,22 @@ var svg5 = d3.select("#A2task5")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv", function(data) {
+d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
 
   // ---------------------------//
   //       AXIS  AND SCALE      //
   // ---------------------------//
-
+  data.forEach(function (d) {
+    d['Height (m)'] = parseFloat(d['Height (m)']);
+    d['Oxygen Production (kg/yr)'] = parseFloat(d['Oxygen Production (kg/yr)']);
+    d['Canopy Cover (m2)'] = parseFloat(d['Canopy Cover (m2)']);
+  });
+  var keys = d3.map(data, function (d) {
+    return (d.Neighborhood)
+  }).keys()
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0, 45000])
+    .domain([0, d3.max(data, d => d['Height (m)'])])
     .range([ 0, width ]);
   svg5.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -36,7 +43,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([35, 90])
+    .domain([0, d3.max(data, d => d['Oxygen Production (kg/yr)'])])
     .range([ height, 0]);
   svg5.append("g")
     .call(d3.axisLeft(y));
@@ -51,12 +58,12 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
   // Add a scale for bubble size
   var z = d3.scaleSqrt()
-    .domain([200000, 1310000000])
+    .domain([0,d3.max(data, d => d['Canopy Cover (m2)']) ])
     .range([ 2, 30]);
 
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
-    .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+    .domain(keys)
     .range(d3.schemeSet1);
 
 
@@ -81,7 +88,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
       .duration(200)
     tooltip
       .style("opacity", 1)
-      .html("Country: " + d.country)
+      .html("Country: " + d.Name)
       .style("left", (d3.mouse(this)[0]+30) + "px")
       .style("top", (d3.mouse(this)[1]+30) + "px")
   }
@@ -126,11 +133,11 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .data(data)
     .enter()
     .append("circle")
-      .attr("class", function(d) { return "bubbles " + d.continent })
-      .attr("cx", function (d) { return x(d.gdpPercap); } )
-      .attr("cy", function (d) { return y(d.lifeExp); } )
-      .attr("r", function (d) { return z(d.pop); } )
-      .style("fill", function (d) { return myColor(d.continent); } )
+      .attr("class", function(d) { return "bubbles " + d.Name })
+      .attr("cx", function (d) { return x(d['Height (m)']); } )
+      .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
+      .attr("r", function (d) { return z(d['Canopy Cover (m2)']); } )
+      .style("fill", function (d) { return myColor(d.Neighborhood); } )
     // -3- Trigger the functions for hover
     .on("mouseover", showTooltip )
     .on("mousemove", moveTooltip )
@@ -191,7 +198,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
     // Add one dot in the legend for each name.
     var size = 20
-    var allgroups = ["Asia", "Europe", "Americas", "Africa", "Oceania"]
+    var allgroups = keys
     svg5.selectAll("myrect")
       .data(allgroups)
       .enter()

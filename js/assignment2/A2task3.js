@@ -39,10 +39,10 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
             .call(d3.axisBottom(x));
 
         svg3.append("text")
-        .attr("text-anchor", "end")
-        .attr("x", width)
-        .attr("y", height+50 )
-        .text("Height (m)");            
+            .attr("text-anchor", "end")
+            .attr("x", width)
+            .attr("y", height + 50)
+            .text("Height (m)");
 
         // Add Y axis
         var y = d3.scaleLinear()
@@ -50,12 +50,12 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
             .range([height, 0]);
         svg3.append("g")
             .call(d3.axisLeft(y));
-            
+
         svg3.append("text")
-        .attr("x", 0)
-        .attr("y", -20 )
-        .text("CO2")
-        .attr("text-anchor", "start");
+            .attr("x", 0)
+            .attr("y", -20)
+            .text("CO2")
+            .attr("text-anchor", "start");
 
         var domain = keys
         // Color scale: give me a specie name, I return a color
@@ -219,11 +219,11 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x));
 
-            svg3_new.append("text")
+        svg3_new.append("text")
             .attr("text-anchor", "end")
             .attr("x", width)
-            .attr("y", height+50 )
-            .text(selectedText_task3);  
+            .attr("y", height + 50)
+            .text(selectedText_task3);
 
         // Add Y axis
         var y = d3.scaleLinear()

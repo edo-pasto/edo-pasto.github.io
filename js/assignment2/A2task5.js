@@ -13,7 +13,7 @@ var svg5 = d3.select("#A2task5")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/4_ThreeNum.csv", function(data) {
+d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
 
   // ---------------------------//
   //       AXIS  AND SCALE      //
@@ -56,7 +56,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
-    .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+    .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
     .range(d3.schemeSet1);
 
 
@@ -64,39 +64,39 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
   //      TOOLTIP               //
   // ---------------------------//
 
-  // -1- Create a tooltip div that is hidden by default:
-  var tooltip = d3.select("#my_dataviz")
-    .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "black")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .style("color", "white")
-
-  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-  var showTooltip = function(d) {
-    tooltip
-      .transition()
-      .duration(200)
-    tooltip
-      .style("opacity", 1)
-      .html("Country: " + d.country)
-      .style("left", (d3.mouse(this)[0]+30) + "px")
-      .style("top", (d3.mouse(this)[1]+30) + "px")
-  }
-  var moveTooltip = function(d) {
-    tooltip
-      .style("left", (d3.mouse(this)[0]+30) + "px")
-      .style("top", (d3.mouse(this)[1]+30) + "px")
-  }
-  var hideTooltip = function(d) {
-    tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
-  }
-
+  var tooltipA2T5 = d3.select("#A2task2")
+        .append("div")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+        // .style("min-width", "2px")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("font-size", "16px")
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseoverA2T5 = function (d) {
+        tooltipA2T5
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+        tooltipA2T5
+            .html("<span style='color:grey'>Height (m): </span>" + d['Height (m)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY) + "px")
+    }
+    var mousemoveA2T5 = function (d) {
+        tooltipA2T5
+            .style("left", (event.pageX + 30) + "px")
+            .style("top", (event.pageY) + "px")
+    }
+    var mouseleaveA2T5 = function (d) {
+        tooltipA2T5
+            .transition()
+            .duration(200)
+            .style("opacity", 0)
+    }
 
   // ---------------------------//
   //       HIGHLIGHT GROUP      //
@@ -126,15 +126,15 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
     .data(data)
     .enter()
     .append("circle")
-      .attr("class", function(d) { return "bubbles " + d.continent })
-      .attr("cx", function (d) { return x(d.gdpPercap); } )
-      .attr("cy", function (d) { return y(d.lifeExp); } )
-      .attr("r", function (d) { return z(d.pop); } )
-      .style("fill", function (d) { return myColor(d.continent); } )
+      .attr("class", function(d) { return "bubbles " + d.Name })
+      .attr("cx", function (d) { return x(d['Height (m2)']); } )
+      .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
+      .attr("r", function (d) { return z(d['Canopy Cover (m2)']); } )
+      .style("fill", function (d) { return myColor(d.Name); } )
     // -3- Trigger the functions for hover
-    .on("mouseover", showTooltip )
-    .on("mousemove", moveTooltip )
-    .on("mouseleave", hideTooltip )
+    .on("mouseover", mouseoverA2T5 )
+    .on("mousemove", mousemoveA2T5)
+    .on("mouseleave", mouseleaveA2T5 )
 
 
 
@@ -191,7 +191,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
     // Add one dot in the legend for each name.
     var size = 20
-    var allgroups = ["Asia", "Europe", "Americas", "Africa", "Oceania"]
+    var allgroups = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
     svg5.selectAll("myrect")
       .data(allgroups)
       .enter()

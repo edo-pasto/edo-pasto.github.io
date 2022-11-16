@@ -232,6 +232,12 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
         svg3_new.append("g")
             .call(d3.axisLeft(y));
 
+        svg3_new.append("text")
+        .attr("text-anchor", "end")
+            .attr("x", 0)
+            .attr("y", -20)
+            .text("CO2");
+        
 
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()

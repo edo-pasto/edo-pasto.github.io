@@ -13,7 +13,11 @@ var svg5 = d3.select("#A2task5")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
+<<<<<<< HEAD
 d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
+=======
+d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
+>>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
 
   // ---------------------------//
   //       AXIS  AND SCALE      //
@@ -63,7 +67,11 @@ d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
 
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
+<<<<<<< HEAD
     .domain(keys)
+=======
+    .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
+>>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
     .range(d3.schemeSet1);
 
 
@@ -71,6 +79,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
   //      TOOLTIP               //
   // ---------------------------//
 
+<<<<<<< HEAD
   // -1- Create a tooltip div that is hidden by default:
   var tooltip = d3.select("#my_dataviz")
     .append("div")
@@ -104,6 +113,41 @@ d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
       .style("opacity", 0)
   }
 
+=======
+  var tooltipA2T5 = d3.select("#A2task2")
+        .append("div")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+        // .style("min-width", "2px")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("font-size", "16px")
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseoverA2T5 = function (d) {
+        tooltipA2T5
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+        tooltipA2T5
+            .html("<span style='color:grey'>Height (m): </span>" + d['Height (m)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY) + "px")
+    }
+    var mousemoveA2T5 = function (d) {
+        tooltipA2T5
+            .style("left", (event.pageX + 30) + "px")
+            .style("top", (event.pageY) + "px")
+    }
+    var mouseleaveA2T5 = function (d) {
+        tooltipA2T5
+            .transition()
+            .duration(200)
+            .style("opacity", 0)
+    }
+>>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
 
   // ---------------------------//
   //       HIGHLIGHT GROUP      //
@@ -134,14 +178,21 @@ d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
     .enter()
     .append("circle")
       .attr("class", function(d) { return "bubbles " + d.Name })
+<<<<<<< HEAD
       .attr("cx", function (d) { return x(d['Height (m)']); } )
       .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
       .attr("r", function (d) { return z(d['Canopy Cover (m2)']); } )
       .style("fill", function (d) { return myColor(d.Neighborhood); } )
+=======
+      .attr("cx", function (d) { return x(d['Height (m2)']); } )
+      .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
+      .attr("r", function (d) { return z(d['Canopy Cover (m2)']); } )
+      .style("fill", function (d) { return myColor(d.Name); } )
+>>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
     // -3- Trigger the functions for hover
-    .on("mouseover", showTooltip )
-    .on("mousemove", moveTooltip )
-    .on("mouseleave", hideTooltip )
+    .on("mouseover", mouseoverA2T5 )
+    .on("mousemove", mousemoveA2T5)
+    .on("mouseleave", mouseleaveA2T5 )
 
 
 
@@ -198,7 +249,11 @@ d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
 
     // Add one dot in the legend for each name.
     var size = 20
+<<<<<<< HEAD
     var allgroups = keys
+=======
+    var allgroups = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
+>>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
     svg5.selectAll("myrect")
       .data(allgroups)
       .enter()

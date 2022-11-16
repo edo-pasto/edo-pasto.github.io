@@ -203,23 +203,23 @@ d3.csv("../../data/top_5_treesMeasures.csv", function (data) {
 d3.select("#treeSizeMeasures_for_taskA2_2").on("change", function () {
 let selectedText_task2 = this.value
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 50, left: 320},
+var margin = {top: 30, right: 30, bottom: 50, left: 260},
     width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom
     d3.select("#the_SVG_ID_taskA2_2").remove()
 // append the svg object to the body of the page
-var svg2 = d3.select("#A2task2")
+var svg2_new = d3.select("#A2task2")
     .append("svg").attr('id', "the_SVG_ID_taskA2_2")
     // .attr("width", width + margin.left + margin.right)
     // .attr("height", height + margin.top + margin.bottom)
-    .attr("viewBox", `0 0 1000 500`)
+    .attr("viewBox", `0 0 800 600`)
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
         d3.csv("../../data/top_5_treesMeasures.csv", function (data) {
             data.forEach(function (d) {
-                d['Height (m)'] = parseFloat(d[selectedText_task2]);
+                d[selectedText_task2] = parseFloat(d[selectedText_task2]);
         
         
             });
@@ -250,7 +250,7 @@ var svg2 = d3.select("#A2task2")
                 .range([height, 0])
                 .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata'])
                 .padding(.4);
-            svg2.append("g")
+                svg2_new.append("g")
                 .call(d3.axisLeft(y).tickSize(0))
                 .select(".domain").remove()
         
@@ -260,7 +260,7 @@ var svg2 = d3.select("#A2task2")
                     return +d[selectedText_task2];
                 })])
                 .range([0, width])
-            svg2.append("g")
+                svg2_new.append("g")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x).ticks(5))
                 .select(".domain").remove()
@@ -273,14 +273,14 @@ var svg2 = d3.select("#A2task2")
                 })])
         
             // Add X axis label:
-            svg2.append("text")
+            svg2_new.append("text")
                 .attr("text-anchor", "end")
                 .attr("x", width)
                 .attr("y", height + margin.top + 30)
                 .text(selectedText_task2);
         
             // Show the main vertical line
-            svg2
+            svg2_new
                 .selectAll("vertLines")
                 .data(sumstat)
                 .enter()
@@ -301,7 +301,7 @@ var svg2 = d3.select("#A2task2")
                 .style("width", 40)
         
             // rectangle for the main box
-            svg2
+            svg2_new
                 .selectAll("boxes")
                 .data(sumstat)
                 .enter()
@@ -323,7 +323,7 @@ var svg2 = d3.select("#A2task2")
                 .style("opacity", 0.6)
         
             // Show the median
-            svg2
+            svg2_new
                 .selectAll("medianLines")
                 .data(sumstat)
                 .enter()
@@ -380,7 +380,7 @@ var svg2 = d3.select("#A2task2")
         
             // Add individual points with jitter
             var jitterWidth = 50
-            svg2
+            svg2_new
                 .selectAll("indPoints")
                 .data(data)
                 .enter()

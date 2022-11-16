@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 30, bottom: 10, left: 150},
-    width = 800 - margin.left - margin.right,
+var margin = {top: 20, right: 30, bottom: 10, left: 100},
+    width = 700 - margin.left - margin.right,
     height = 420 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -148,17 +148,17 @@ d3.csv("../../data/treesMeasures.csv", function (data) {
 
 d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
     let selectedText_task1 = this.value
-    var margin = {top: 20, right: 30, bottom: 10, left: 170},
-        width = 800 - margin.left - margin.right,
-        height = 420 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 30, bottom: 10, left: 100},
+    width = 700 - margin.left - margin.right,
+    height = 420 - margin.top - margin.bottom;
     d3.select("#the_SVG_ID_taska2_1").remove()
 // append the svg object to the body of the page
-    var svgA2T1 = d3.select("#A2task1")
+    var svgA2T1_new = d3.select("#A2task1")
         .append("svg")
         .attr('id', 'the_SVG_ID_taska2_1')
         // .attr("width", width + margin.left + margin.right)
         // .attr("height", height + margin.top + margin.bottom)
-        .attr("viewBox", `0 0 800 600`)
+        .attr("viewBox", `0 0 700 500`)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -174,14 +174,14 @@ d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
                 return +d[selectedText_task1];
             })])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
             .range([0, width]);
-        svgA2T1.append("g")
+            svgA2T1_new.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x));
 
         // Y axis: initialization
         var y = d3.scaleLinear()
             .range([height, 0]);
-        var yAxis = svgA2T1.append("g")
+        var yAxis = svgA2T1_new.append("g")
 
 
 
@@ -189,46 +189,6 @@ d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
 
         // A function that builds the graph for a specific value of bin
         function update(nBin) {
-
-            // var tooltipA2T1 = d3.select("#A2task1")
-            // .append("div")
-            // .style("opacity", 0)
-            // .attr("class", "tooltip")
-            // .style("background-color", "white")
-            // .style("border", "solid")
-            // .style("border-width", "2px")
-            // .style("border-radius", "5px")
-            // .style("padding", "10px")
-
-            // var mouseoverA2T1 = function (d) {
-            //   // const totalAmount = d.Count;
-            //   // const treeType = d.Name;
-            //   // const canopyMean = d["Mean Canopy Cover (m2)"];
-            //   tooltipA2T1
-            //     .transition()
-            //     .duration(100)
-            //     .style("opacity", 1)
-            //     // .html("Tree Type: " + treeType + "<br>" + "Total Amount: " + totalAmount + "<br>" + "Canopy mean: " + canopyMean)
-            //     .html("Range: " + 10 + " - " + 20)
-            //     // .style("left", (d3.mouse(this)[0] + 20) + "px")
-            //     // .style("top", (d3.mouse(this)[1]) + "px")
-            //     .style("left", (event.pageX+ 20) + "px")
-            //     .style("top", (event.pageY) + "px")
-            //   d3.select(this).attr("fill", "#0e6efc");
-            // }
-            // var mousemoveA2T1 = function (d) {
-            //   tooltipA2T1
-            //     .style('left', (event.pageX + 40) + 'px')
-            //     .style('top', (event.pageY + 5) + 'px')
-            // }
-            // var mouseleaveA2T1 = function (d) {
-            //   tooltipA2T1
-            //     .transition()
-            //     .duration(100)
-            //     .style("opacity", 0);
-            //   d3.select(this).attr("fill", "#69b3a2");
-            // }
-
 
             // set the parameters for the histogram
 
@@ -252,7 +212,7 @@ d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
                 .call(d3.axisLeft(y));
 
             // Join the rect with the bins data
-            var u = svgA2T1.selectAll("rect")
+            var u = svgA2T1_new.selectAll("rect")
                 .data(bins)
 
 

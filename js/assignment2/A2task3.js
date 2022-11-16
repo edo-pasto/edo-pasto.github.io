@@ -183,10 +183,9 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
 d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
     let selectedText_task3 = this.value
 
-    let margin = {top: 10, right: 30, bottom: 30, left: 220},
-        width = 709 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
-
+    var margin = {top: 10, right: 30, bottom: 30, left: 220},
+    width = 500 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
     d3.select("#the_SVG_ID").remove()
     var svg3_new = d3.selectAll("#A2task3")
         .append("svg")

@@ -13,11 +13,8 @@ var svg5 = d3.select("#A2task5")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-<<<<<<< HEAD
-d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
-=======
+// d3.csv("/data/top_trees_neighborhood_unpivot_task_5_A_2.csv", function(data) {
 d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
->>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
 
   // ---------------------------//
   //       AXIS  AND SCALE      //
@@ -67,11 +64,9 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
 
   // Add a scale for bubble color
   var myColor = d3.scaleOrdinal()
-<<<<<<< HEAD
-    .domain(keys)
-=======
+
+    // .domain(keys)
     .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
->>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
     .range(d3.schemeSet1);
 
 
@@ -79,41 +74,39 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
   //      TOOLTIP               //
   // ---------------------------//
 
-<<<<<<< HEAD
   // -1- Create a tooltip div that is hidden by default:
-  var tooltip = d3.select("#my_dataviz")
-    .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltip")
-      .style("background-color", "black")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .style("color", "white")
+  // var tooltip = d3.select("#my_dataviz")
+  //   .append("div")
+  //     .style("opacity", 0)
+  //     .attr("class", "tooltip")
+  //     .style("background-color", "black")
+  //     .style("border-radius", "5px")
+  //     .style("padding", "10px")
+  //     .style("color", "white")
+  //
+  // // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+  // var showTooltip = function(d) {
+  //   tooltip
+  //     .transition()
+  //     .duration(200)
+  //   tooltip
+  //     .style("opacity", 1)
+  //     .html("Country: " + d.Name)
+  //     .style("left", (d3.mouse(this)[0]+30) + "px")
+  //     .style("top", (d3.mouse(this)[1]+30) + "px")
+  // }
+  // var moveTooltip = function(d) {
+  //   tooltip
+  //     .style("left", (d3.mouse(this)[0]+30) + "px")
+  //     .style("top", (d3.mouse(this)[1]+30) + "px")
+  // }
+  // var hideTooltip = function(d) {
+  //   tooltip
+  //     .transition()
+  //     .duration(200)
+  //     .style("opacity", 0)
+  // }
 
-  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
-  var showTooltip = function(d) {
-    tooltip
-      .transition()
-      .duration(200)
-    tooltip
-      .style("opacity", 1)
-      .html("Country: " + d.Name)
-      .style("left", (d3.mouse(this)[0]+30) + "px")
-      .style("top", (d3.mouse(this)[1]+30) + "px")
-  }
-  var moveTooltip = function(d) {
-    tooltip
-      .style("left", (d3.mouse(this)[0]+30) + "px")
-      .style("top", (d3.mouse(this)[1]+30) + "px")
-  }
-  var hideTooltip = function(d) {
-    tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
-  }
-
-=======
   var tooltipA2T5 = d3.select("#A2task2")
         .append("div")
         .style("background-color", "white")
@@ -147,7 +140,6 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
             .duration(200)
             .style("opacity", 0)
     }
->>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
 
   // ---------------------------//
   //       HIGHLIGHT GROUP      //
@@ -178,17 +170,17 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
     .enter()
     .append("circle")
       .attr("class", function(d) { return "bubbles " + d.Name })
-<<<<<<< HEAD
-      .attr("cx", function (d) { return x(d['Height (m)']); } )
-      .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
-      .attr("r", function (d) { return z(d['Canopy Cover (m2)']); } )
-      .style("fill", function (d) { return myColor(d.Neighborhood); } )
-=======
+
+      // .attr("cx", function (d) { return x(d['Height (m)']); } )
+      // .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
+      // .attr("r", function (d) { return z(d['Canopy Cover (m2)']); } )
+      // .style("fill", function (d) { return myColor(d.Neighborhood); } )
+
       .attr("cx", function (d) { return x(d['Height (m2)']); } )
       .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); } )
       .attr("r", function (d) { return z(d['Canopy Cover (m2)']); } )
       .style("fill", function (d) { return myColor(d.Name); } )
->>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
+
     // -3- Trigger the functions for hover
     .on("mouseover", mouseoverA2T5 )
     .on("mousemove", mousemoveA2T5)
@@ -249,11 +241,10 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function(data) {
 
     // Add one dot in the legend for each name.
     var size = 20
-<<<<<<< HEAD
-    var allgroups = keys
-=======
+
+    // var allgroups = keys
     var allgroups = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
->>>>>>> 2e120f38db121bfe8a3036beeaa2059e0fbccedd
+
     svg5.selectAll("myrect")
       .data(allgroups)
       .enter()

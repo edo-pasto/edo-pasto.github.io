@@ -14,7 +14,7 @@ var svg2 = d3.select("#A2task2")
         "translate(" + margin.left + "," + margin.top + ")");
 
 // Read the data and compute summary statistics for each specie
-d3.csv("../../data/top_5_treesMeasures.csv", function (data) {
+d3.csv("../../data/top_6_treesMeasures.csv", function (data) {
     data.forEach(function (d) {
         d['Height (m)'] = parseFloat(d['Height (m)']);
 
@@ -45,7 +45,7 @@ d3.csv("../../data/top_5_treesMeasures.csv", function (data) {
     // Show the Y scale
     var y = d3.scaleBand()
         .range([height, 0])
-        .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata']) //'Tilia x europaea'
+        .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']) //'Tilia x europaea'
         .padding(.4);
     svg2.append("g")
         .call(d3.axisLeft(y).tickSize(0))
@@ -217,7 +217,7 @@ var svg2_new = d3.select("#A2task2")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-        d3.csv("../../data/top_5_treesMeasures.csv", function (data) {
+        d3.csv("../../data/top_6_treesMeasures.csv", function (data) {
             data.forEach(function (d) {
                 d[selectedText_task2] = parseFloat(d[selectedText_task2]);
         
@@ -248,7 +248,7 @@ var svg2_new = d3.select("#A2task2")
             // Show the Y scale
             var y = d3.scaleBand()
                 .range([height, 0])
-                .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata'])
+                .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
                 .padding(.4);
                 svg2_new.append("g")
                 .call(d3.axisLeft(y).tickSize(0))

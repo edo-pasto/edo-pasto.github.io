@@ -1,6 +1,6 @@
 var margin3 = {top: 30, right: 0, bottom: 150, left: 110},
-    width3 = 400 - margin3.left - margin3.right,
-    height3 = 400 - margin3.top - margin3.bottom;
+    width3 = 500 - margin3.left - margin3.right,
+    height3 = 500 - margin3.top - margin3.bottom;
 //Read the data
 d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
 
@@ -64,9 +64,13 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
 
 
     // color palette
+    // var colorTitles = d3.scaleOrdinal()
+    //     .domain(allKeys)
+    //     .range(['#ffd43b', '#4daf4a', '#3c51ae', '#adb5bd', '#FFBCD9', '#e41a1c'])
+
     var colorTitles = d3.scaleOrdinal()
-        .domain(allKeys)
-        .range(['#ffd43b', '#4daf4a', '#3c51ae', '#adb5bd', '#FFBCD9', '#e41a1c'])
+    .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
+    .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
     // Tooltip for all the bars
 
     var tooltipA2T4 = d3.select("#A2task4")
@@ -121,7 +125,7 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
         .attr("cy", function (d) {
             return y(d['Gross Carbon Sequestration (kg/yr)']);
         })
-        .attr("r", 1.5)
+        .attr("r", 2.5)
         .on("mouseover", mouseoverA2T4)
         .on("mousemove", mousemoveA2T4)
         .on("mouseleave", mouseleaveA2T4);

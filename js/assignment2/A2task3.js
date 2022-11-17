@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 220},
+var margin = {top: 40, right: 30, bottom: 30, left: 220},
     width = 500 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -52,15 +52,16 @@ d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
             .call(d3.axisLeft(y));
 
         svg3.append("text")
+        .attr("text-anchor", "end")
             .attr("x", 0)
-            .attr("y", -50)
-            .text("CO2")
-            .attr("text-anchor", "start");
+            .attr("y", -20)
+            .text("CO2");
+            
 
         var domain = keys
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()
-            .domain(keys)
+            .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
             .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
 
         var tooltipA2T4 = d3.select("#A2task3")

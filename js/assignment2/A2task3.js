@@ -16,11 +16,11 @@ var svg3 = d3.select("#A2task3")
 
 
 //Read the data
-d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
+d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
         let selectedText_task3 = "Height (m)"
         data.forEach(function (d) {
             d[selectedText_task3] = parseFloat(d[selectedText_task3]);
-            d['Oxygen Production (kg/yr)'] = parseFloat(d['Oxygen Production (kg/yr)']);
+            d['Gross Carbon Sequestration (kg/yr)'] = parseFloat(d['Gross Carbon Sequestration (kg/yr)']);
 
         });
 
@@ -46,14 +46,14 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
 
         // Add Y axis
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d['Oxygen Production (kg/yr)']) + 1.0])
+            .domain([0, d3.max(data, d => d['Gross Carbon Sequestration (kg/yr)']) + 1.0])
             .range([height, 0]);
         svg3.append("g")
             .call(d3.axisLeft(y));
 
         svg3.append("text")
             .attr("x", 0)
-            .attr("y", -20)
+            .attr("y", -50)
             .text("CO2")
             .attr("text-anchor", "start");
 
@@ -61,9 +61,9 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()
             .domain(keys)
-            .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163"])
+            .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
 
-        var tooltipA2T4 = d3.select("#A2task4")
+        var tooltipA2T4 = d3.select("#A2task3")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -78,7 +78,7 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
 
             let treeType3 = d.Name;
             tooltipA2T4
-                .html("Tree Type: " + treeType3 + "<br>" + "Tree Height: " + d[selectedText_task3] + "<br>" + "Oxygen production: " + d['Oxygen Production (kg/yr)'])
+                .html("Tree Type: " + treeType3 + "<br>" + "Tree Height: " + d[selectedText_task3] + "<br>" + "CO2 Substraction: " + d['Gross Carbon Sequestration (kg/yr)'])
                 .style("opacity", 1);
 
         }
@@ -94,33 +94,29 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
         }
 
 
-        // Highlight the specie that is hovered
-        var highlight = function (d) {
+        // // Highlight the specie that is hovered
+        // var highlight = function (d) {
+        //     d3.selectAll(".dot")
+        //         .transition()
+        //         .duration(200)
+        //         .style("fill", "lightgrey")
+        //         .attr("r", 3)
 
+        //     d3.selectAll("." + d.Name)
+        //         .transition()
+        //         .duration(200)
+        //         .style("fill", color(d.Name))
+        //         .attr("r", 7)
+        // }
 
-            d3.selectAll(".dot")
-                .transition()
-                .duration(200)
-                .style("fill", "lightgrey")
-                .attr("r", 3)
-
-            d3.selectAll("." + d.Name)
-                .transition()
-                .duration(200)
-                .style("fill", color(d.Name))
-                .attr("r", 7)
-
-        }
-
-
-        // Highlight the specie that is hovered
-        var doNotHighlight = function () {
-            d3.selectAll(".dot")
-                .transition()
-                .duration(200)
-                .style("fill", "lightgrey")
-                .attr("r", 5)
-        }
+        // // Highlight the specie that is hovered
+        // var doNotHighlight = function () {
+        //     d3.selectAll(".dot")
+        //         .transition()
+        //         .duration(200)
+        //         .style("fill", "lightgrey")
+        //         .attr("r", 5)
+        // }
 
         // Add dots
         svg3.append('g')
@@ -135,7 +131,7 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
                 return x(d[selectedText_task3]);
             })
             .attr("cy", function (d) {
-                return y(d['Oxygen Production (kg/yr)']);
+                return y(d['Gross Carbon Sequestration (kg/yr)']);
             })
             .attr("r", 3)
             .style("fill", function (d) {
@@ -182,25 +178,27 @@ d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
 );
 d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
     let selectedText_task3 = this.value
-
     var margin = {top: 10, right: 30, bottom: 30, left: 220},
-    width = 500 - margin.left - margin.right,
+    width = 640 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+
     d3.select("#the_SVG_ID").remove()
-    var svg3_new = d3.selectAll("#A2task3")
-        .append("svg")
-        .attr("id", "the_SVG_ID")
-        // .attr("width", width + margin.left + margin.right)
-        // .attr("height", height + margin.top + margin.bottom)
-        .attr("viewBox", `0 0 800 500`)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-    d3.csv("/data/my_data_for_task_3_dont_manipulate_please.csv", function (data) {
+
+    var svg3_new = d3.select("#A2task3")
+    .append("svg")
+    .attr("id", "the_SVG_ID")
+    // .attr("width", width + margin.left + margin.right)
+    // .attr("height", height + margin.top + margin.bottom)
+    .attr("viewBox", `0 0 800 500`)
+    .append("g")
+    .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
 
         data.forEach(function (d) {
             d[selectedText_task3] = parseFloat(d[selectedText_task3]);
-            d['Oxygen Production (kg/yr)'] = parseFloat(d['Oxygen Production (kg/yr)']);
+            d['Gross Carbon Sequestration (kg/yr)'] = parseFloat(d['Gross Carbon Sequestration (kg/yr)']);
 
         });
 
@@ -226,7 +224,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
 
         // Add Y axis
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d['Oxygen Production (kg/yr)']) + 1.0])
+            .domain([0, d3.max(data, d => d['Gross Carbon Sequestration (kg/yr)']) + 1.0])
             .range([height, 0]);
         svg3_new.append("g")
             .call(d3.axisLeft(y));
@@ -241,9 +239,9 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
         // Color scale: give me a specie name, I return a color
         var color = d3.scaleOrdinal()
             .domain(keys)
-            .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163"])
+            .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
 
-        var tooltipA2T4 = d3.select("#A2task4")
+        var tooltipA2T4 = d3.select("#A2task3")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -258,7 +256,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
 
             let treeType3 = d.Name;
             tooltipA2T4
-                .html("Tree Type: " + treeType3 + "<br>" + "Tree " + selectedText_task3 + " :" + d[selectedText_task3] + "<br>" + "Oxygen production: " + d['Oxygen Production (kg/yr)'])
+                .html("Tree Type: " + treeType3 + "<br>" + "Tree " + selectedText_task3 + " :" + d[selectedText_task3] + "<br>" + "CO2 Substraction " + d['Gross Carbon Sequestration (kg/yr)'])
                 .style("opacity", 1);
 
         }
@@ -287,7 +285,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
                 return x(d[selectedText_task3]);
             })
             .attr("cy", function (d) {
-                return y(d['Oxygen Production (kg/yr)']);
+                return y(d['Gross Carbon Sequestration (kg/yr)']);
             })
             .attr("r", 3)
             .style("fill", function (d) {

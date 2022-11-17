@@ -1,6 +1,6 @@
 //----------- Third Chart --------------
 
-var margin3 = { top: 30, right: 0, bottom: 150, left: 110 },
+var margin3 = {top: 30, right: 0, bottom: 150, left: 110},
     width3 = 400 - margin3.left - margin3.right,
     height3 = 400 - margin3.top - margin3.bottom;
 //Read the data
@@ -9,9 +9,13 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
     // group the data: I want to draw one line per group
     var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-        .key(function (d) { return d.Name; })
+        .key(function (d) {
+            return d.Name;
+        })
         .entries(data);
-    allKeys = sumstat.map(function (d) { return d.key })
+    allKeys = sumstat.map(function (d) {
+        return d.key
+    })
 
     // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
     var svg3 = d3.select("#task3")
@@ -29,8 +33,10 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     // Add X axis 
     var x = d3.scaleLinear()
         .range([0, width3])
-        .domain([0, d3.max(data, function (d) { return +d.Count; })]
-           );
+        .domain([0, d3.max(data, function (d) {
+                return +d.Count;
+            })]
+        );
 
     svg3
         .append("g")
@@ -41,7 +47,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
 
     var y = d3.scaleBand()
-        .domain( data.map(function (d) {
+        .domain(data.map(function (d) {
             return d.Neighborhood;
         }))
         .range([0, height3])
@@ -52,7 +58,6 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .selectAll("text")
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end");
-
 
 
     // color palette
@@ -78,7 +83,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         tooltip3
             .html("Tree Type: " + treeType3 + "<br>" + "Total Amount: " + totalAmount3)
             .style("opacity", 1);
-            
+
     }
     const mousemove3 = function (d) {
         tooltip3
@@ -88,20 +93,30 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     }
     const mouseleave3 = function (d) {
         tooltip3
-        .style("opacity", 0);
+            .style("opacity", 0);
     }
 
     // create the Bar
 
     svg3.selectAll("mybar")
-        .data(function (d) { return d.values })
+        .data(function (d) {
+            return d.values
+        })
         .enter()
         .append("rect")
-        .style("fill", function (d, i) { return colorTitles(d.Name) })
-        .attr("x", function (d, i) { return x(0); })
-        .attr("y", function (d, i) { return y(d.Neighborhood); })
+        .style("fill", function (d, i) {
+            return colorTitles(d.Name)
+        })
+        .attr("x", function (d, i) {
+            return x(0);
+        })
+        .attr("y", function (d, i) {
+            return y(d.Neighborhood);
+        })
         .attr("height", y.bandwidth())
-        .attr("width", function (d, i) { return width3 -( width3 - x(d.Count)); })
+        .attr("width", function (d, i) {
+            return width3 - (width3 - x(d.Count));
+        })
         .on("mouseover", mouseover3)
         .on("mousemove", mousemove3)
         .on("mouseleave", mouseleave3);
@@ -113,7 +128,11 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
         .attr("text-anchor", "start")
         .attr("y", -5)
         .attr("x", 0)
-        .text(function (d) { return (d.key) })
-        .style("fill", function (d) { return colorTitles(d.key) })
+        .text(function (d) {
+            return (d.key)
+        })
+        .style("fill", function (d) {
+            return colorTitles(d.key)
+        })
 
 });

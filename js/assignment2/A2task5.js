@@ -23,12 +23,13 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
   // ---------------------------//
   data.forEach(function (d) {
     d['Height (m)'] = parseFloat(d['Height (m)']);
-    d['Oxygen Production (kg/yr)'] = parseFloat(d['Oxygen Production (kg/yr)']);
+    // d['Oxygen Production (kg/yr)'] = parseFloat(d['Oxygen Production (kg/yr)']);
+    d['Gross Carbon Sequestration (kg/yr)'] = parseFloat(d['Gross Carbon Sequestration (kg/yr)']);
     d['Canopy Cover (m2)'] = parseFloat(d['Canopy Cover (m2)']);
   });
-  var keys = d3.map(data, function (d) {
-    return (d.Neighborhood)
-  }).keys()
+  // var keys = d3.map(data, function (d) {
+  //   return (d.Neighborhood)
+  // }).keys()
   // Add X axis
   var x = d3.scaleLinear()
     .domain([0, d3.max(data, d => d['Height (m)'])])
@@ -46,7 +47,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d['Oxygen Production (kg/yr)'])])
+    .domain([0, d3.max(data, d => d['Gross Carbon Sequestration (kg/yr)'])])
     .range([height, 0]);
   svg5.append("g")
     .call(d3.axisLeft(y));
@@ -56,7 +57,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     .attr("text-anchor", "end")
     .attr("x", 0)
     .attr("y", -20)
-    .text("CO2")
+    .text("CO2 Subtract")
     .attr("text-anchor", "start")
 
   // Add a scale for bubble size
@@ -95,7 +96,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
       .duration(200)
       .style("opacity", 1)
     tooltipA2T5
-      .html("<span style='color:grey'>Canopy Size (m2): </span>" + d['Canopy Cover (m2)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .html("<span style='color:grey'>Canopy Size (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction: </span>" + d['Gross Carbon Sequestration (kg/yr)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
       .style("left", (event.pageX + 10) + "px")
       .style("top", (event.pageY) + "px")
   }
@@ -147,7 +148,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     // .style("fill", function (d) { return myColor(d.Neighborhood); } )
 
     .attr("cx", function (d) { return x(d['Height (m)']); })
-    .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); })
+    .attr("cy", function (d) { return y(d['Gross Carbon Sequestration (kg/yr)']); })
     .attr("r", function (d) { return z(d['Canopy Cover (m2)']); })
     .style("fill", function (d) { return myColor(d.Name); })
 
@@ -279,7 +280,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
     // ---------------------------//
     data.forEach(function (d) {
       d[selectedText_task5] = parseFloat(d[selectedText_task5]);
-      d['Oxygen Production (kg/yr)'] = parseFloat(d['Oxygen Production (kg/yr)']);
+      d['Gross Carbon Sequestration (kg/yr)'] = parseFloat(d['Gross Carbon Sequestration (kg/yr)']);
       d['Canopy Cover (m2)'] = parseFloat(d['Canopy Cover (m2)']);
     });
     var keys = d3.map(data, function (d) {
@@ -302,7 +303,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d['Oxygen Production (kg/yr)'])])
+      .domain([0, d3.max(data, d => d['Gross Carbon Sequestration (kg/yr)'])])
       .range([height, 0]);
     svg5_new.append("g")
       .call(d3.axisLeft(y));
@@ -351,7 +352,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
         .duration(200)
         .style("opacity", 1)
       tooltipA2T5
-        .html("<span style='color:grey'>Canopy Size (m2): </span>" + d['Canopy Cover (m2)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .html("<span style='color:grey'>Canopy Size (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction: </span>" + d['Gross Carbon Sequestration (kg/yr)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY) + "px")
     }
@@ -397,7 +398,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
       .attr("class", function (d) { return "bubbles " + d.Name })
 
       .attr("cx", function (d) { return x(d[selectedText_task5]); })
-      .attr("cy", function (d) { return y(d['Oxygen Production (kg/yr)']); })
+      .attr("cy", function (d) { return y(d['Gross Carbon Sequestration (kg/yr)']); })
       .attr("r", function (d) { return z(d['Canopy Cover (m2)']); })
       .style("fill", function (d) { return myColor(d.Name); })
 

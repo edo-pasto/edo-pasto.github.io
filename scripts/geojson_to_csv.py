@@ -124,14 +124,37 @@ result = result.sort_values(by='Name')
 result = result.sample(frac=0.3)
 result.to_csv(f'{DATA_PATH}/top_{top}_treesMeasures.csv', index=False)
 
-#TASK 5
-data_task3 = df[['Name','Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)', 'Crown Height (m)', 'Oxygen Production (kg/yr)']][:-1]
+#Task 4
+data_task4 = df[['Name','Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)', 'Crown Height (m)', 'Gross Carbon Sequestration (kg/yr)', 'Gross Carbon Sequestration (eur/yr)']][:-1]
 
-data_task3['Height (m)'] = data_task3['Height (m)'].apply(float)
-data_task3['Crown Width (m)'] = data_task3['Crown Width (m)'].apply(float)
-data_task3['Canopy Cover (m2)'] = data_task3['Canopy Cover (m2)'].apply(float)
-data_task3['Crown Height (m)'] = data_task3['Crown Height (m)'].apply(float)
-data_task3['Oxygen Production (kg/yr)'] = data_task3['Oxygen Production (kg/yr)'].apply(float)
+data_task4['Height (m)'] = data_task4['Height (m)'].apply(float)
+data_task4['Crown Width (m)'] = data_task4['Crown Width (m)'].apply(float)
+data_task4['Canopy Cover (m2)'] = data_task4['Canopy Cover (m2)'].apply(float)
+data_task4['Crown Height (m)'] = data_task4['Crown Height (m)'].apply(float)
+data_task4['Gross Carbon Sequestration (kg/yr)'] = data_task4['Gross Carbon Sequestration (kg/yr)'].apply(float)
+data_task4['Gross Carbon Sequestration (eur/yr)'] = data_task4['Gross Carbon Sequestration (eur/yr)'].apply(float)
+
+trees_occurences = df[['Name', 'DBH (cm)']]
+top_trees = trees_occurences.groupby('Name').count().round(2).rename(columns={'DBH (cm)': 'Count'}).reset_index()
+top_trees = top_trees.sort_values(by='Count', ascending=False)[:top]
+trees_name = top_trees['Name'].tolist()
+
+result = data_task4[data_task4.Name.isin(trees_name)]
+result = result.sort_values(by='Name')
+# result = result.sample(frac=0.3)
+result.to_csv(f'{DATA_PATH}/top_{top}_treesMeasuresSmallMulti.csv', index=False)
+
+
+#TASK 5
+# data_task3 = df[['Name','Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)', 'Crown Height (m)', 'Oxygen Production (kg/yr)']][:-1]
+data_task5 = df[['Name','Height (m)', 'Crown Width (m)', 'Canopy Cover (m2)', 'Crown Height (m)', 'Gross Carbon Sequestration (kg/yr)']][:-1]
+
+data_task5['Height (m)'] = data_task5['Height (m)'].apply(float)
+data_task5['Crown Width (m)'] = data_task5['Crown Width (m)'].apply(float)
+data_task5['Canopy Cover (m2)'] = data_task5['Canopy Cover (m2)'].apply(float)
+data_task5['Crown Height (m)'] = data_task5['Crown Height (m)'].apply(float)
+# data_task3['Oxygen Production (kg/yr)'] = data_task3['Oxygen Production (kg/yr)'].apply(float)
+data_task5['Gross Carbon Sequestration (kg/yr)'] = data_task5['Gross Carbon Sequestration (kg/yr)'].apply(float)
 
 top = 6
 # #Keep only the tope 5 trees
@@ -140,9 +163,9 @@ top_trees = trees_occurences.groupby('Name').count().round(2).rename(columns={'D
 top_trees = top_trees.sort_values(by='Count', ascending=False)[:top]
 trees_name = top_trees['Name'].tolist()
 
-result = data_task3[data_task3.Name.isin(trees_name)]
+result = data_task5[data_task5.Name.isin(trees_name)]
 result = result.sort_values(by='Name')
-# result = result.sample(frac=0.3)
+result = result.sample(frac=0.3)
 result.to_csv(f'{DATA_PATH}/top_{top}_treesMeasuresBubble.csv', index=False)
 
 

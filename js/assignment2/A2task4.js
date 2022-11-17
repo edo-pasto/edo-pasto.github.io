@@ -91,12 +91,17 @@
 
 
 var margin3 = { top: 30, right: 0, bottom: 150, left: 110 },
-  width3 = 350 - margin3.left - margin3.right,
+  width3 = 400 - margin3.left - margin3.right,
   height3 = 400 - margin3.top - margin3.bottom;
 //Read the data
-d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
+d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
 
-
+  data.forEach(function (d) {
+    d['Height (m)'] = parseFloat(d['Height (m)']);
+    d['Gross Carbon Sequestration (eur/yr)'] = parseFloat(d['Gross Carbon Sequestration (eur/yr)']);
+    d['Gross Carbon Sequestration (kg/yr)'] = parseFloat(d['Gross Carbon Sequestration (kg/yr)']);
+    d['Canopy Cover (m2)'] = parseFloat(d['Canopy Cover (m2)']);
+  });
   // group the data: I want to draw one line per group
   var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
     .key(function (d) { return d.Name; })
@@ -105,7 +110,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
   // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
   var svg4 = d3.select("#A2task4")
-    .selectAll("mybar")
+    .selectAll("dot")
     .data(sumstat)
     .enter()
     .append("svg")
@@ -119,7 +124,7 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
   // Add X axis 
   var x = d3.scaleLinear()
     .range([0, width3])
-    .domain([0, d3.max(data, function (d) { return +d.Count; })]
+    .domain([0, d3.max(data, function (d) { return +d['Height (m)']; })]
     );
 
   svg4
@@ -131,10 +136,10 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
   // Add Y axis 
   var y = d3.scaleLinear()
-  .domain([0, 5000])
-    // .domain(data.map(function (d) {
-    //   return d.Neighborhood;
-    // }))
+  .domain([0, d3.max(data, function (d){ return +d['Gross Carbon Sequestration (kg/yr)'];})])
+  // .domain(data.map(function (d) {
+  //   return d['Gross Carbon Sequestration (kg/yr)'];
+  // }))
     .range([height3, 0]);
 
   svg4.append("g")
@@ -163,10 +168,11 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
 
   // Three function that change the tooltip when user hover / move / leave a cell
   const mouseoverA2T4 = function (d) {
-    let totalAmount3 = d.Count;
+    let treeHeight = d['Height (m)'];
+    let Co2Sequestration = d['Gross Carbon Sequestration (kg/yr)']
     let treeType3 = d.Name;
     tooltipA2T4
-      .html("Tree Type: " + treeType3 + "<br>" + "Total Amount: " + totalAmount3)
+      .html("Tree Type: " + treeType3 + "<br>" + "Height: " + treeHeight + "<br>" + "C02 Sequestration: " + Co2Sequestration)
       .style("opacity", 1);
 
   }
@@ -192,8 +198,8 @@ d3.csv("/data/top_trees_neighborhood_unpivot.csv", function (data) {
     // .attr("y", function (d, i) { return y(d.Neighborhood); })
     // .attr("height", y.bandwidth())
     // .attr("width", function (d, i) { return width3 - (width3 - x(d.Count)); })
-    .attr("cx", function (d) { return x(d.Count); })
-    .attr("cy", function (d) { return y(d.Neighborhood); })
+    .attr("cx", function (d) { return x(d['Height (m)']); })
+    .attr("cy", function (d) { return y(d['Gross Carbon Sequestration (kg/yr)']); })
     .attr("r", 1.5)
     .on("mouseover", mouseoverA2T4)
     .on("mousemove", mousemoveA2T4)

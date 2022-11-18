@@ -485,9 +485,10 @@ span {
 
 .bubbles {
 	stroke-width: 1px;
-	stroke: black;
-	opacity: .8
+	stroke: #F1F1F1;
+	opacity: .75
   }
   .bubbles:hover {
 	stroke: black;
+	opacity: 1
   }

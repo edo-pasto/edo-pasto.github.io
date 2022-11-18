@@ -32,7 +32,8 @@ function returnID(i) {
         .data(sumstat)
         .enter()
         .append("svg")
-        .attr('id', `SVG4${numbers.map(returnID)}`)
+        // .attr('id', `SVG4${numbers.map(returnID)}`)
+        .attr('class', `SVG4_ID`)
         // .attr("viewBox", `0 0 1000 500`)
         .attr("width", width3 + margin3.left + margin3.right)
         .attr("height", height3 + margin3.top + margin3.bottom)
@@ -181,7 +182,7 @@ d3.select("#treeSizeMeasures_taskA2_4").on("change", function () {
 // numbers.forEach(function (i) {
 //       d3.select(`#SVG4${i}`).remove()
 //   });
-d3.select("#SVG4_ID").remove()
+$('.SVG4_ID').remove()
     data.forEach(function (d) {
       d[selectedText_task4] = parseFloat(d[selectedText_task4]);
       d['Gross Carbon Sequestration (eur/yr)'] = parseFloat(d['Gross Carbon Sequestration (eur/yr)']);
@@ -204,7 +205,8 @@ d3.select("#SVG4_ID").remove()
       .data(sumstat)
       .enter()
       .append("svg")
-      .attr('id', `SVG4_ID`)
+      // .attr('id', `SVG4_ID`)
+      .attr('class', `SVG4_ID`)
       // .attr("viewBox", `0 0 1000 500`)
       .attr("width", width3 + margin3.left + margin3.right)
       .attr("height", height3 + margin3.top + margin3.bottom)

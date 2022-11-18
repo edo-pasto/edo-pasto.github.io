@@ -115,6 +115,7 @@ d3.csv("../../data/treesMeasures.csv", function (data) {
                 return "translate(" + x(d.x0) + "," + y(d.length) + ")";
             })
             .attr("width", function (d) {
+                // return x(d.x1) - x(d.x0);
                 return x(d.x1) - x(d.x0) - 1;
             })
             .attr("height", function (d) {

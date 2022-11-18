@@ -167,16 +167,18 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
   // ---------------------------//
 
   // Add legend: circles
-  var valuesToShow = [d3.min(data, d => d['Canopy Cover (m2)']), 100, d3.max(data, d => d['Canopy Cover (m2)'])]
-  var xCircle = 390
-  var xLabel = 440
+  var valuesToShow = [d3.min(data, d => d['Canopy Cover (m2)']), ((d3.min(data, d => d['Canopy Cover (m2)'])+d3.max(data, d => d['Canopy Cover (m2)']))/4).toFixed(2), d3.max(data, d => d['Canopy Cover (m2)'])]
+  var moveX = 50
+  var moveY = 150
+  var xCircle = 390 + moveX
+  var xLabel = 440 + moveX
   svg5
     .selectAll("legend")
     .data(valuesToShow)
     .enter()
     .append("circle")
     .attr("cx", xCircle)
-    .attr("cy", function (d) { return height - 100 - z(d) })
+    .attr("cy", function (d) { return height - moveY - z(d) })
     .attr("r", function (d) { return z(d) })
     .style("fill", "none")
     .attr("stroke", "black")
@@ -189,8 +191,8 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     .append("line")
     .attr('x1', function (d) { return xCircle + z(d) })
     .attr('x2', xLabel)
-    .attr('y1', function (d) { return height - 100 - z(d) })
-    .attr('y2', function (d) { return height - 100 - z(d) })
+    .attr('y1', function (d) { return height - moveY - z(d) })
+    .attr('y2', function (d) { return height - moveY - z(d) })
     .attr('stroke', 'black')
     .style('stroke-dasharray', ('2,2'))
 
@@ -201,7 +203,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     .enter()
     .append("text")
     .attr('x', xLabel)
-    .attr('y', function (d) { return height - 100 - z(d) })
+    .attr('y', function (d) { return height - moveY - z(d) })
     .text(function (d) { return d })
     .style("font-size", 10)
     .attr('alignment-baseline', 'middle')
@@ -209,7 +211,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
   // Legend title
   svg5.append("text")
     .attr('x', xCircle)
-    .attr("y", height - 100 + 30)
+    .attr("y", height - moveY + 30)
     .text("Canopy Size (m2)")
     .attr("text-anchor", "middle")
 
@@ -223,7 +225,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     .data(allgroups)
     .enter()
     .append("circle")
-    .attr("cx", 390)
+    .attr("cx", xCircle)
     .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("r", 7)
     .style("fill", function (d) { return myColor(d) })
@@ -240,7 +242,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     .data(allgroups)
     .enter()
     .append("text")
-    .attr("x", 390 + size * .8)
+    .attr("x", xCircle + size * .8)
     .attr("y", function (d, i) { return i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d) { return myColor(d) })
     .text(function (d) { return d })
@@ -411,16 +413,18 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
       .on("mouseleave", mouseleaveA2T5)
 
 
-    var valuesToShow = [d3.min(data, d => d['Canopy Cover (m2)']), 100, d3.max(data, d => d['Canopy Cover (m2)'])]
-    var xCircle = 390
-    var xLabel = 440
+    var valuesToShow = [d3.min(data, d => d['Canopy Cover (m2)']), ((d3.min(data, d => d['Canopy Cover (m2)'])+d3.max(data, d => d['Canopy Cover (m2)']))/4).toFixed(2), d3.max(data, d => d['Canopy Cover (m2)'])]
+    var moveX = 50
+    var moveY = 150
+    var xCircle = 390 + moveX
+    var xLabel = 440 + moveX
     svg5_new
       .selectAll("legend")
       .data(valuesToShow)
       .enter()
       .append("circle")
       .attr("cx", xCircle)
-      .attr("cy", function (d) { return height - 100 - z(d) })
+      .attr("cy", function (d) { return height - moveY - z(d) })
       .attr("r", function (d) { return z(d) })
       .style("fill", "none")
       .attr("stroke", "black")
@@ -433,8 +437,8 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
       .append("line")
       .attr('x1', function (d) { return xCircle + z(d) })
       .attr('x2', xLabel)
-      .attr('y1', function (d) { return height - 100 - z(d) })
-      .attr('y2', function (d) { return height - 100 - z(d) })
+      .attr('y1', function (d) { return height - moveY - z(d) })
+      .attr('y2', function (d) { return height - moveY - z(d) })
       .attr('stroke', 'black')
       .style('stroke-dasharray', ('2,2'))
 
@@ -445,7 +449,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
       .enter()
       .append("text")
       .attr('x', xLabel)
-      .attr('y', function (d) { return height - 100 - z(d) })
+      .attr('y', function (d) { return height - moveY - z(d) })
       .text(function (d) { return d })
       .style("font-size", 10)
       .attr('alignment-baseline', 'middle')
@@ -453,7 +457,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
     // Legend title
     svg5_new.append("text")
       .attr('x', xCircle)
-      .attr("y", height - 100 + 30)
+      .attr("y", height - moveY + 30)
       .text("Canopy Size (m2)")
       .attr("text-anchor", "middle")
 
@@ -467,7 +471,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
       .data(allgroups)
       .enter()
       .append("circle")
-      .attr("cx", 390)
+      .attr("cx", xCircle)
       .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
       .attr("r", 7)
       .style("fill", function (d) { return myColor(d) })
@@ -479,7 +483,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
       .data(allgroups)
       .enter()
       .append("text")
-      .attr("x", 390 + size * .8)
+      .attr("x", xCircle + size * .8)
       .attr("y", function (d, i) { return i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
       .style("fill", function (d) { return myColor(d) })
       .text(function (d) { return d })

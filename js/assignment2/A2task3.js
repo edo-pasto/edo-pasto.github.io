@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 40, right: 30, bottom: 30, left: 220},
+var margin = { top: 40, right: 30, bottom: 30, left: 180 },
     width = 500 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -17,183 +17,183 @@ var svg3 = d3.select("#A2task3")
 
 //Read the data
 d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
-        let selectedText_task3 = "Height (m)"
-        data.forEach(function (d) {
-            d[selectedText_task3] = parseFloat(d[selectedText_task3]);
-            d['Gross Carbon Sequestration (kg/yr)'] = parseFloat(d['Gross Carbon Sequestration (kg/yr)']);
+    let selectedText_task3 = "Height (m)"
+    data.forEach(function (d) {
+        d[selectedText_task3] = parseFloat(d[selectedText_task3]);
+        d['Gross Carbon Sequestration (kg/yr)'] = parseFloat(d['Gross Carbon Sequestration (kg/yr)']);
 
-        });
+    });
 
-        //get names as keys
-        var keys = d3.map(data, function (d) {
-            return (d.Name)
-        }).keys()
+    //get names as keys
+    var keys = d3.map(data, function (d) {
+        return (d.Name)
+    }).keys()
 
-        // Add X axis
+    // Add X axis
 
-        var x = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d[selectedText_task3])])
-            .range([0.0, width]);
-        svg3.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+    var x = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d[selectedText_task3])])
+        .range([0.0, width]);
+    svg3.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
 
-        svg3.append("text")
-            .attr("text-anchor", "end")
-            .attr("x", width)
-            .attr("y", height + 50)
-            .text("Height (m)");
-
-        // Add Y axis
-        var y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d['Gross Carbon Sequestration (kg/yr)']) + 1.0])
-            .range([height, 0]);
-        svg3.append("g")
-            .call(d3.axisLeft(y));
-
-        svg3.append("text")
+    svg3.append("text")
         .attr("text-anchor", "end")
-            .attr("x", 0)
-            .attr("y", -20)
-            .text("CO2");
-            
+        .attr("x", width)
+        .attr("y", height + 50)
+        .text("Height (m)");
 
-        var domain = keys
-        // Color scale: give me a specie name, I return a color
-        var color = d3.scaleOrdinal()
-            .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
-            .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
+    // Add Y axis
+    var y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d['Gross Carbon Sequestration (kg/yr)']) + 1.0])
+        .range([height, 0]);
+    svg3.append("g")
+        .call(d3.axisLeft(y));
 
-        var tooltipA2T4 = d3.select("#A2task3")
-            .append("div")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "10px")
-
-        // Three function that change the tooltip when user hover / move / leave a cell
-        const mouseoverA2T3 = function (d) {
-
-            let treeType3 = d.Name;
-            tooltipA2T4
-                .html("Tree Type: " + treeType3 + "<br>" + "Tree Height: " + d[selectedText_task3] + "<br>" + "CO2 Substraction: " + d['Gross Carbon Sequestration (kg/yr)'])
-                .style("opacity", 1);
-
-        }
-        const mousemoveA2T3 = function (d) {
-            tooltipA2T4
-                .style('left', (event.pageX + 20) + 'px')
-                .style('top', (event.pageY + 10) + 'px')
-
-        }
-        const mouseleaveA2T3 = function (d) {
-            tooltipA2T4
-                .style("opacity", 0);
-        }
+    svg3.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", 0)
+        .attr("y", -20)
+        .text("CO2");
 
 
-        // // Highlight the specie that is hovered
-        // var highlight = function (d) {
-        //     d3.selectAll(".dot")
-        //         .transition()
-        //         .duration(200)
-        //         .style("fill", "lightgrey")
-        //         .attr("r", 3)
+    var domain = keys
+    // Color scale: give me a specie name, I return a color
+    let trees = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
+    let color_list = ["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd']
+    // let tree_color_map = {}
+    // for (i in trees)
+    //     tree_color_map[trees[i]] = color_list[i]
+    var color = d3.scaleOrdinal()
+        .domain(trees)
+        .range(color_list)
 
-        //     d3.selectAll("." + d.Name)
-        //         .transition()
-        //         .duration(200)
-        //         .style("fill", color(d.Name))
-        //         .attr("r", 7)
-        // }
+    var tooltipA2T4 = d3.select("#A2task3")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
 
-        // // Highlight the specie that is hovered
-        // var doNotHighlight = function () {
-        //     d3.selectAll(".dot")
-        //         .transition()
-        //         .duration(200)
-        //         .style("fill", "lightgrey")
-        //         .attr("r", 5)
-        // }
+    // Three function that change the tooltip when user hover / move / leave a cell
+    const mouseoverA2T3 = function (d) {
 
-        // Add dots
-        svg3.append('g')
-            .selectAll("dot")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("class", function (d) {
-                return "dot " + d.Name
-            })
-            .attr("cx", function (d) {
-                return x(d[selectedText_task3]);
-            })
-            .attr("cy", function (d) {
-                return y(d['Gross Carbon Sequestration (kg/yr)']);
-            })
-            .attr("r", 3)
-            .style("fill", function (d) {
-                return color(d.Name)
-            })
-            // .on("mouseover", highlight)
-            // .on("mouseleave", doNotHighlight)
-            .on("mouseover", mouseoverA2T3)
-            .on("mousemove", mousemoveA2T3)
-            .on("mouseleave", mouseleaveA2T3);
-
-
-        var legend = d3.select("#A2task3_legend")
-            .append("svg")
-            // .attr("viewBox", `0 0 50 50`)
-            .attr('width', 300)
-            .attr('height', 200)
-            .append('g')
-            .attr("transform", `translate(50,0)`)
-            .selectAll("div")
-            .data(domain)
-            .enter()
-            .append("g")
-            .attr('transform', function (d, i) {
-                return "translate(0," + i * 30 + ")";
-            });
-
-        legend.append("rect")
-            .attr("width", 20)
-            .attr("height", 20)
-            .style("fill", function (d, i) {
-                return color(domain[i])
-            });
-
-        legend.append("text")
-            .attr("x", 25)
-            .attr("y", 15)
-            .text(function (d, i) {
-                return d
-            });
-
+        let treeType3 = d.Name;
+        tooltipA2T4
+            .html("Tree Type: " + treeType3 + "<br>" + "Tree Height: " + d[selectedText_task3] + "<br>" + "CO2 Substraction: " + d['Gross Carbon Sequestration (kg/yr)'])
+            .style("opacity", 1);
 
     }
+    const mousemoveA2T3 = function (d) {
+        tooltipA2T4
+            .style('left', (event.pageX + 20) + 'px')
+            .style('top', (event.pageY + 10) + 'px')
+
+    }
+    const mouseleaveA2T3 = function (d) {
+        tooltipA2T4
+            .style("opacity", 0);
+    }
+
+
+    // Add dots
+    svg3.append('g')
+        .selectAll("dot")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", function (d) {
+            return "dot " + d.Name
+        })
+        .attr("cx", function (d) {
+            return x(d[selectedText_task3]);
+        })
+        .attr("cy", function (d) {
+            return y(d['Gross Carbon Sequestration (kg/yr)']);
+        })
+        .attr("r", 3)
+        .style("fill", function (d) {
+            return color(d.Name)
+        })
+        // .on("mouseover", highlight)
+        // .on("mouseleave", doNotHighlight)
+        .on("mouseover", mouseoverA2T3)
+        .on("mousemove", mousemoveA2T3)
+        .on("mouseleave", mouseleaveA2T3);
+
+
+    var highlight = function (d) {
+        // reduce opacity of all groups
+        d3.selectAll(".dot").style("opacity", .1)
+        // expect the one that is hovered
+        d3.selectAll(".dot." + d.replaceAll(' ', '.')).style("opacity", 1).style('stroke-width', '1px').style('stroke', 'black');
+    }
+
+    // And when it is not hovered anymore
+    var noHighlight = function (d) {
+        d3.selectAll(".dot").style("opacity", 1).style('stroke-width', '0px');
+    }
+
+
+    // Add one dot in the legend for each name.
+    var xCircle = 420
+    var size = 20
+
+    // var allgroups = keys
+    var allgroups = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
+
+    svg3.selectAll("myrect")
+        .data(allgroups)
+        .enter()
+        .append("circle")
+        .attr("cx", xCircle)
+        .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("r", 7)
+        .style("fill", function (d) { return color(d) })
+        .on("mouseover", highlight)
+        .on("mouseleave", noHighlight)
+
+    // Add labels beside legend dots
+    svg3.selectAll("mylabels")
+        .data(allgroups)
+        .enter()
+        .append("text")
+        .attr("x", xCircle + size * .8)
+        .attr("y", function (d, i) { return i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+        .style("fill", function (d) { return color(d) })
+        .text(function (d) { return d })
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+        .on("mouseover", highlight)
+        .on("mouseleave", noHighlight)
+
+
+}
 );
+
+
+
 d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
     let selectedText_task3 = this.value
-    var margin = {top: 10, right: 30, bottom: 30, left: 220},
-    width = 640 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    var margin = { top: 40, right: 30, bottom: 30, left: 180 },
+        width = 640 - margin.left - margin.right,
+        height = 440 - margin.top - margin.bottom;
 
     d3.select("#the_SVG_ID").remove()
 
     var svg3_new = d3.select("#A2task3")
-    .append("svg")
-    .attr("id", "the_SVG_ID")
-    // .attr("width", width + margin.left + margin.right)
-    // .attr("height", height + margin.top + margin.bottom)
-    .attr("viewBox", `0 0 800 500`)
-    .append("g")
-    .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+        .append("svg")
+        .attr("id", "the_SVG_ID")
+        // .attr("width", width + margin.left + margin.right)
+        // .attr("height", height + margin.top + margin.bottom)
+        .attr("viewBox", `0 0 800 500`)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
     d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
 
@@ -231,16 +231,34 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
             .call(d3.axisLeft(y));
 
         svg3_new.append("text")
-        .attr("text-anchor", "end")
+            .attr("text-anchor", "end")
             .attr("x", 0)
             .attr("y", -20)
             .text("CO2");
-        
+
 
         // Color scale: give me a specie name, I return a color
+        var domain = keys
+        // Color scale: give me a specie name, I return a color
+        let trees = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
+        let color_list = ["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd']
+
         var color = d3.scaleOrdinal()
-            .domain(keys)
-            .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
+            .domain(trees)
+            .range(color_list)
+
+        var highlight = function (d) {
+            // reduce opacity of all groups
+            d3.selectAll(".dot").style("opacity", .1)
+            // expect the one that is hovered
+            d3.selectAll(".dot." + d.replaceAll(' ', '.')).style("opacity", 1).style('stroke-width', '1px').style('stroke', 'black');
+        }
+
+        // And when it is not hovered anymore
+        var noHighlight = function (d) {
+            d3.selectAll(".dot").style("opacity", 1).style('stroke-width', '0px');
+        }
+
 
         var tooltipA2T4 = d3.select("#A2task3")
             .append("div")
@@ -297,6 +315,38 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
             .on("mouseover", mouseoverA2T3)
             .on("mousemove", mousemoveA2T3)
             .on("mouseleave", mouseleaveA2T3);
+
+            // Add one dot in the legend for each name.
+    var xCircle = 420
+    var size = 20
+
+    // var allgroups = keys
+    var allgroups = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
+
+    svg3_new.selectAll("myrect")
+        .data(allgroups)
+        .enter()
+        .append("circle")
+        .attr("cx", xCircle)
+        .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("r", 7)
+        .style("fill", function (d) { return color(d) })
+        .on("mouseover", highlight)
+        .on("mouseleave", noHighlight)
+
+    // Add labels beside legend dots
+    svg3_new.selectAll("mylabels")
+        .data(allgroups)
+        .enter()
+        .append("text")
+        .attr("x", xCircle + size * .8)
+        .attr("y", function (d, i) { return i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+        .style("fill", function (d) { return color(d) })
+        .text(function (d) { return d })
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+        .on("mouseover", highlight)
+        .on("mouseleave", noHighlight)
 
 
     });

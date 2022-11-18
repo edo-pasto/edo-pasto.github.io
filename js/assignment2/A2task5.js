@@ -121,10 +121,10 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
 
   // What to do when one group is hovered
   var highlight = function (d) {
-    // reduce opacity of all groups
-    d3.selectAll(".bubbles").style("opacity", .05)
-    // expect the one that is hovered
-    d3.selectAll("." + d).style("opacity", 1)
+      // reduce opacity of all groups
+      d3.selectAll(".bubbles").style("opacity", .05)
+      // expect the one that is hovered
+      d3.selectAll(".bubbles." + d.replaceAll(' ', '.')).style("opacity", 1)
   }
 
   // And when it is not hovered anymore
@@ -230,10 +230,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     .attr("r", 7)
     .style("fill", function (d) { return myColor(d) })
     .on("mouseover", function (d) {
-      // reduce opacity of all groups
-      d3.selectAll(".bubbles").style("opacity", .05)
-      // expect the one that is hovered
-      d3.selectAll(".bubbles." + d.replaceAll(' ', '.')).style("opacity", 1)
+
     })
     .on("mouseleave", noHighlight)
 
@@ -248,12 +245,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
     .text(function (d) { return d })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
-    .on("mouseover", function (d) {
-      // reduce opacity of all groups
-      d3.selectAll(".bubbles").style("opacity", .05)
-      // expect the one that is hovered
-      d3.selectAll(".bubbles." + d.replaceAll(' ', '.')).style("opacity", 1)
-    })
+    .on("mouseover", highlight)
     .on("mouseleave", noHighlight)
 })
 
@@ -328,10 +320,9 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
 
     // Add a scale for bubble color
     var myColor = d3.scaleOrdinal()
-
       // .domain(keys)
       .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
-      .range(d3.schemeSet1);
+      .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
 
 
     // ---------------------------//

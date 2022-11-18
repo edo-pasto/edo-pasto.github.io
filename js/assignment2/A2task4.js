@@ -19,12 +19,7 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
     allKeys = sumstat.map(function (d) {
         return d.key
     })
-// let numbers = {numb: ['0','1','2','3','4','5']};
-let numbers = ['0','1','2','3','4','5']
 
-function returnID(i) {
-  return i;
-}
     // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
     var svg4 = d3.select("#A2task4")
         

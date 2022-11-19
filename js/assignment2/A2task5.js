@@ -55,9 +55,9 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
   // Add Y axis label:
   svg5.append("text")
     .attr("text-anchor", "end")
-    .attr("x", 0)
+    .attr("x", -50)
     .attr("y", -20)
-    .text("CO2 Subtract")
+    .text("CO2 Subtraction (kg/yr)")
     .attr("text-anchor", "start")
 
   // Add a scale for bubble size
@@ -99,7 +99,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
       .duration(200)
       .style("opacity", 1)
     tooltipA2T5
-      .html("<span style='color:grey'>Canopy Size (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction: </span>" + d['Gross Carbon Sequestration (kg/yr)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .html("<span style='color:grey'>Canopy Size (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction (kg/yr): </span>" + d['Gross Carbon Sequestration (kg/yr)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
       .style("left", (event.pageX + 10) + "px")
       .style("top", (event.pageY) + "px")
   }

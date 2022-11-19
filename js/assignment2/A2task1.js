@@ -1,5 +1,5 @@
 // set the dimensions and margins of the graph
-var margin = {top: 20, right: 30, bottom: 10, left: 100},
+var margin = { top: 20, right: 30, bottom: 10, left: 100 },
     width = 700 - margin.left - margin.right,
     height = 420 - margin.top - margin.bottom;
 
@@ -27,6 +27,12 @@ d3.csv("../../data/treesMeasures.csv", function (data) {
     svgA2T1.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
+
+    svgA2T1.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height + 50)
+        .text("Height (m)");
 
     // Y axis: initialization
     var y = d3.scaleLinear()
@@ -149,11 +155,11 @@ d3.csv("../../data/treesMeasures.csv", function (data) {
 
 d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
     let selectedText_task1 = this.value
-    var margin = {top: 20, right: 30, bottom: 10, left: 100},
-    width = 700 - margin.left - margin.right,
-    height = 420 - margin.top - margin.bottom;
+    var margin = { top: 20, right: 30, bottom: 10, left: 100 },
+        width = 700 - margin.left - margin.right,
+        height = 420 - margin.top - margin.bottom;
     d3.select("#the_SVG_ID_taska2_1").remove()
-// append the svg object to the body of the page
+    // append the svg object to the body of the page
     var svgA2T1_new = d3.select("#A2task1")
         .append("svg")
         .attr('id', 'the_SVG_ID_taska2_1')
@@ -175,9 +181,15 @@ d3.select("#treeSizeMeasures_for_taskA2_1").on("change", function () {
                 return +d[selectedText_task1];
             })])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
             .range([0, width]);
-            svgA2T1_new.append("g")
+        svgA2T1_new.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x));
+
+        svgA2T1_new.append("text")
+            .attr("text-anchor", "end")
+            .attr("x", width)
+            .attr("y", height + 50)
+            .text(`${selectedText_task1}`);
 
         // Y axis: initialization
         var y = d3.scaleLinear()

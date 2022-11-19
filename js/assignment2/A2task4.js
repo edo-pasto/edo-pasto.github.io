@@ -66,12 +66,12 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
 
     svg4.append("g")
         .call(d3.axisLeft(y));
-        svg4.append("text")
-            .attr("text-anchor", "end")
-            .attr("x", (width / 2) - 230)
-            .attr("y", height - 420)
-            .text("CO2 absorption (kg/year)")
-            .attr("transform", "rotate(-90)");
+    svg4.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", (width / 2) - 230)
+        .attr("y", height - 420)
+        .text("CO2 absorption (kg/yr)")
+        .attr("transform", "rotate(-90)");
 
     var colorTitles = d3.scaleOrdinal()
         .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
@@ -154,11 +154,55 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
             return colorTitles(d.key)
         })
 
+    // --------------- regression lines --------------------//
+
+    // var yval = data.map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
+    // var xval = data.map(function (d) { return parseFloat(d['Height (m)']); });
+
+
+    // var lr = linearRegression(yval, xval);
+
+    // var max = d3.max(data, function (d) { return parseFloat(d['Height (m)']); });
+
+    // svg4.append("line")
+    //     .attr("x1", x(0))
+    //     .attr("y1", y(lr.intercept))
+    //     .attr("x2", x(max))
+    //     .attr("y2", y((max * lr.slope) + lr.intercept))
+    //     .style("stroke", "gray")
+    //     .style("opacity", 0.5);
+
+    // function linearRegression(y, x) {
+
+    //     var lr = {};
+    //     var n = y.length;
+    //     var sum_x = 0;
+    //     var sum_y = 0;
+    //     var sum_xy = 0;
+    //     var sum_xx = 0;
+    //     var sum_yy = 0;
+
+    //     for (var i = 0; i < y.length; i++) {
+
+    //         sum_x += x[i];
+    //         sum_y += y[i];
+    //         sum_xy += (x[i] * y[i]);
+    //         sum_xx += (x[i] * x[i]);
+    //         sum_yy += (y[i] * y[i]);
+    //     }
+
+    //     lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+    //     lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
+    //     lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
+
+    //     return lr;
+
+    // };
+
+
+
+
 });
-
-
-
-
 
 
 
@@ -241,22 +285,18 @@ d3.select("#treeSizeMeasures_taskA2_4").on("change", function () {
             .domain([0, d3.max(data, function (d) {
                 return +d['Gross Carbon Sequestration (kg/yr)'];
             })])
-            // .domain(data.map(function (d) {
-            //   return d['Gross Carbon Sequestration (kg/yr)'];
-            // }))
             .range([height3, 0]);
 
         svg4_new.append("g")
             .call(d3.axisLeft(y));
-        // .selectAll("text")
-        // .attr("transform", "translate(-10,0)rotate(-45)")
-        // .style("text-anchor", "end");
-
-
-        // color palette
-        // var colorTitles = d3.scaleOrdinal()
-        //     .domain(allKeys)
-        //     .range(['#ffd43b', '#4daf4a', '#3c51ae', '#adb5bd', '#FFBCD9', '#e41a1c'])
+        svg4_new.append("g")
+            .call(d3.axisLeft(y));
+        svg4_new.append("text")
+            .attr("text-anchor", "end")
+            .attr("x", (width / 2) - 230)
+            .attr("y", height - 420)
+            .text("CO2 absorption (kg/yr)")
+            .attr("transform", "rotate(-90)");
 
         var colorTitles = d3.scaleOrdinal()
             .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])

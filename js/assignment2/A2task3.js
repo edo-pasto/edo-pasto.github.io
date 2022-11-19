@@ -32,9 +32,10 @@ d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
     // Add X axis
 
     var x = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d[selectedText_task3])])
+        .domain([0, 0])
         .range([0.0, width]);
     svg3.append("g")
+        .attr("class", "myXaxis")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
@@ -132,6 +133,30 @@ d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
         .on("mouseleave", mouseleaveA2T3);
 
 
+
+    // new X axis
+    x.domain([0, d3.max(data, d => d[selectedText_task3])])
+    svg3.select(".myXaxis")
+        .transition()
+        .duration(1500)
+        .attr("opacity", "1")
+        .call(d3.axisBottom(x));
+
+    svg3.selectAll("circle")
+        .transition()
+        .delay(function (d, i) { return (i * 3) })
+        .duration(1500)
+        .attr("cx", function (d) {
+            return x(d[selectedText_task3]);
+        })
+        .attr("cy", function (d) {
+            return y(d['Gross Carbon Sequestration (kg/yr)']);
+        })
+
+    // ---------------------------//
+    //       HIGHLIGHT GROUP      //
+    // ---------------------------//
+
     var highlight = function (d) {
         // reduce opacity of all groups
         d3.selectAll(".dot").style("opacity", .1)
@@ -144,6 +169,9 @@ d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
         d3.selectAll(".dot").style("opacity", 1).style('stroke-width', '0px');
     }
 
+    // ---------------------------//
+    //       LEGEND              //
+    // ---------------------------//
 
     // Add one dot in the legend for each name.
     var xCircle = 420
@@ -153,15 +181,30 @@ d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
     var allgroups = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
 
     svg3.selectAll("myrect")
-        .data(allgroups)
-        .enter()
-        .append("circle")
-        .attr("cx", xCircle)
-        .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
-        .attr("r", 7)
-        .style("fill", function (d) { return color(d) })
-        .on("mouseover", highlight)
-        .on("mouseleave", noHighlight)
+    .data(allgroups)
+    .enter()
+    .append("rect")
+    .attr("rx", 100)
+    .attr("ry", 100)
+    .attr("x", xCircle)
+    .attr("y", function (d, i) { return   + i * (size + 5) })
+    .attr("width", 12)
+    .attr("height", 12)
+    .attr("stroke", "black")
+    .attr("fill", "white")
+    // .append("circle")
+    // .attr("x", xCircle)
+    // .attr("y", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+    // .attr("r", 7)
+    .style("fill", function (d) { return color(d) })
+    .on("mouseover", highlight)
+    .on("mouseleave", noHighlight)
+
+    d3.select("rect")
+    .transition()
+    .duration(1000)
+    .attr("rx", 0)
+    .attr("ry", 0);
 
     // Add labels beside legend dots
     svg3.selectAll("mylabels")
@@ -216,12 +259,13 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
 
         console.log(width)
         // Add X axis
-        var x = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d[selectedText_task3])])
+        var x_new = d3.scaleLinear()
+            .domain([0, 0])
             .range([0.0, width]);
         svg3_new.append("g")
+            .attr('class', 'myXaxis')
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(x_new));
 
         svg3_new.append("text")
             .attr("text-anchor", "end")
@@ -253,17 +297,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
             .domain(trees)
             .range(color_list)
 
-        var highlight = function (d) {
-            // reduce opacity of all groups
-            d3.selectAll(".dot").style("opacity", .1)
-            // expect the one that is hovered
-            d3.selectAll(".dot." + d.replaceAll(' ', '.')).style("opacity", 1).style('stroke-width', '1px').style('stroke', 'black');
-        }
 
-        // And when it is not hovered anymore
-        var noHighlight = function (d) {
-            d3.selectAll(".dot").style("opacity", 1).style('stroke-width', '0px');
-        }
 
 
         var tooltipA2T3 = d3.select("#A2task3")
@@ -286,7 +320,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
                 .duration(200)
                 .style("opacity", 1)
             tooltipA2T3
-                .html( `<span style='color:grey'>${selectedText_task3}: </span>` + d[selectedText_task3] + "<br><span style='color:grey'>CO2 Subtraction (kg/yr): </span>" + d['Gross Carbon Sequestration (kg/yr)'])
+                .html(`<span style='color:grey'>${selectedText_task3}: </span>` + d[selectedText_task3] + "<br><span style='color:grey'>CO2 Subtraction (kg/yr): </span>" + d['Gross Carbon Sequestration (kg/yr)'])
         }
         const mousemoveA2T3 = function (d) {
             tooltipA2T3
@@ -311,7 +345,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
                 return "dot " + d.Name
             })
             .attr("cx", function (d) {
-                return x(d[selectedText_task3]);
+                return x_new(d[selectedText_task3]);
             })
             .attr("cy", function (d) {
                 return y(d['Gross Carbon Sequestration (kg/yr)']);
@@ -320,11 +354,42 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
             .style("fill", function (d) {
                 return color(d.Name)
             })
-            // .on("mouseover", highlight)
-            // .on("mouseleave", doNotHighlight)
             .on("mouseover", mouseoverA2T3)
             .on("mousemove", mousemoveA2T3)
             .on("mouseleave", mouseleaveA2T3);
+
+
+        // new X axis
+        x_new.domain([0, d3.max(data, d => d[selectedText_task3])])
+        svg3_new.select(".myXaxis")
+            .transition()
+            .duration(1500)
+            .attr("opacity", "1")
+            .call(d3.axisBottom(x_new));
+
+        svg3_new.selectAll("circle")
+            .transition()
+            .delay(function (d, i) { return (i * 3) })
+            .duration(1500)
+            .attr("cx", function (d) {
+                return x_new(d[selectedText_task3]);
+            })
+            .attr("cy", function (d) {
+                return y(d['Gross Carbon Sequestration (kg/yr)']);
+            })
+
+
+        var highlight = function (d) {
+            // reduce opacity of all groups
+            d3.selectAll(".dot").style("opacity", .1)
+            // expect the one that is hovered
+            d3.selectAll(".dot." + d.replaceAll(' ', '.')).style("opacity", 1).style('stroke-width', '1px').style('stroke', 'black');
+        }
+
+        // And when it is not hovered anymore
+        var noHighlight = function (d) {
+            d3.selectAll(".dot").style("opacity", 1).style('stroke-width', '0px');
+        }
 
         // Add one dot in the legend for each name.
         var xCircle = 460
@@ -336,13 +401,28 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
         svg3_new.selectAll("myrect")
             .data(allgroups)
             .enter()
-            .append("circle")
-            .attr("cx", xCircle)
-            .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
-            .attr("r", 7)
+            .append("rect")
+            .attr("rx", 100)
+            .attr("ry", 100)
+            .attr("x", xCircle)
+            .attr("y", function (d, i) { return   + i * (size + 5) })
+            .attr("width", 12)
+            .attr("height", 12)
+            .attr("stroke", "black")
+            .attr("fill", "white")
+            // .append("circle")
+            // .attr("x", xCircle)
+            // .attr("y", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+            // .attr("r", 7)
             .style("fill", function (d) { return color(d) })
             .on("mouseover", highlight)
             .on("mouseleave", noHighlight)
+
+            d3.select("rect")
+            .transition()
+            .duration(1000)
+            .attr("rx", 0)
+            .attr("ry", 0);
 
         // Add labels beside legend dots
         svg3_new.selectAll("mylabels")

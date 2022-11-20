@@ -73,8 +73,9 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
         .text("CO2 absorption (kg/yr)")
         .attr("transform", "rotate(-90)");
 
+    let dom = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
     var colorTitles = d3.scaleOrdinal()
-        .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
+        .domain(dom)
         .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
     // Tooltip for all the bars
 
@@ -155,22 +156,38 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
         })
 
     // --------------- regression lines --------------------//
+    
+    // console.log(data[4].Name)
+    // console.log(data)
+    // let index = 0
 
-    // var yval = data.map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
-    // var xval = data.map(function (d) { return parseFloat(d['Height (m)']); });
+    // dom.forEach(function (d, i) {
 
+    //     var yval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
+    //     var xval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d['Height (m)']); });
 
-    // var lr = linearRegression(yval, xval);
+    //     // var lr = linearRegression(yval, xval);
+    //     var max = d3.max(data, function (d) { return parseFloat(d['Height (m)']); });
 
-    // var max = d3.max(data, function (d) { return parseFloat(d['Height (m)']); });
+    //         svg4.append("svg:line")
+    //         .attr('id', `Line${d}`)
+    //             .attr("x1", x(0))
+    //             .attr("y1", y((linearRegression(yval, xval)).intercept))
+    //             .attr("x2", x(max))
+    //             .attr("y2", y((max * (linearRegression(yval, xval)).slope) + (linearRegression(yval, xval)).intercept))
+    //             .style("stroke", "gray")
+    //             .style("opacity", 0.5);
 
-    // svg4.append("line")
-    //     .attr("x1", x(0))
-    //     .attr("y1", y(lr.intercept))
-    //     .attr("x2", x(max))
-    //     .attr("y2", y((max * lr.slope) + lr.intercept))
-    //     .style("stroke", "gray")
-    //     .style("opacity", 0.5);
+    //     if(data[index].Name === 'Celtis australis'){
+    //         index = index + 1200
+    //     }else{
+    //         index = index + 600
+    //     }
+            
+    // })
+    // // var yval = data.filter(d => d.Name == e).map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
+    // // var xval = data.filter(d => d.Name == e).map(function (d) { return parseFloat(d['Height (m)']); });
+
 
     // function linearRegression(y, x) {
 
@@ -216,19 +233,8 @@ d3.select("#treeSizeMeasures_taskA2_4").on("change", function () {
         height3 = 500 - margin.top - margin.bottom;
 
 
-
-
     d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
 
-
-        // data.forEach(function (d) {
-        //     d3.select(`#SVG4${d.Name}`).remove()
-        // });
-        //   let numbers = ['0','1','2','3','4','5'];
-
-        // numbers.forEach(function (i) {
-        //       d3.select(`#SVG4${i}`).remove()
-        //   });
         $('.SVG4_ID').remove()
         data.forEach(function (d) {
             d[selectedText_task4] = parseFloat(d[selectedText_task4]);

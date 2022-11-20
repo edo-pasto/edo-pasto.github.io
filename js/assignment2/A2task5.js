@@ -99,7 +99,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
       .duration(200)
       .style("opacity", 1)
     tooltipA2T5
-      .html("<span style='color:grey'>Canopy Size (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction (kg/yr): </span>" + d['Gross Carbon Sequestration (kg/yr)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .html("<span style='color:grey'>Canopy cover (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction (kg/yr): </span>" + d['Gross Carbon Sequestration (kg/yr)'] + "<br><span style='color:grey'>Height (m): </span> " + d['Height (m)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
       .style("left", (event.pageX + 10) + "px")
       .style("top", (event.pageY) + "px")
   }
@@ -212,7 +212,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
   svg5.append("text")
     .attr('x', xCircle)
     .attr("y", height - moveY + 30)
-    .text("Canopy Size (m2)")
+    .text("Canopy Cover (m2)")
     .attr("text-anchor", "middle")
 
   // Add one dot in the legend for each name.
@@ -348,7 +348,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
         .duration(200)
         .style("opacity", 1)
       tooltipA2T5
-      .html("<span style='color:grey'>Canopy Size (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction: </span>" + d['Gross Carbon Sequestration (kg/yr)']) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
+      .html("<span style='color:grey'>Canopy Cover (m2): </span> " + d['Canopy Cover (m2)'] + "<br> <span style='color:grey'>Tree Type: </span>" + d.Name + "<br><span style='color:grey'>CO2 Subtraction: </span>" + d['Gross Carbon Sequestration (kg/yr)'] + `<br><span style='color:grey'>${selectedText_task5}: </span>` + d[selectedText_task5]) // + d.Prior_disorder + "<br>" + "HR: " +  d.HR)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY) + "px")
     }
@@ -449,7 +449,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
     svg5_new.append("text")
       .attr('x', xCircle)
       .attr("y", height - moveY + 30)
-      .text("Canopy Size (m2)")
+      .text("Canopy Cover (m2)")
       .attr("text-anchor", "middle")
 
     // Add one dot in the legend for each name.

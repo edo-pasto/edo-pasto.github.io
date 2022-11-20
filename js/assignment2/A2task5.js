@@ -73,7 +73,7 @@ d3.csv("../../data/top_6_treesMeasuresBubble.csv", function (data) {
 
     var myColor = d3.scaleOrdinal()
     .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
-    .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
+    .range(["#440154ff", "#febbd9", "#fde725ff", "#f00034", "#52a163", '#0d6efc'])
 
 
   // ---------------------------//
@@ -322,7 +322,7 @@ d3.select("#treeSizeMeasures_taskA2_5").on("change", function () {
     var myColor = d3.scaleOrdinal()
       // .domain(keys)
       .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
-      .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
+      .range(["#440154ff", "#febbd9", "#fde725ff", "#f00034", "#52a163", '#0d6efc'])
 
 
     // ---------------------------//

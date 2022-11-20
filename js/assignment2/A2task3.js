@@ -62,7 +62,7 @@ d3.csv("../../data/top_6_treesMeasuresScatter.csv", function (data) {
     var domain = keys
     // Color scale: give me a specie name, I return a color
     let trees = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
-    let color_list = ["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd']
+    let color_list = ["#440154ff", "#febbd9", "#fde725ff", "#f00034", "#52a163", '#0d6efc']
     // let tree_color_map = {}
     // for (i in trees)
     //     tree_color_map[trees[i]] = color_list[i]
@@ -291,7 +291,7 @@ d3.select("#treeSizeMeasures_taskA2_3").on("change", function () {
         var domain = keys
         // Color scale: give me a specie name, I return a color
         let trees = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
-        let color_list = ["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd']
+        let color_list = ["#440154ff", "#febbd9", "#fde725ff", "#f00034", "#52a163", '#0d6efc']
 
         var color = d3.scaleOrdinal()
             .domain(trees)

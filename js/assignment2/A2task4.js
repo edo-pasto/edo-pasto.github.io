@@ -76,7 +76,7 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
     let dom = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea']
     var colorTitles = d3.scaleOrdinal()
         .domain(dom)
-        .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
+        .range(["#440154ff", "#febbd9", "#fde725ff", "#f00034", "#52a163", '#0d6efc'])
     // Tooltip for all the bars
 
     var tooltipA2T4 = d3.select("#A2task4")
@@ -174,7 +174,7 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
             .attr("y1", y(lr.intercept) + margin3.top)
             .attr("x2", x(max) + margin3.left)
             .attr("y2", y((max * lr.slope) + lr.intercept) + margin3.top)
-            .style("stroke", "gray")
+            .style("stroke", "black")
             .style("opacity", 0.5)
     }
 
@@ -292,7 +292,7 @@ d3.select("#treeSizeMeasures_taskA2_4").on("change", function () {
 
         var colorTitles = d3.scaleOrdinal()
             .domain(['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea'])
-            .range(["#440154ff", "#21908dff", "#fde725ff", "#f00034", "#52a163", '#acb4bd'])
+            .range(["#440154ff", "#febbd9", "#fde725ff", "#f00034", "#52a163", '#0d6efc'])
         // Tooltip for all the bars
 
         var tooltipA2T4 = d3.select("#A2task4")
@@ -368,6 +368,56 @@ d3.select("#treeSizeMeasures_taskA2_4").on("change", function () {
             .style("fill", function (d) {
                 return colorTitles(d.key)
             })
+
+
+
+            for (let svgx of $(".SVG4_ID")) {
+                let d = svgx.__data__.key;
+                var yval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
+                var xval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d[selectedText_task4]); });
+                var max = d3.max(data.filter(x => x.Name == d), function (d) { return parseFloat(d[selectedText_task4]); });
+        
+                let lr = linearRegression(yval, xval)
+        
+                let svg_reg_new = d3.selectAll('.SVG4_ID').filter(function(din, i) {// i is the index
+                    return din.key == d
+                });
+        
+                svg_reg_new.append("line")
+                    .attr("x1", x(0) + margin3.left)
+                    .attr("y1", y(lr.intercept) + margin3.top)
+                    .attr("x2", x(max) + margin3.left)
+                    .attr("y2", y((max * lr.slope) + lr.intercept) + margin3.top)
+                    .style("stroke", "black")
+                    .style("opacity", 0.5)
+            }
+        
+            function linearRegression(y, x) {
+        
+                var lr = {};
+                var n = y.length;
+                var sum_x = 0;
+                var sum_y = 0;
+                var sum_xy = 0;
+                var sum_xx = 0;
+                var sum_yy = 0;
+        
+                for (var i = 0; i < y.length; i++) {
+        
+                    sum_x += x[i];
+                    sum_y += y[i];
+                    sum_xy += (x[i] * y[i]);
+                    sum_xx += (x[i] * x[i]);
+                    sum_yy += (y[i] * y[i]);
+                }
+        
+                lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+                lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
+                lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
+        
+                return lr;
+        
+            };
 
     });
 

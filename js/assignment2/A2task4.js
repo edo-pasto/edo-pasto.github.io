@@ -157,67 +157,53 @@ d3.csv("../../data/top_6_treesMeasuresSmallMulti.csv", function (data) {
 
     // --------------- regression lines --------------------//
     
-    // console.log(data[4].Name)
-    // console.log(data)
-    // let index = 0
+    for (let svgx of $(".SVG4_ID")) {
+        let d = svgx.__data__.key;
+        var yval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
+        var xval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d['Height (m)']); });
+        var max = d3.max(data.filter(x => x.Name == d), function (d) { return parseFloat(d['Height (m)']); });
 
-    // dom.forEach(function (d, i) {
+        let lr = linearRegression(yval, xval)
 
-    //     var yval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
-    //     var xval = data.filter(x => x.Name == d).map(function (d) { return parseFloat(d['Height (m)']); });
+        let svg_reg = d3.selectAll('.SVG4_ID').filter(function(din, i) {// i is the index
+            return din.key == d
+        });
 
-    //     // var lr = linearRegression(yval, xval);
-    //     var max = d3.max(data, function (d) { return parseFloat(d['Height (m)']); });
+        svg_reg.append("line")
+            .attr("x1", x(0) + margin3.left)
+            .attr("y1", y(lr.intercept) + margin3.top)
+            .attr("x2", x(max) + margin3.left)
+            .attr("y2", y((max * lr.slope) + lr.intercept) + margin3.top)
+            .style("stroke", "gray")
+            .style("opacity", 0.5)
+    }
 
-    //         svg4.append("svg:line")
-    //         .attr('id', `Line${d}`)
-    //             .attr("x1", x(0))
-    //             .attr("y1", y((linearRegression(yval, xval)).intercept))
-    //             .attr("x2", x(max))
-    //             .attr("y2", y((max * (linearRegression(yval, xval)).slope) + (linearRegression(yval, xval)).intercept))
-    //             .style("stroke", "gray")
-    //             .style("opacity", 0.5);
+    function linearRegression(y, x) {
 
-    //     if(data[index].Name === 'Celtis australis'){
-    //         index = index + 1200
-    //     }else{
-    //         index = index + 600
-    //     }
-            
-    // })
-    // // var yval = data.filter(d => d.Name == e).map(function (d) { return parseFloat(d['Gross Carbon Sequestration (kg/yr)']); });
-    // // var xval = data.filter(d => d.Name == e).map(function (d) { return parseFloat(d['Height (m)']); });
+        var lr = {};
+        var n = y.length;
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var sum_yy = 0;
 
+        for (var i = 0; i < y.length; i++) {
 
-    // function linearRegression(y, x) {
+            sum_x += x[i];
+            sum_y += y[i];
+            sum_xy += (x[i] * y[i]);
+            sum_xx += (x[i] * x[i]);
+            sum_yy += (y[i] * y[i]);
+        }
 
-    //     var lr = {};
-    //     var n = y.length;
-    //     var sum_x = 0;
-    //     var sum_y = 0;
-    //     var sum_xy = 0;
-    //     var sum_xx = 0;
-    //     var sum_yy = 0;
+        lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+        lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
+        lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
 
-    //     for (var i = 0; i < y.length; i++) {
+        return lr;
 
-    //         sum_x += x[i];
-    //         sum_y += y[i];
-    //         sum_xy += (x[i] * y[i]);
-    //         sum_xx += (x[i] * x[i]);
-    //         sum_yy += (y[i] * y[i]);
-    //     }
-
-    //     lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
-    //     lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
-    //     lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
-
-    //     return lr;
-
-    // };
-
-
-
+    };
 
 });
 

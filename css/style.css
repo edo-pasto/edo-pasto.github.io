@@ -6,7 +6,7 @@
 }
 
 #includeFooter{
-	height:120px;
+	height:150px;
 	background-color: var(--primary-color);
 }
 #F_container {
@@ -354,7 +354,7 @@ ul {
 	margin-left: 300px;
 }
 
-#assignm1PageContent {
+#assignm1PageContent, #assignm2PageContent, #assignm3PageContent {
 	/* position: absolute;  */
 	overflow-x: auto;
 	z-index: 2;
@@ -362,13 +362,7 @@ ul {
 	margin-left: 300px;
 }
 
-#assignm2PageContent {
-	/* position: absolute;  */
-	overflow-x: auto;
-	z-index: 2;
-	margin-top: 15px;
-	margin-left: 300px;
-}
+
 
 #includeHeader {
 	position: relative;
@@ -426,14 +420,11 @@ ul {
 	margin-top: 70px;
 }
 
-#assignm1Title {
+#assignm1Title, #assignm2Title, #assignm3Title {
 	padding-top: 22px;
 	margin-top: 90px;
 }
-#assignm2Title {
-	padding-top: 22px;
-	margin-top: 90px;
-}
+
 
 .task-container {
 	display: flex;

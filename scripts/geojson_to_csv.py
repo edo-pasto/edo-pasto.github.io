@@ -92,6 +92,8 @@ data are separated for each neighborhood
 '''
 for nbh in data['Neighborhood'].unique():
     unpivot_data[unpivot_data['Neighborhood'] == nbh].sort_values(by='Count', ascending=False).to_csv(f'../data/single_neighborhood/top_trees_{nbh}.csv', index=False)
+
+
 #-------------------------------------------------
 #                   ASSIGNMENT 2 
 #-------------------------------------------------
@@ -193,4 +195,13 @@ result = result.sample(frac=0.3)
 result.to_csv(f'{DATA_PATH}/top_{top}_treesMeasuresBubble.csv', index=False)
 
 
-
+#-------------------------------------------------
+#                   ASSIGNMENT 3 
+#-------------------------------------------------
+ #Task 1
+result_task1Ass2 = unpivot_data.groupby(by=['Neighborhood'])['Count'].sum().reset_index()
+neigh = result_task1Ass2['Neighborhood']
+count = result_task1Ass2['Count']
+zipped = list(zip(neigh, count))
+result2 = pd.DataFrame(zipped, columns=['Neighborhood','Count'])
+result2.to_csv(f'{DATA_PATH}/neighborhoodDensity.csv', index=False)

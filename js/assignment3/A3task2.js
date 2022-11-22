@@ -19,13 +19,13 @@ var projection = d3.geoIdentity()
 // Data and color scale
 var data = d3.map();
 var colorScale = d3.scaleThreshold()
-  .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+  .domain([100, 300, 500, 1000, 2000, 3200])
   .range(d3.schemeBlues[7]);
 
 // Load external data and boot
 d3.queue()
   .defer(d3.json, "../../data/circoscrizioni.json")
-  //.defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
+  .defer(d3.csv, "../../data/neighborhoodDensity.csv", function(d) { data.set(d.Neighborhood, +d.Count); })
   .await(ready);
 
 function ready(error, topo) {
@@ -52,7 +52,8 @@ function ready(error, topo) {
       .duration(200)
       .style("stroke", "transparent")
   }
-
+  console.log(topo.features)
+  console.log(data)
   // Draw the map
   svg2.append("g")
     .selectAll("path")
@@ -65,7 +66,8 @@ function ready(error, topo) {
       )
       // set the color of each country
       .attr("fill", function (d) {
-        d.total = data.get(d.id) || 0;
+        console.log(d, d.total, d.id)
+        d.total = data.get(d.Count) || 0;
         return colorScale(d.total);
       })
       .style("stroke", "transparent")
@@ -73,5 +75,7 @@ function ready(error, topo) {
       .style("opacity", .8)
       .on("mouseover", mouseOver )
       .on("mouseleave", mouseLeave )
+
+
     }
 

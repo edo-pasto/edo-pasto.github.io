@@ -6,8 +6,8 @@ var svg = d3.select("#A3task1").append('svg'),
 // Map and projection
 var path = d3.geoPath();
 var projection = d3.geoMercator()
-  .scale(70)
-  .center([0,20])
+  .scale(5000)
+  .center([47,11])
   .translate([width / 2, height / 2]);
 
 // Data and color scale
@@ -18,7 +18,7 @@ var colorScale = d3.scaleThreshold()
 
 // Load external data and boot
 d3.queue()
-  .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+  .defer(d3.json, "../../data/circoscrizioni.json")
   .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
   .await(ready);
 

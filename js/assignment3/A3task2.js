@@ -1,14 +1,20 @@
 // The svg
-var svg2 = d3.select("#A3task2").append('svg'),
+var svg2 = d3.select("#A3task2"),
   width = +svg2.attr("width"),
   height = +svg2.attr("height");
 
 // Map and projection
-var path = d3.geoPath();
+
 var projection = d3.geoMercator()
-  .scale(70)
-  .center([0,20])
+  .scale(55000)
+  .center([11,46.1])
   .translate([width / 2, height / 2]);
+
+  /*
+var projection = d3.geoIdentity()
+ .fitExtent([width,height],geojsonObject)
+.reflectY(true);*/
+
 
 // Data and color scale
 var data = d3.map();
@@ -18,8 +24,8 @@ var colorScale = d3.scaleThreshold()
 
 // Load external data and boot
 d3.queue()
-  .defer(d3.json, "../../data/trento_neighborhoods.json")
-  .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
+  .defer(d3.json, "../../data/circoscrizioni.json")
+  //.defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
   .await(ready);
 
 function ready(error, topo) {

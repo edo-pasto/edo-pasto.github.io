@@ -1,10 +1,10 @@
 // The svg
-var svg = d3.select("#A3task2"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+var svg1 = d3.select("#A3task1"),
+    width = +svg1.attr("width"),
+    height = +svg1.attr("height");
 
 // Map and projection
-var path = d3.geoPath();
+
 var projection = d3.geoMercator()
     .scale(55000)
     .center([11, 46.1])
@@ -21,6 +21,18 @@ var data = d3.map();
 var colorScale = d3.scaleThreshold()
     .domain([100, 300, 500, 1000, 2000, 3200])
     .range(d3.schemeBlues[7]);
+
+var tooltipA3T1 = d3.select("#A3task1")
+    .append("div")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    // .style("min-width", "2px")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("font-size", "16px")
 
 // Load external data and boot
 d3.queue()
@@ -42,6 +54,22 @@ function ready(error, topo) {
             .duration(200)
             .style("opacity", 1)
             .style("stroke", "black")
+
+
+        tooltipA3T1
+            .transition()
+            .duration(200)
+            .style("opacity", 1)
+        tooltipA3T1
+            .html("<span style='color:grey'>Height (m): </span>" +"ciaoo")
+            .style("top", (event.pageY) + "px")
+
+
+    }
+    let mouseMove = function (d) {
+        tooltipA3T1
+            .style("left", (event.pageX + 30) + "px")
+            .style("top", (event.pageY) + "px")
     }
 
     let mouseLeave = function (d) {
@@ -53,11 +81,16 @@ function ready(error, topo) {
             .transition()
             .duration(200)
             .style("stroke", "transparent")
+
+        tooltipA3T1
+            .transition()
+            .duration(200)
+            .style("opacity", 0)
     }
     // console.log(topo.features)
     // console.log(data)
     // Draw the map
-    svg.append("g")
+    svg1.append("g")
         .selectAll("path")
         .data(topo.features)
         .enter()
@@ -78,7 +111,9 @@ function ready(error, topo) {
         })
         .style("opacity", .8)
         .on("mouseover", mouseOver)
+        .on("mousemove", mouseMove)
         .on("mouseleave", mouseLeave)
+
 
 
 }

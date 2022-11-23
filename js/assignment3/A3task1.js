@@ -1,12 +1,13 @@
+var margin = { top: 200, right: 30, bottom: 50, left: 500 };
 // The svg
 var svg1 = d3.select("#A3task1"),
-    width = +svg1.attr("width"),
-    height = +svg1.attr("height");
+    width = +svg1.attr("width") - margin.left - margin.right,
+    height = +svg1.attr("height") - margin.top - margin.bottom;
 
 // Map and projection
 
 var projection = d3.geoMercator()
-    .scale(55000)
+    .scale(120000)
     .center([11, 46.1])
     .translate([width / 2, height / 2]);
 
@@ -20,9 +21,9 @@ var projection = d3.geoIdentity()
 var data = d3.map();
 var colorScale = d3.scaleThreshold()
     .domain([100, 300, 500, 1000, 2000, 3200])
-    .range(d3.schemeBlues[7]);
+    .range(d3.schemeGreens[7]);
 
-var tooltipA3T1 = d3.select("#A3task1")
+var tooltipA3T1 = d3.select("#A3task1Div")
     .append("div")
     .style("background-color", "white")
     .style("border", "solid")
@@ -49,6 +50,7 @@ function ready(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", .5)
+            .style('stroke', 'transparent')
         d3.select(this)
             .transition()
             .duration(200)
@@ -61,7 +63,7 @@ function ready(error, topo) {
             .duration(200)
             .style("opacity", 1)
         tooltipA3T1
-            .html("<span style='color:grey'>Height (m): </span>" +"ciaoo")
+            .html("<span style='color:grey'>Neighborhood: </span>" + d.properties.nome + "<br>" + "<span style='color:grey'>Tree Abundance: </span>" + d.total)
             .style("top", (event.pageY) + "px")
 
 
@@ -76,7 +78,8 @@ function ready(error, topo) {
         d3.selectAll(".Country")
             .transition()
             .duration(200)
-            .style("opacity", .8)
+            .style("opacity", 1)
+            .style("stroke", 'transparent')
         d3.select(this)
             .transition()
             .duration(200)
@@ -109,7 +112,7 @@ function ready(error, topo) {
         .attr("class", function (d) {
             return "Country"
         })
-        .style("opacity", .8)
+        .style("opacity", 1)
         .on("mouseover", mouseOver)
         .on("mousemove", mouseMove)
         .on("mouseleave", mouseLeave)

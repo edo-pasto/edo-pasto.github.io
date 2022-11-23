@@ -199,9 +199,18 @@ result.to_csv(f'{DATA_PATH}/top_{top}_treesMeasuresBubble.csv', index=False)
 #                   ASSIGNMENT 3 
 #-------------------------------------------------
  #Task 1
-result_task1Ass2 = unpivot_data.groupby(by=['Neighborhood'])['Count'].sum().reset_index()
-neigh = result_task1Ass2['Neighborhood']
-count = result_task1Ass2['Count']
+result_task1Ass3 = unpivot_data.groupby(by=['Neighborhood'])['Count'].sum().reset_index()
+neigh = result_task1Ass3['Neighborhood']
+count = result_task1Ass3['Count']
 zipped = list(zip(neigh, count))
 result2 = pd.DataFrame(zipped, columns=['Neighborhood','Count'])
 result2.to_csv(f'{DATA_PATH}/neighborhoodDensity.csv', index=False)
+
+#TAsk3
+task3 = pd.read_csv('../data/top_trees_neighborhood_unpivot_task_5_A_2.csv')
+result_task3Ass3 = task3.groupby(by=['Neighborhood'])['Oxygen Production (kg/yr)'].sum().reset_index()
+print(result_task3Ass3)
+count = result_task3Ass3['Oxygen Production (kg/yr)']
+zipped = list(zip(neigh, count))
+result3 = pd.DataFrame(zipped, columns=['Neighborhood','Oxygen Production (kg/yr)'])
+result3.to_csv(f'{DATA_PATH}/neighborhoodOxygenProd.csv', index=False)

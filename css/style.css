@@ -483,3 +483,10 @@ span {
 	stroke: black;
 	opacity: 1
   }
+.map-container{
+	text-align: center;
+
+}
+.map-container p{
+	text-align: center;
+}

@@ -38,7 +38,7 @@ var tooltipA3T1 = d3.select("#A3task1Div")
 // Load external data and boot
 d3.queue()
     .defer(d3.json, "../../data/circoscrizioni.json")
-    .defer(d3.csv, "../../data/neighborhoodDensity.csv", function (d) {
+    .defer(d3.csv, "../../data/neighborhoodAbundance.csv", function (d) {
         data.set(d.Neighborhood, +d.Count);
     })
     .await(ready);

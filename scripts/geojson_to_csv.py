@@ -36,11 +36,16 @@ top = 5
 
 # load "circoscrizioni" file (neighborhoods) and create a map
 nbhs_map = {}
+nbhs_map2 = {}
 with open('../data/circoscrizioni.json', 'r') as neighborhoods:
     nbhs = json.load(neighborhoods)
 
     for nbh in nbhs['features']:
         nbhs_map[nbh['properties']['nome']] = Polygon(nbh['geometry']['coordinates'][0])
+    
+    for nbh in nbhs['features']:
+        nbhs_map2[nbh['properties']['nome']] = nbh['properties']['area']
+
 
 # define a function to retrieve for a given point the name of the neighborhood
 def point_to_neighborhood(point):
@@ -203,13 +208,41 @@ result_task1Ass3 = unpivot_data.groupby(by=['Neighborhood'])['Count'].sum().rese
 neigh = result_task1Ass3['Neighborhood']
 count = result_task1Ass3['Count']
 zipped = list(zip(neigh, count))
-result2 = pd.DataFrame(zipped, columns=['Neighborhood','Count'])
-result2.to_csv(f'{DATA_PATH}/neighborhoodDensity.csv', index=False)
+result1 = pd.DataFrame(zipped, columns=['Neighborhood','Count'])
+result1.to_csv(f'{DATA_PATH}/neighborhoodAbundance.csv', index=False)
 
-#TAsk3
+#Task2
+task2 = pd.read_csv('../data/top_trees_neighborhood_unpivot_task_5_A_2.csv')
+gruopByNeigh = task2.groupby(by=['Neighborhood'])['Canopy Cover (m2)'].sum().reset_index()
+count = gruopByNeigh['Canopy Cover (m2)']
+zipped = list(zip(neigh, count))
+canopy_cover_perNeigh = pd.DataFrame(zipped, columns=['Neighborhood','Canopy Cover (m2)'])
+print(canopy_cover_perNeigh)
+
+area_perNeigh = pd.DataFrame(columns=['Neighborhood', 'Area'])
+keys = nbhs_map2.keys()
+values = nbhs_map2.values()
+area_perNeigh['Neighborhood'] = keys
+area_perNeigh['Area'] = values
+area_perNeighSorted = area_perNeigh.sort_values(by='Neighborhood').reset_index()
+# df2['Country'] = df2['id'].map(df1.drop_duplicates().set_index('iso')['Country'])
+# print(count)
+area_perNeighSorted['Canopy Cover (m2)'] = count
+print(area_perNeighSorted)
+areas = area_perNeighSorted['Area']
+canopyAreas = area_perNeighSorted['Canopy Cover (m2)']
+density = []
+for a, c in zip(areas, canopyAreas):
+    density.append((c/a))
+area_perNeighSorted['Density'] = density
+print(area_perNeighSorted)
+
+area_perNeighSorted.to_csv(f'{DATA_PATH}/neighborhoodDensity.csv', index=False)
+
+
+#Task3
 task3 = pd.read_csv('../data/top_trees_neighborhood_unpivot_task_5_A_2.csv')
 result_task3Ass3 = task3.groupby(by=['Neighborhood'])['Oxygen Production (kg/yr)'].sum().reset_index()
-print(result_task3Ass3)
 count = result_task3Ass3['Oxygen Production (kg/yr)']
 zipped = list(zip(neigh, count))
 result3 = pd.DataFrame(zipped, columns=['Neighborhood','Oxygen Production (kg/yr)'])

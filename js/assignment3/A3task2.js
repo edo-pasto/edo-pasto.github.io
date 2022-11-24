@@ -19,8 +19,8 @@ var projection = d3.geoIdentity()
 
 // Data and color scale
 var data = d3.map();
-var colorScale = d3.scaleThreshold()
-    .domain([100, 300, 500, 1000, 2000, 3200])
+var colorScale2 = d3.scaleThreshold()
+    .domain([0.000050, 0.000100, 0.001000, 0.01000, 0.02000, 0.05000])
     .range(d3.schemeGreens[7]);
 
 var tooltipA3T2 = d3.select("#A3task2Div")
@@ -39,11 +39,11 @@ var tooltipA3T2 = d3.select("#A3task2Div")
 d3.queue()
     .defer(d3.json, "../../data/circoscrizioni.json")
     .defer(d3.csv, "../../data/neighborhoodDensity.csv", function (d) {
-        data.set(d.Neighborhood, +d.Count);
+        data.set(d.Neighborhood, +d.Density);
     })
-    .await(ready);
+    .await(ready2);
 
-function ready(error, topo) {
+function ready2(error, topo) {
 
     let mouseOver = function (d) {
         d3.selectAll(".Country")
@@ -106,7 +106,7 @@ function ready(error, topo) {
         .attr("fill", function (d) {
             // console.log(d.properties.nome, d.total, d.id)
             d.total = data.get(d.properties.nome) || 0;
-            return colorScale(d.total);
+            return colorScale2(d.total);
         })
         .style("stroke", "transparent")
         .attr("class", function (d) {

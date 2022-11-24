@@ -19,7 +19,7 @@ var projection = d3.geoIdentity()
 
 // Data and color scale
 var data = d3.map();
-var colorScale = d3.scaleThreshold()
+var colorScale1 = d3.scaleThreshold()
     .domain([100, 300, 500, 1000, 2000, 3200])
     .range(d3.schemeGreens[7]);
 
@@ -106,7 +106,7 @@ function ready(error, topo) {
         .attr("fill", function (d) {
             // console.log(d.properties.nome, d.total, d.id)
             d.total = data.get(d.properties.nome) || 0;
-            return colorScale(d.total);
+            return colorScale1(d.total);
         })
         .style("stroke", "transparent")
         .attr("class", function (d) {

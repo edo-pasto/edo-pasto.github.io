@@ -100,7 +100,10 @@ function ready4(error, topo) {
             .projection(projection4)
         )
         // set the color of each country
-        .attr("fill", '#dbf8cf')
+        .attr("fill", function (d) {
+            d.total = data4.get(d.properties.nome) || 0;
+            return '#dbf8cf'
+        }) 
         .style("stroke", "black")
         .attr("class", function (d) {
             return "Country"
@@ -123,7 +126,7 @@ function ready4(error, topo) {
                 .attr("r", 2)
                 .style("fill", "#2b8a3e")
                 .attr("stroke", "black")
-                .attr("stroke-width", 1)
+                .attr("stroke-width", .3)
                 .attr("fill-opacity", .8)
 
         })

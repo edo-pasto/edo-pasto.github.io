@@ -10,17 +10,17 @@
     <link type="image/png" sizes="32x32" rel="icon" href="images/favicon.ico">
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"
-            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
     <!-- Google Font CDN -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Custom CSS -->
@@ -37,143 +37,144 @@
 
 <body class="w3-light-grey">
 
-<!-- Top container -->
-<div id="includeHeader">
+    <!-- Top container -->
+    <div id="includeHeader">
 
-</div>
-
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar">
-
-</nav>
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
-     title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" id="assignm3PageContent">
-
-    <!-- Header -->
-    <header class="w3-container" id="assignm3Title">
-        <h1><b>Assignment 3 - Maps</b></h1>
-    </header>
-    <br>
-    <br>
-    <h2><b>Tree Abundance per Neighborhood</b></h2>
-    <h4>
-
-    </h4>
-    <div class="map-container" id="A3task1Div">
-        <!-- <div id="legendA3task1"> </div> -->
-        <svg id="A3task1" width="900" height="600"></svg>
-        <p><i>Map of Trento's circoscrizioni </i></p>
-    </div>
-   
-    <br>
-    <hr>
-    <br>
-
-    <h2><b>Tree Density per Neighborhood</b></h2>
-    <h4>
-
-    </h4>
-    <div class="map-container" id="A3task2Div">
-        <svg id="A3task2" width="900" height="600"></svg>
-        <p><i>Map of Trento's circoscrizioni </i></p>
-    </div>
-    <br>
-    <hr>
-    <br>
-
-    <h2><b>Oxygen Production per Neighborhood</b></h2>
-    <h4>
-
-    </h4>
-    <div class="map-container" id="A3task3Div">
-        <svg id="A3task3" width="900" height="600"></svg>
-        <p><i>Map of Trento's circoscrizioni </i></p>
-    </div>
-    <hr>
-    <br>
-
-    <h2><b>Tree Dot Density Map </b></h2>
-    <h4>
-
-
-    </h4>
-    <div class="map-container" id="A3task4Div">
-        <svg id="A3task4" width="900" height="600"></svg>
-        <p><i>Map of Trento's circoscrizioni </i></p>
     </div>
 
-    <hr>
-    <br>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar">
 
-    <h2><b>Top Tree Dot Density Map</b></h2>
-    <h4>
+    </nav>
 
-    </h4>
-    <div class="map-container" id="A3task5Div">
-        <svg id="A3task5" width="900" height="600"></svg>
-        <p><i>Map of Trento's circoscrizioni </i></p>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+        title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" id="assignm3PageContent">
+
+        <!-- Header -->
+        <header class="w3-container" id="assignm3Title">
+            <h1><b>Assignment 3 - Maps</b></h1>
+        </header>
+        <br>
+        <br>
+        <h2><b>Tree Abundance per Neighborhood</b></h2>
+        <h4>The first map of the Trento's circoscrizioni shows the different tree abundance <br> (total number of trees) inside each region. <br>
+            The increasing of the intensity of green scale color follows the increasing of the tree abundance.  
+        </h4>
+        <div class="map-container" id="A3task1Div">
+            <svg id="A3task1" width="900" height="600"></svg>
+            <p><i>Map of Trento's circoscrizioni </i></p>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <h2><b>Tree Density per Neighborhood</b></h2>
+        <h4>
+            The second map of the Trento's circoscrizioni shows instead the different tree density <br> (total canopy cover of a region divided by the area of the same region) inside each region. <br>
+            The increasing of the intensity of green scale color follows the increasing of the tree density.  
+        </h4>
+        <div class="map-container" id="A3task2Div">
+            <svg id="A3task2" width="900" height="600"></svg>
+            <p><i>Map of Trento's circoscrizioni </i></p>
+        </div>
+        <br>
+        <hr>
+        <br>
+
+        <h2><b>Oxygen Production per Neighborhood</b></h2>
+        <h4>
+            In this third map of the Trento's circoscrizioni we are able to see the different tree oxygen production <br> (measured in kg per year) inside each region. <br>
+            The increasing of the intensity of blue scale color follows the increasing of the tree oxygen production.  
+        </h4>
+        <div class="map-container" id="A3task3Div">
+            <svg id="A3task3" width="900" height="600"></svg>
+            <p><i>Map of Trento's circoscrizioni </i></p>
+        </div>
+        <hr>
+        <br>
+
+        <h2><b>Tree Dot Density Map </b></h2>
+        <h4>
+            This map of the Trento's circoscrizioni displays the location <br> (dots inside the map) of all the trees in Trento's city 
+
+        </h4>
+        <div class="map-container" id="A3task4Div">
+            <svg id="A3task4" width="900" height="600"></svg>
+            <p><i>Map of Trento's circoscrizioni </i></p>
+        </div>
+
+        <hr>
+        <br>
+
+        <h2><b>Top Tree Dot Density Map</b></h2>
+        <h4>
+            This map of the Trento's circoscrizioni displays the location (dots inside the map) <br> of the top 10 trees (in terms of abundance) in Trento's city 
+        </h4>
+        <div class="map-container" id="A3task5Div">
+            <div id="task5Ass2_legend"></div>
+            <svg id="A3task5" width="900" height="600"></svg>
+            <p><i>Map of Trento's circoscrizioni </i></p>
+        </div>
+
+
+        <!-- Footer -->
+        <div id="includeFooter">
+
     </div>
 
-</div>
+
+        <!-- End page content -->
 
 
-<!-- Footer -->
-<div id="includeFooter">
+        <script>
+            // Get the Sidebar
+            var mySidebar = document.getElementById("mySidebar");
 
-</div>
+            // Get the DIV with overlay effect
+            var overlayBg = document.getElementById("myOverlay");
 
+            // Toggle between showing and hiding the sidebar, and add overlay effect
+            function w3_open() {
+                if (mySidebar.style.display === 'block') {
+                    mySidebar.style.display = 'none';
+                    overlayBg.style.display = "none";
+                } else {
+                    mySidebar.style.display = 'block';
+                    overlayBg.style.display = "block";
+                }
+            }
 
-<!-- End page content -->
-</div>
+            // Close the sidebar with the close button
+            function w3_close() {
+                mySidebar.style.display = "none";
+                overlayBg.style.display = "none";
+            }
 
-<script>
-    // Get the Sidebar
-    var mySidebar = document.getElementById("mySidebar");
-
-    // Get the DIV with overlay effect
-    var overlayBg = document.getElementById("myOverlay");
-
-    // Toggle between showing and hiding the sidebar, and add overlay effect
-    function w3_open() {
-        if (mySidebar.style.display === 'block') {
-            mySidebar.style.display = 'none';
-            overlayBg.style.display = "none";
-        } else {
-            mySidebar.style.display = 'block';
-            overlayBg.style.display = "block";
-        }
-    }
-
-    // Close the sidebar with the close button
-    function w3_close() {
-        mySidebar.style.display = "none";
-        overlayBg.style.display = "none";
-    }
-
-    $(function () {
-        $("#includeFooter").load("./components/footer.html");
-    });
-    $(function () {
-        $("#includeHeader").load("./components/header.html");
-    });
-    $(function () {
-        $("#mySidebar").load("./components/sidebar.html");
-    });
+            $(function () {
+                $("#includeFooter").load("./components/footer.html");
+            });
+            $(function () {
+                $("#includeHeader").load("./components/header.html");
+            });
+            $(function () {
+                $("#mySidebar").load("./components/sidebar.html");
+            });
 
 
-</script>
-<script src="https://kit.fontawesome.com/22c153e680.js" crossorigin="anonymous"></script>
-<script src="./js/assignment3/A3task1.js" crossorigin="anonymous"></script>
-<script src="./js/assignment3/A3task2.js" crossorigin="anonymous"></script>
-<script src="./js/assignment3/A3task3.js" crossorigin="anonymous"></script>
-<script src="./js/assignment3/A3task4.js" crossorigin="anonymous"></script>
-<script src="./js/assignment3/A3task5.js" crossorigin="anonymous"></script>
+        </script>
+        <script src="https://kit.fontawesome.com/22c153e680.js" crossorigin="anonymous"></script>
+        <!-- <script src="./js/assignment3/legend.js" crossorigin="anonymous"></script> -->
+        <script src="./js/assignment3/A3task1.js" crossorigin="anonymous"></script>
+        <script src="./js/assignment3/A3task2.js" crossorigin="anonymous"></script>
+        <script src="./js/assignment3/A3task3.js" crossorigin="anonymous"></script>
+        <script src="./js/assignment3/A3task4.js" crossorigin="anonymous"></script>
+        <script src="./js/assignment3/A3task5.js" crossorigin="anonymous"></script>
 
 
 </body>

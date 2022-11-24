@@ -1,3 +1,6 @@
+
+
+
 var margin = { top: 200, right: 30, bottom: 50, left: 500 };
 // The svg
 var svg1 = d3.select("#A3task1"),
@@ -11,17 +14,13 @@ let projection1 = d3.geoMercator()
     .center([11, 46.1])
     .translate([width / 2, height / 2]);
 
-/*
-var projection = d3.geoIdentity()
-.fitExtent([width,height],geojsonObject)
-.reflectY(true);*/
-
+// Legend(d3.scaleThreshold([39, 100, 300, 500, 1000, 2000, 3024], d3.schemeGreens[8]), "#A3task1")
 
 // Data and color scale
 var data = d3.map();
 let colorScale1 = d3.scaleThreshold()
-    .domain([100, 300, 500, 1000, 2000, 3200])
-    .range(d3.schemeGreens[7]);
+    .domain([39, 100, 300, 500, 1000, 2000, 3024])
+    .range(d3.schemeGreens[8]);
 
 var tooltipA3T1 = d3.select("#A3task1Div")
     .append("div")

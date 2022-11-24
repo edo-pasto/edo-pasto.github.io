@@ -217,7 +217,7 @@ gruopByNeigh = task2.groupby(by=['Neighborhood'])['Canopy Cover (m2)'].sum().res
 count = gruopByNeigh['Canopy Cover (m2)']
 zipped = list(zip(neigh, count))
 canopy_cover_perNeigh = pd.DataFrame(zipped, columns=['Neighborhood','Canopy Cover (m2)'])
-print(canopy_cover_perNeigh)
+# print(canopy_cover_perNeigh)
 
 area_perNeigh = pd.DataFrame(columns=['Neighborhood', 'Area'])
 keys = nbhs_map2.keys()
@@ -228,14 +228,14 @@ area_perNeighSorted = area_perNeigh.sort_values(by='Neighborhood').reset_index()
 # df2['Country'] = df2['id'].map(df1.drop_duplicates().set_index('iso')['Country'])
 # print(count)
 area_perNeighSorted['Canopy Cover (m2)'] = count
-print(area_perNeighSorted)
+# print(area_perNeighSorted)
 areas = area_perNeighSorted['Area']
 canopyAreas = area_perNeighSorted['Canopy Cover (m2)']
 density = []
 for a, c in zip(areas, canopyAreas):
     density.append((c/a))
 area_perNeighSorted['Density'] = density
-print(area_perNeighSorted)
+# print(area_perNeighSorted)
 
 area_perNeighSorted.to_csv(f'{DATA_PATH}/neighborhoodDensity.csv', index=False)
 
@@ -249,14 +249,18 @@ result3 = pd.DataFrame(zipped, columns=['Neighborhood','Oxygen Production (kg/yr
 result3.to_csv(f'{DATA_PATH}/neighborhoodOxygenProd.csv', index=False)
 
 #Task5
-
 top = 10
-
-canopy_cover = df[['Name', 'Canopy Cover (m2)', 'Latitude', 'Longitude']][:-1] # remove the last line because is the total
-canopy_cover['Canopy Cover (m2)'] = canopy_cover['Canopy Cover (m2)'].apply(float) # cast string to float values
-
+countTrees = df[['Name', 'Canopy Cover (m2)']][:-1] # remove the last line because is the total
+countTrees['Canopy Cover (m2)'] = countTrees['Canopy Cover (m2)'].apply(float) # cast string to float values
 # count the occurences of every tree
-top_trees = canopy_cover.groupby('Name').count().round(2).rename(columns={'Canopy Cover (m2)': 'Count'}).reset_index()
+top_trees = countTrees.groupby('Name').count().round(2).rename(columns={'Canopy Cover (m2)': 'Count'}).reset_index()
 # select only the top X and save into csv
 top_trees = top_trees.sort_values(by='Count', ascending=False)[:top]
-top_trees.to_csv(f'{DATA_PATH}/MapTop_{top}_trees.csv', index=False)
+names = top_trees['Name'].to_list()
+# top_trees.to_csv(f'{DATA_PATH}/MapTop_{top}_trees.csv', index=False)
+trees_type = df[['Name', 'Latitude', 'Longitude']][:-1]
+# print(trees_type)
+# print(names)
+trees_type = trees_type[trees_type['Name'].isin(names)]
+# print(trees_type)
+trees_type.to_csv(f'{DATA_PATH}/mapTop_{top}_trees.csv', index=False)

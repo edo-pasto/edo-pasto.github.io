@@ -6,7 +6,7 @@ var svg3 = d3.select("#A3task3"),
 
 // Map and projection
 
-var projection = d3.geoMercator()
+var projection3 = d3.geoMercator()
     .scale(120000)
     .center([11, 46.1])
     .translate([width / 2, height / 2]);
@@ -18,10 +18,10 @@ var projection = d3.geoIdentity()
 
 
 // Data and color scale
-var data = d3.map();
+var data3 = d3.map();
 var colorScale3 = d3.scaleThreshold()
     .domain([100, 400, 700, 1300, 5000, 8000])
-    .range(d3.schemeGreens[7]);
+    .range(d3.schemeBlues[7]);
 
 var tooltipA3T3 = d3.select("#A3task3Div")
     .append("div")
@@ -39,7 +39,7 @@ var tooltipA3T3 = d3.select("#A3task3Div")
 d3.queue()
     .defer(d3.json, "../../data/circoscrizioni.json")
     .defer(d3.csv, "../../data/neighborhoodOxygenProd.csv", function (d) {
-        data.set(d.Neighborhood, +d['Oxygen Production (kg/yr)']);
+        data3.set(d.Neighborhood, +d['Oxygen Production (kg/yr)']);
     })
     .await(ready3);
 
@@ -55,7 +55,7 @@ function ready3(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", "black")
+            .style("stroke", "red")
 
 
             tooltipA3T3
@@ -79,11 +79,11 @@ function ready3(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", 'transparent')
+            .style("stroke", 'black')
         d3.select(this)
             .transition()
             .duration(200)
-            .style("stroke", "transparent")
+            .style("stroke", "black")
 
         tooltipA3T3
             .transition()
@@ -100,15 +100,15 @@ function ready3(error, topo) {
         .append("path")
         // draw each country
         .attr("d", d3.geoPath()
-            .projection(projection)
+            .projection(projection3)
         )
         // set the color of each country
         .attr("fill", function (d) {
             // console.log(d.properties.nome, d.total, d.id)
-            d.total = data.get(d.properties.nome) || 0;
+            d.total = data3.get(d.properties.nome) || 0;
             return colorScale3(d.total);
         })
-        .style("stroke", "transparent")
+        .style("stroke", "black")
         .attr("class", function (d) {
             return "Country"
         })

@@ -6,7 +6,7 @@ var svg1 = d3.select("#A3task1"),
 
 // Map and projection
 
-var projection = d3.geoMercator()
+let projection1 = d3.geoMercator()
     .scale(120000)
     .center([11, 46.1])
     .translate([width / 2, height / 2]);
@@ -19,7 +19,7 @@ var projection = d3.geoIdentity()
 
 // Data and color scale
 var data = d3.map();
-var colorScale1 = d3.scaleThreshold()
+let colorScale1 = d3.scaleThreshold()
     .domain([100, 300, 500, 1000, 2000, 3200])
     .range(d3.schemeGreens[7]);
 
@@ -55,7 +55,7 @@ function ready(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", "black")
+            .style("stroke", "red")
 
 
         tooltipA3T1
@@ -79,11 +79,11 @@ function ready(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", 'transparent')
+            .style("stroke", 'black')
         d3.select(this)
             .transition()
             .duration(200)
-            .style("stroke", "transparent")
+            .style("stroke", "black")
 
         tooltipA3T1
             .transition()
@@ -100,7 +100,7 @@ function ready(error, topo) {
         .append("path")
         // draw each country
         .attr("d", d3.geoPath()
-            .projection(projection)
+            .projection(projection1)
         )
         // set the color of each country
         .attr("fill", function (d) {
@@ -108,7 +108,7 @@ function ready(error, topo) {
             d.total = data.get(d.properties.nome) || 0;
             return colorScale1(d.total);
         })
-        .style("stroke", "transparent")
+        .style("stroke", "black")
         .attr("class", function (d) {
             return "Country"
         })

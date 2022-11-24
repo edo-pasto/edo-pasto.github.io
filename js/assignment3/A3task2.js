@@ -6,7 +6,7 @@ var svg2 = d3.select("#A3task2"),
 
 // Map and projection
 
-var projection = d3.geoMercator()
+var projection2 = d3.geoMercator()
     .scale(120000)
     .center([11, 46.1])
     .translate([width / 2, height / 2]);
@@ -18,8 +18,8 @@ var projection = d3.geoIdentity()
 
 
 // Data and color scale
-var data = d3.map();
-var colorScale2 = d3.scaleThreshold()
+var data2 = d3.map();
+let colorScale2 = d3.scaleThreshold()
     .domain([0.000050, 0.000100, 0.001000, 0.01000, 0.02000, 0.05000])
     .range(d3.schemeGreens[7]);
 
@@ -39,7 +39,7 @@ var tooltipA3T2 = d3.select("#A3task2Div")
 d3.queue()
     .defer(d3.json, "../../data/circoscrizioni.json")
     .defer(d3.csv, "../../data/neighborhoodDensity.csv", function (d) {
-        data.set(d.Neighborhood, +d.Density);
+        data2.set(d.Neighborhood, +d.Density);
     })
     .await(ready2);
 
@@ -55,7 +55,7 @@ function ready2(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", "black")
+            .style("stroke", "red")
 
 
             tooltipA3T2
@@ -79,11 +79,11 @@ function ready2(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", 1)
-            .style("stroke", 'transparent')
+            .style("stroke", 'black')
         d3.select(this)
             .transition()
             .duration(200)
-            .style("stroke", "transparent")
+            .style("stroke", "black")
 
             tooltipA3T2
             .transition()
@@ -100,15 +100,15 @@ function ready2(error, topo) {
         .append("path")
         // draw each country
         .attr("d", d3.geoPath()
-            .projection(projection)
+            .projection(projection2)
         )
         // set the color of each country
         .attr("fill", function (d) {
             // console.log(d.properties.nome, d.total, d.id)
-            d.total = data.get(d.properties.nome) || 0;
+            d.total = data2.get(d.properties.nome) || 0;
             return colorScale2(d.total);
         })
-        .style("stroke", "transparent")
+        .style("stroke", "black")
         .attr("class", function (d) {
             return "Country"
         })

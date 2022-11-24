@@ -247,3 +247,16 @@ count = result_task3Ass3['Oxygen Production (kg/yr)']
 zipped = list(zip(neigh, count))
 result3 = pd.DataFrame(zipped, columns=['Neighborhood','Oxygen Production (kg/yr)'])
 result3.to_csv(f'{DATA_PATH}/neighborhoodOxygenProd.csv', index=False)
+
+#Task5
+
+top = 10
+
+canopy_cover = df[['Name', 'Canopy Cover (m2)', 'Latitude', 'Longitude']][:-1] # remove the last line because is the total
+canopy_cover['Canopy Cover (m2)'] = canopy_cover['Canopy Cover (m2)'].apply(float) # cast string to float values
+
+# count the occurences of every tree
+top_trees = canopy_cover.groupby('Name').count().round(2).rename(columns={'Canopy Cover (m2)': 'Count'}).reset_index()
+# select only the top X and save into csv
+top_trees = top_trees.sort_values(by='Count', ascending=False)[:top]
+top_trees.to_csv(f'{DATA_PATH}/MapTop_{top}_trees.csv', index=False)

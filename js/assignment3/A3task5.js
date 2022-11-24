@@ -113,6 +113,30 @@ function ready(error, topo) {
         .on("mousemove", mouseMove)
         .on("mouseleave", mouseLeave)
 
+        d3.csv("../../data/MapTop_10_trees.csv", function(data){
+            let trees = ['Aesculus hippocastanum', 'Carpinus betulus', 'Celtis australis', 'Platanus x hispanica', 'Tilia cordata', 'Tilia x europaea', 'Acer campestre','Cupressus','Sophora japonica','Prunus cerasifera']
+            let color_list = ["#440154ff", "#febbd9", "#fde725ff", "#f00034", "#52a163", '#0d6efc','#98f5ff', '#ff922b','#A9754F', '#8a2be2']
+            var color = d3.scaleOrdinal()
+            .domain(trees)
+            .range(color_list)
+            console.log(data[0].Name)
+            svg5
+              .selectAll("dot")
+              .data(data)
+              .enter()
+              .append("circle")
+                .attr("cx", function(d){ return projection5([d.Longitude, d.Latitude])[0] })
+                .attr("cy", function(d){ return projection5([d.Longitude, d.Latitude])[1] })
+                .attr("r", 2)
+                .style("fill", function (d) {
+                    console.log(d)
+                    return color(d.Name)
+                })
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("fill-opacity", .8)
+
+        })
 
 
 }

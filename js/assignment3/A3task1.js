@@ -56,7 +56,8 @@ function ready(error, topo) {
             .duration(200)
             .style("opacity", 1)
             .style("stroke", "red")
-
+            
+        console.log(d)
 
         tooltipA3T1
             .transition()

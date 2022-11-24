@@ -10,12 +10,10 @@ let projection4 = d3.geoMercator()
     .scale(120000)
     .center([11, 46.1])
     .translate([width / 2, height / 2]);
-
 /*
 var projection = d3.geoIdentity()
 .fitExtent([width,height],geojsonObject)
 .reflectY(true);*/
-
 
 // Data and color scale
 var data4 = d3.map();
@@ -30,7 +28,7 @@ var tooltipA3T4 = d3.select("#A3task4Div")
     .style("border-width", "2px")
     .style("border-radius", "5px")
     .style("padding", "10px")
-    // .style("min-width", "2px")
+    //.style("min-width", "2px")
     .style("opacity", 0)
     .attr("class", "tooltip")
     .style("font-size", "16px")
@@ -41,9 +39,9 @@ d3.queue()
     .defer(d3.csv, "../../data/neighborhoodAbundance.csv", function (d) {
         data4.set(d.Neighborhood, +d.Count);
     })
-    .await(ready);
+    .await(ready4);
 
-function ready(error, topo) {
+function ready4(error, topo) {
 
     let mouseOver = function (d) {
         d3.selectAll(".Country")
@@ -62,6 +60,7 @@ function ready(error, topo) {
             .transition()
             .duration(200)
             .style("opacity", 1)
+        
         tooltipA3T4
             .html("<span style='color:grey'>Neighborhood: </span>" + d.properties.nome + "<br>" + "<span style='color:grey'>Tree Abundance: </span>" + d.total)
             .style("top", (event.pageY) + "px")
@@ -90,8 +89,6 @@ function ready(error, topo) {
             .duration(200)
             .style("opacity", 0)
     }
-    // console.log(topo.features)
-    // console.log(data)
     // Draw the map
     svg4.append("g")
         .selectAll("path")
@@ -112,8 +109,24 @@ function ready(error, topo) {
         .on("mouseover", mouseOver)
         .on("mousemove", mouseMove)
         .on("mouseleave", mouseLeave)
+  
 
+        d3.csv("../../data/geo_data_trees.csv", function(data){
 
+            svg4
+              .selectAll("dot")
+              .data(data)
+              .enter()
+              .append("circle")
+                .attr("cx", function(d){ return projection4([d.Longitude, d.Latitude])[0] })
+                .attr("cy", function(d){ return projection4([d.Longitude, d.Latitude])[1] })
+                .attr("r", 2)
+                .style("fill", "#2b8a3e")
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("fill-opacity", .8)
+
+        })
 
 }
 

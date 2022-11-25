@@ -16,11 +16,12 @@ var projection = d3.geoIdentity()
 .fitExtent([width,height],geojsonObject)
 .reflectY(true);*/
 
+Legend(d3v6.scaleThreshold([200, 500, 800, 1500, 3500, 6000, 8000], d3v6.schemeBlues[8]), "#A3task3_legend")
 
 // Data and color scale
 var data3 = d3.map();
 var colorScale3 = d3.scaleThreshold()
-    .domain([d3.min(data3, d => d['Oxygen Production (kg/yr)']), 200, 500, 800, 1500, 3500, 6000, d3.max(data3, d => d['Oxygen Production (kg/yr)'])])
+    .domain([100, 200, 500, 800, 1500, 3500, 6000, 8000])
     .range(d3.schemeBlues[8]);
 
 var tooltipA3T3 = d3.select("#A3task3Div")

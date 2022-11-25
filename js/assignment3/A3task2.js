@@ -16,11 +16,12 @@ var projection = d3.geoIdentity()
 .fitExtent([width,height],geojsonObject)
 .reflectY(true);*/
 
+Legend(d3v6.scaleThreshold([0.000025 ,0.000050, 0.000100, 0.001000, 0.01000, 0.02000, 0.03000], d3v6.schemeGreens[8]), "#A3task2_legend")
 
 // Data and color scale
 var data2 = d3.map();
 let colorScale2 = d3.scaleThreshold()
-    .domain([d3.min(data2, d => d['Density']),0.000050, 0.000100, 0.001000, 0.01000, 0.02000, d3.max(data2, d => d['Density'])])
+    .domain([0.000025 ,0.000050, 0.000100, 0.001000, 0.01000, 0.02000, 0.03000])
     .range(d3.schemeGreens[7]);
 
 var tooltipA3T2 = d3.select("#A3task2Div")
@@ -63,7 +64,7 @@ function ready2(error, topo) {
             .duration(200)
             .style("opacity", 1)
             tooltipA3T2
-            .html("<span style='color:grey'>Neighborhood: </span>" + d.properties.nome + "<br>"+"<span style='color:grey'>Tree Density: </span>" + d.total)
+            .html("<span style='color:grey'>Neighborhood: </span>" + d.properties.nome + "<br>"+"<span style='color:grey'>Tree Density: </span>" + d.total.toFixed(5))
             .style("top", (event.pageY) + "px")
 
 

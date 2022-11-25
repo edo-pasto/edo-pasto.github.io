@@ -14,12 +14,21 @@ let projection1 = d3.geoMercator()
     .center([11, 46.1])
     .translate([width / 2, height / 2]);
 
-// Legend(d3.scaleThreshold([39, 100, 300, 500, 1000, 2000, 3024], d3.schemeGreens[8]), "#A3task1")
+var data = d3.map();
+
+// Load external data and boot
+d3.queue()
+    .defer(d3.json, "../../data/circoscrizioni.json")
+    .defer(d3.csv, "../../data/neighborhoodAbundance.csv", function (d) {
+        data.set(d.Neighborhood, +d.Count);
+    })
+    .await(ready);
+
+Legend(d3v6.scaleThreshold([50, 100, 300, 500, 1000, 2000, 3000], d3v6.schemeGreens[8]), "#A3task1_legend")
 
 // Data and color scale
-var data = d3.map();
 let colorScale1 = d3.scaleThreshold()
-    .domain([d3.min(data,  d => d['Count']), 100, 300, 500, 1000, 2000, d3.max(data,  d => d['Count'])])
+    .domain([50, 100, 300, 500, 1000, 2000, 3000])
     .range(d3.schemeGreens[8]);
 
 var tooltipA3T1 = d3.select("#A3task1Div")
@@ -34,13 +43,7 @@ var tooltipA3T1 = d3.select("#A3task1Div")
     .attr("class", "tooltip")
     .style("font-size", "16px")
 
-// Load external data and boot
-d3.queue()
-    .defer(d3.json, "../../data/circoscrizioni.json")
-    .defer(d3.csv, "../../data/neighborhoodAbundance.csv", function (d) {
-        data.set(d.Neighborhood, +d.Count);
-    })
-    .await(ready);
+
 
 function ready(error, topo) {
 

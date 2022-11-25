@@ -20,8 +20,8 @@ var projection = d3.geoIdentity()
 // Data and color scale
 var data3 = d3.map();
 var colorScale3 = d3.scaleThreshold()
-    .domain([100, 400, 700, 1300, 5000, 8000])
-    .range(d3.schemeBlues[7]);
+    .domain([d3.min(data3, d => d['Oxygen Production (kg/yr)']), 200, 500, 800, 1500, 3500, 6000, d3.max(data3, d => d['Oxygen Production (kg/yr)'])])
+    .range(d3.schemeBlues[8]);
 
 var tooltipA3T3 = d3.select("#A3task3Div")
     .append("div")

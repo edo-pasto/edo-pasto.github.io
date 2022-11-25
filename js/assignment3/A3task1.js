@@ -19,7 +19,7 @@ let projection1 = d3.geoMercator()
 // Data and color scale
 var data = d3.map();
 let colorScale1 = d3.scaleThreshold()
-    .domain([39, 100, 300, 500, 1000, 2000, 3024])
+    .domain([d3.min(data,  d => d['Count']), 100, 300, 500, 1000, 2000, d3.max(data,  d => d['Count'])])
     .range(d3.schemeGreens[8]);
 
 var tooltipA3T1 = d3.select("#A3task1Div")

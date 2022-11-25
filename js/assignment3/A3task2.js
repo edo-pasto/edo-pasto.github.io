@@ -20,7 +20,7 @@ var projection = d3.geoIdentity()
 // Data and color scale
 var data2 = d3.map();
 let colorScale2 = d3.scaleThreshold()
-    .domain([0.000050, 0.000100, 0.001000, 0.01000, 0.02000, 0.05000])
+    .domain([d3.min(data2, d => d['Density']),0.000050, 0.000100, 0.001000, 0.01000, 0.02000, d3.max(data2, d => d['Density'])])
     .range(d3.schemeGreens[7]);
 
 var tooltipA3T2 = d3.select("#A3task2Div")

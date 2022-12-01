@@ -6,7 +6,7 @@ var margin = {top: 80, right: 30, bottom: 50, left:110},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#A4task3")
+var svgA4T3 = d3.select("#A4task3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -38,14 +38,14 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
   var x = d3.scaleLinear()
     .domain([-10, 120])
     .range([ 0, width ]);
-  svg.append("g")
+    svgA4T3.append("g")
     .attr("class", "xAxis")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).tickValues([0,25, 50, 75, 100]).tickSize(-height) )
     .select(".domain").remove()
 
   // Add X axis label:
-  svg.append("text")
+  svgA4T3.append("text")
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height + 40)
@@ -61,7 +61,7 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
     .domain(categories)
     .range([0, height])
     .paddingInner(1)
-  svg.append("g")
+    svgA4T3.append("g")
     .call(d3.axisLeft(yName).tickSize(0))
     .select(".domain").remove()
 
@@ -75,7 +75,7 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
   }
 
   // Add areas
-  svg.selectAll("areas")
+  svgA4T3.selectAll("areas")
     .data(allDensity)
     .enter()
     .append("path")

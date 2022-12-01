@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MammaMia - Data Visualization Assignments</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon -->
+    <link type="image/png" sizes="32x32" rel="icon" href="images/favicon.ico">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+    <!-- Google Font CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--D3.js table -->
+    <script src="./js/utils/d3_v6.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.js"></script>
+    <!-- <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script> -->
+
+
+</head>
+
+<body class="w3-light-grey">
+
+    <!-- Top container -->
+    <div id="includeHeader">
+
+    </div>
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar">
+
+    </nav>
+
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+        title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" id="assignm4PageContent">
+
+        <!-- Header -->
+        <header class="w3-container" id="assignm4Title">
+            <h1><b>Assignment 4 - Temporal Data</b></h1>
+        </header>
+        <br>
+        <br>
+
+        <h2><b> </b></h2>
+        <h4>  
+        </h4>
+        <select id="selectButton"></select>
+        <div class="task-container" id="A4task1"></div>
+
+        <br>
+        <hr>
+        <br>
+
+        <h2><b> 2</b></h2>
+        <h4>  
+        </h4>
+        <div class="task-container" id="A4task2"></div>
+
+        <br>
+        <hr>
+        <br>
+
+        <h2><b> 3</b></h2>
+        <h4>  
+        </h4>
+        <div class="task-container" id="A4task3"></div>
+
+        <br>
+        <hr>
+        <br>
+
+
+        <!-- Footer -->
+        <div id="includeFooter">
+
+    </div>
+
+
+        <!-- End page content -->
+
+
+        <script>
+            // Get the Sidebar
+            var mySidebar = document.getElementById("mySidebar");
+
+            // Get the DIV with overlay effect
+            var overlayBg = document.getElementById("myOverlay");
+
+            // Toggle between showing and hiding the sidebar, and add overlay effect
+            function w3_open() {
+                if (mySidebar.style.display === 'block') {
+                    mySidebar.style.display = 'none';
+                    overlayBg.style.display = "none";
+                } else {
+                    mySidebar.style.display = 'block';
+                    overlayBg.style.display = "block";
+                }
+            }
+
+            // Close the sidebar with the close button
+            function w3_close() {
+                mySidebar.style.display = "none";
+                overlayBg.style.display = "none";
+            }
+
+            $(function () {
+                $("#includeFooter").load("./components/footer.html");
+            });
+            $(function () {
+                $("#includeHeader").load("./components/header.html");
+            });
+            $(function () {
+                $("#mySidebar").load("./components/sidebar.html");
+            });
+
+
+        </script>
+        <script src="https://kit.fontawesome.com/22c153e680.js" crossorigin="anonymous"></script>
+        
+        <!-- <script src="./js/utils/legend.js" crossorigin="anonymous"></script> -->
+        
+        <script src="./js/assignment4/A4task1_test.js" crossorigin="anonymous"></script>
+        <script src="./js/assignment4/A4task2.js" crossorigin="anonymous"></script>
+        <script src="./js/assignment4/A4task3.js" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

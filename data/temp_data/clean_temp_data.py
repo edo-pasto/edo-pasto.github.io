@@ -28,7 +28,7 @@ df['date'] = df['date'].apply(lambda x: pd.to_datetime(x.replace('.','-'), dayfi
 # filter keeping only required year
 year_list = [2021, 2017, 2013, 2009, 2005, 2001, 1997, 1993]
 df['year'] = df['date'].apply(lambda x: x.year)
-df['month'] = df['date'].apply(lambda x: month_map[x.month])
+df['month'] = df['date'].apply(lambda x: x.month)
 df = df[df['year'].isin(year_list)]
 
 # clean non numeric data in "sum", "min", "max"
@@ -39,7 +39,10 @@ grouped = df[['year', 'month', 'min']].groupby(by=['year', 'month']).min()
 grouped['max'] = df[['year', 'month', 'max']].groupby(by=['year', 'month']).min()['max']
 grouped['mean'] = round((grouped['max'] + grouped['min']) / 2, 2)
 
-grouped.to_csv('grouped_cleaned_daily_temp_data.csv')
+grouped = grouped.reset_index(drop=False)
+grouped['month'] = grouped['month'].apply(lambda x: month_map[x])
+
+grouped.to_csv('grouped_cleaned_daily_temp_data.csv', index=False)
 
 df['mean'] = round((df['min'] + df['max']) / 2, 2)
 # renaming columns

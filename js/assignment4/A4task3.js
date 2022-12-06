@@ -20,7 +20,7 @@ var svgA4T3 = d3.select("#A4task3")
 d3.csv("../../data/temp_data/pivot_data_year_2021.csv", function (data) {
 
   // Get the different categories and count them
-  console.log(data)
+
   var categories = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   var n = categories.length
 

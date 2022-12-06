@@ -1,25 +1,27 @@
 
 
 // set the dimensions and margins of the graph
-var margin = { top: 80, right: 30, bottom: 50, left: 110 },
-  width = 460 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+var margin = { top: 120, right: 30, bottom: 50, left: 110 },
+  width = 500 - margin.left - margin.right,
+  height = 420 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svgA4T3 = d3.select("#A4task3")
   .append("svg")
   .attr('id', 'SVG_ID_A4T3')
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+  .attr("viewBox", `0 0 800 600`)
+  // .attr("width", width + margin.left + margin.right)
+  // .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform",
     "translate(" + margin.left + "," + margin.top + ")");
 
 //read data
-d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv", function (data) {
+d3.csv("../../data/temp_data/pivot_data_year_2021.csv", function (data) {
 
   // Get the different categories and count them
-  var categories = ["Almost Certainly", "Very Good Chance", "We Believe", "Likely", "About Even", "Little Chance", "Chances Are Slight", "Almost No Chance"]
+  console.log(data)
+  var categories = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   var n = categories.length
 
   // Compute the mean of each group
@@ -32,27 +34,25 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
 
   // Create a color scale using these means.
   var myColor = d3.scaleSequential()
-    .domain([0, 100])
+    .domain([-15, 40])
     .interpolator(d3.interpolateViridis);
-
-
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([-10, 120])
+    .domain([-15, 40])
     .range([0, width]);
   svgA4T3.append("g")
     .attr("class", "xAxis")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).tickValues([0, 25, 50, 75, 100]).tickSize(-height))
+    .call(d3.axisBottom(x).tickValues([ 0, 10 , 20, 30]).tickSize(-height))
     .select(".domain").remove()
 
   // Add X axis label:
   svgA4T3.append("text")
     .attr("text-anchor", "end")
-    .attr("x", width)
+    .attr("x", width - (width / 2))
     .attr("y", height + 40)
-    .text("Probability (%)");
+    .text("Temperature Distribution");
 
   // Create a Y scale for densities
   var y = d3.scaleLinear()
@@ -102,26 +102,27 @@ d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.c
 });
 
 d3.select("#yearsA4T3").on("change", function () {
-
-  var margin = { top: 80, right: 30, bottom: 50, left: 110 },
-  width = 460 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+  let selectedYear = this.value
+  var margin = { top: 120, right: 30, bottom: 50, left: 110 },
+  width = 500 - margin.left - margin.right,
+  height = 420 - margin.top - margin.bottom;
 
   d3.select("#SVG_ID_A4T3").remove();
 
   var svgA4T3 = d3.select("#A4task3")
   .append("svg")
   .attr('id', 'SVG_ID_A4T3')
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+  .attr("viewBox", `0 0 800 600`)
+  // .attr("width", width + margin.left + margin.right)
+  // .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform",
     "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv("https://raw.githubusercontent.com/zonination/perceptions/master/probly.csv", function (data) {
+    d3.csv(`../../data/temp_data/pivot_data_year_${selectedYear}.csv`, function (data) {
 
   // Get the different categories and count them
-  var categories = ["Almost Certainly", "Very Good Chance", "We Believe", "Likely", "About Even", "Little Chance", "Chances Are Slight", "Almost No Chance"]
+  var categories = ["January","February","March","April","May","June","July","August","September","October","November","December"]
   var n = categories.length
 
   // Compute the mean of each group
@@ -133,27 +134,26 @@ d3.select("#yearsA4T3").on("change", function () {
   }
 
   // Create a color scale using these means.
-  // var myColor = d3.scaleSequential()
-  //   .domain([0, 100])
-  //   // .interpolator(d3.interpolateViridis);
-  let myColor = d3.scaleLinear();
+  var myColor = d3.scaleSequential()
+    .domain([-15, 40])
+    .interpolator(d3.interpolateViridis);
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([-10, 120])
+    .domain([-15, 40])
     .range([0, width]);
   svgA4T3.append("g")
     .attr("class", "xAxis")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).tickValues([0, 25, 50, 75, 100]).tickSize(-height))
+    .call(d3.axisBottom(x).tickValues([0, 10, 20, 30]).tickSize(-height))
     .select(".domain").remove()
 
   // Add X axis label:
   svgA4T3.append("text")
     .attr("text-anchor", "end")
-    .attr("x", width)
+    .attr("x", width - (width / 2))
     .attr("y", height + 40)
-    .text("Probability (%)");
+    .text("Temperature Distribution");
 
   // Create a Y scale for densities
   var y = d3.scaleLinear()

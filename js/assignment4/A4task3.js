@@ -52,7 +52,7 @@ d3.csv("../../data/temp_data/pivot_data_year_2021.csv", function (data) {
     .attr("text-anchor", "end")
     .attr("x", width - (width / 2))
     .attr("y", height + 40)
-    .text("Temperature Distribution");
+    .text("Temperature (°C)");
 
   // Create a Y scale for densities
   var y = d3.scaleLinear()
@@ -153,7 +153,7 @@ d3.select("#yearsA4T3").on("change", function () {
     .attr("text-anchor", "end")
     .attr("x", width - (width / 2))
     .attr("y", height + 40)
-    .text("Temperature Distribution");
+    .text("Temperature (°C)");
 
   // Create a Y scale for densities
   var y = d3.scaleLinear()

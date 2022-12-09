@@ -2,7 +2,7 @@
 
 // set the dimensions and margins of the graph
 var margin = { top: 120, right: 30, bottom: 50, left: 110 },
-  width = 500 - margin.left - margin.right,
+  width = 600 - margin.left - margin.right,
   height = 420 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -52,7 +52,7 @@ d3.csv("../../data/temp_data/pivot_data_year_2021.csv", function (data) {
     .attr("text-anchor", "end")
     .attr("x", width - (width / 2))
     .attr("y", height + 40)
-    .text("Temperature (°C)");
+    .text("Mean Montly Temperature (°C)");
 
   // Create a Y scale for densities
   var y = d3.scaleLinear()
@@ -104,7 +104,7 @@ d3.csv("../../data/temp_data/pivot_data_year_2021.csv", function (data) {
 d3.select("#yearsA4T3").on("change", function () {
   let selectedYear = this.value
   var margin = { top: 120, right: 30, bottom: 50, left: 110 },
-  width = 500 - margin.left - margin.right,
+  width = 600 - margin.left - margin.right,
   height = 420 - margin.top - margin.bottom;
 
   d3.select("#SVG_ID_A4T3").remove();
@@ -153,7 +153,7 @@ d3.select("#yearsA4T3").on("change", function () {
     .attr("text-anchor", "end")
     .attr("x", width - (width / 2))
     .attr("y", height + 40)
-    .text("Temperature (°C)");
+    .text("Mean Montly Temperature (°C)");
 
   // Create a Y scale for densities
   var y = d3.scaleLinear()

@@ -183,8 +183,8 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .data(data)
             .enter()
             .append("circle")
-            .attr("fill", "#000000")
-            .attr("stroke", "none")
+            .attr("fill", "#fd7e14")
+            .attr("stroke", "white")
             .attr("cx", function (d) {
                 return x(d.month)
             })
@@ -200,8 +200,8 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .data(data)
             .enter()
             .append("circle")
-            .attr("fill", "#000000")
-            .attr("stroke", "none")
+            .attr("fill", "#74c0fc")
+            .attr("stroke", "white")
             .attr("cx", function (d) {
                 return x(d.month)
             })
@@ -231,6 +231,7 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             })
             .attr("r", 3)
             .style("fill", 'green')
+            .attr('stroke', "white")
             .on("mouseover", mouseoverA4T1_mean)
             .on("mousemove", mousemoveA4T1)
             .on("mouseleave", mouseleaveA4T1);
@@ -270,15 +271,15 @@ d3.select("#yearsA4T1").on("change", function () {
 
     let selectedYear = this.value
     var margin = { top: 30, right: 80, bottom: 30, left: 50 },
-        width = 550 - margin.left - margin.right,
-        height = 350 - margin.top - margin.bottom;
+        width = 580 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
 
     d3.select("#SVG_ID_A4T1").remove()
     // append the svg object to the body of the page
     var svg1 = d3.select("#A4task1")
         .append("svg")
         .attr('id', 'SVG_ID_A4T1')
-        .attr("viewBox", `0 0 700 450`)
+        .attr("viewBox", `0 0 600 400`)
         // .attr("width", width + margin.left + margin.right)
         // .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -448,8 +449,8 @@ d3.select("#yearsA4T1").on("change", function () {
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("fill", "#000000")
-                .attr("stroke", "none")
+                .attr("fill", "#fd7e14")
+                .attr('stroke', "white")
                 .attr("cx", function (d) {
                     return x(d.month)
                 })
@@ -467,8 +468,8 @@ d3.select("#yearsA4T1").on("change", function () {
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("fill", "#000000")
-                .attr("stroke", "none")
+                .attr("fill", "#74c0fc")
+                .attr('stroke', "white")
                 .attr("cx", function (d) {
                     return x(d.month)
                 })
@@ -498,6 +499,7 @@ d3.select("#yearsA4T1").on("change", function () {
                 })
                 .attr("r", 3)
                 .style("fill", 'green')
+                .attr('stroke', "white")
                 .on("mouseover", mouseoverA4T1_mean)
                 .on("mousemove", mousemoveA4T1)
                 .on("mouseleave", mouseleaveA4T1);

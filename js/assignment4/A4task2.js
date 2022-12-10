@@ -377,7 +377,7 @@ for (var i = 0; i < features.length; i++) {
     let ft_name = features[i];
     let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
     let line_coordinate = angleToCoordinate(angle, 20);
-    let label_coordinate = angleToCoordinate(angle, 10.5);
+    let label_coordinate = angleToCoordinate(angle, 20.6);
 
     //draw axis line
     svgA4T2.append("line")

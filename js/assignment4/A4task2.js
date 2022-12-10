@@ -11,7 +11,7 @@ function angleToCoordinate(angle, value) {
 // let  = ["A", "B", "C", "D", "E", "F"];
 let years = ["1993", "1997", "2001", "2005", "2009", "2013", "2017", "2021"];
 const features = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
+let colors = ["darkorange", "gray", "navy", "blue", "red", "green", "black", "yellow"];
 //generate the data
 // for (var i = 0; i < years.length; i++) {
 //     var point = {}
@@ -25,7 +25,7 @@ const features = ["January", "February", "March", "April", "May", "June", "July"
 
 let svgA4T2 = d3.select("#A4task2").append("svg")
     .attr("viewBox", `0 0 950 950`)
-    .style("margin-bottom", -450+"px")
+    .style("margin-bottom", -450 + "px")
 // .attr("width", 600)
 // .attr("height", 600);
 
@@ -74,7 +74,7 @@ let line = d3.line()
     .x(d => d.x)
     .y(d => d.y);
 
-let colors = ["darkorange", "gray", "navy", "blue", "red", "green", "black", "yellow"];
+
 
 function getPathCoordinates(data_point) {
     let coordinates = [];
@@ -130,7 +130,7 @@ svgA4T2.selectAll("mylabels")
     .enter()
     .append("text")
     .attr("x", xCircle + size * .8)
-    .attr("y", function (d, i) { return i * (size + 5) + (size / 2) +1  }) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("y", function (d, i) { return i * (size + 5) + (size / 2) + 1 }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d, i) { return colors[i] })
     .text(function (d) { return d })
     .attr("text-anchor", "left")
@@ -171,17 +171,70 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             console.log(dict);
             let color = colors[i];
             let coordinates = getPathCoordinates(dict);
-
             //draw the path element
             svgA4T2.append("path")
                 .datum(coordinates)
                 .attr("d", line)
-                .attr("id", "Year"+years[i])
+                .attr("id", "Year" + years[i])
                 .attr("stroke-width", 3)
                 .attr("stroke", color)
                 .attr("fill", "none")
                 .attr("stroke-opacity", 1)
                 .attr("opacity", 1);
-            // });
+
+                
+
+            // .on("mouseover", mouseoverA4T1_min)
+            // .on("mousemove", mousemoveA4T1)
+            // .on("mouseleave", mouseleaveA4T1);
+
+            svgA4T2.selectAll("myCircles")           // it doubles line [*]
+            .data(data).enter()
+            .append("circle")   
+            .attr("id", "ciao"+years[i])             // full notation for the node    // [*] selection.classed() method for classes,
+            // but you can omit this line because you wrote .selectAll(".datapoints") above
+            .attr("fill", "black")  // you must make big dots 
+            // to be clickable for people
+            .attr("stroke", "white")
+            .attr("stroke-width", "1")
+            .attr("cx", function (d, i) {
+                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+                return angleToCoordinate(angle, d.mean).x
+               
+            })
+            .attr("cy", function (d, i) {
+    
+                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+                return angleToCoordinate(angle, d.mean).y
+                
+            })
+            .attr("r", 3)
+
         }
+
+        svgA4T2.selectAll("myCircles")           // it doubles line [*]
+            .data(data).enter()
+            .append("circle")   
+            .attr("id", function(d,i){return "ciao"+years[i]})             // full notation for the node    // [*] selection.classed() method for classes,
+            // but you can omit this line because you wrote .selectAll(".datapoints") above
+            .attr("fill", "black")  // you must make big dots 
+            // to be clickable for people
+            .attr("stroke", "white")
+            .attr("stroke-width", "1")
+            .attr("cx", function (d, i) {
+                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+                return angleToCoordinate(angle, d.mean).x
+               
+            })
+            .attr("cy", function (d, i) {
+    
+                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+                return angleToCoordinate(angle, d.mean).y
+                
+            })
+            .attr("r", 3)
+
+
+
+       
     });

@@ -152,6 +152,7 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
     function (data) {
 
         for (i = 0; i < years.length; i++) {
+
             let temp_year = data.filter(function (row) {
                 return row.year == years[i];
             });
@@ -182,59 +183,59 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
                 .attr("stroke-opacity", 1)
                 .attr("opacity", 1);
 
-                
+            for ([key, value] of Object.entries(dict)) {
 
-            // .on("mouseover", mouseoverA4T1_min)
-            // .on("mousemove", mousemoveA4T1)
-            // .on("mouseleave", mouseleaveA4T1);
-
-            svgA4T2.selectAll("myCircles")           // it doubles line [*]
-            .data(data).enter()
-            .append("circle")   
-            .attr("id", "ciao"+years[i])             // full notation for the node    // [*] selection.classed() method for classes,
-            // but you can omit this line because you wrote .selectAll(".datapoints") above
-            .attr("fill", "black")  // you must make big dots 
-            // to be clickable for people
-            .attr("stroke", "white")
-            .attr("stroke-width", "1")
-            .attr("cx", function (d, i) {
-                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-                return angleToCoordinate(angle, d.mean).x
-               
-            })
-            .attr("cy", function (d, i) {
+                svgA4T2
+                .append("circle")
+                           // it doubles line [*]
+                 
+                .attr("id", function(){return years[i]+key})             // full notation for the node    // [*] selection.classed() method for classes,
+                // but you can omit this line because you wrote .selectAll(".datapoints") above
+                .attr("fill", color)  // you must make big dots 
+                // to be clickable for people
+                .attr("stroke", "white")
+                .attr("stroke-width", "1")
+                .attr("cx", function () {
+                    
+                    let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+                    return angleToCoordinate(angle, value).x
     
-                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-                return angleToCoordinate(angle, d.mean).y
-                
-            })
-            .attr("r", 3)
+                })
+                .attr("cy", function () {
+
+                    let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+                    return angleToCoordinate(angle, value).y
+    
+                })
+                .attr("r", 3)
+            }
 
         }
 
-        svgA4T2.selectAll("myCircles")           // it doubles line [*]
-            .data(data).enter()
-            .append("circle")   
-            .attr("id", function(d,i){return "ciao"+years[i]})             // full notation for the node    // [*] selection.classed() method for classes,
-            // but you can omit this line because you wrote .selectAll(".datapoints") above
-            .attr("fill", "black")  // you must make big dots 
-            // to be clickable for people
-            .attr("stroke", "white")
-            .attr("stroke-width", "1")
-            .attr("cx", function (d, i) {
-                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-                return angleToCoordinate(angle, d.mean).x
-               
-            })
-            .attr("cy", function (d, i) {
-    
-                let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-                return angleToCoordinate(angle, d.mean).y
-                
-            })
-            .attr("r", 3)
+        // svgA4T2.selectAll("myCircles")           // it doubles line [*]
+        //     .data(data).enter()
+        //     .append("circle")   
+        //     .attr("id", function(d,i){return "ciao"+years[i]})             // full notation for the node    // [*] selection.classed() method for classes,
+        //     // but you can omit this line because you wrote .selectAll(".datapoints") above
+        //     .attr("fill", "black")  // you must make big dots 
+        //     // to be clickable for people
+        //     .attr("stroke", "white")
+        //     .attr("stroke-width", "1")
+        //     .attr("cx", function (d, i) {
+        //         console.log(i)
+        //         let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+        //         return angleToCoordinate(angle, d.mean).x
+
+        //     })
+        //     .attr("cy", function (d, i) {
+        //         console.log(i)
+        //         let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+        //         return angleToCoordinate(angle, d.mean).y
+
+        //     })
+        //     .attr("r", 3)
 
 
 
-       
+
     });

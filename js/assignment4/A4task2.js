@@ -353,10 +353,10 @@ let svgA4T2 = d3.select("#A4task2").append("svg")
     .attr("height", 600);
 
 let radialScale = d3.scaleLinear()
-    .domain([0, 20])
+    .domain([-7, 21])
     .range([0, 250]);
 // let ticks = [2, 4, 6, 8, 10];
-let ticks = d3.range(0, 20, 1)
+let ticks = d3.range(-7, 21, 1)
 ticks.forEach(t =>
     svgA4T2.append("circle")
         .attr("cx", 300)
@@ -400,8 +400,8 @@ let colors = ["darkorange", "gray", "navy", "blue", "red", "green", "black", "ye
 
 function getPathCoordinates(data_point) {
     let coordinates = [];
-    for (var i = 0; i < features.length; i++) {
-        let ft_name = features[i];
+    for (var i = 0; i < features.length+1; i++) {
+        let ft_name = features[i%features.length];
         let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
         coordinates.push(angleToCoordinate(angle, parseFloat(data_point[ft_name])));
     }

@@ -1,4 +1,3 @@
-
 // radarchart
 
 var RadarChart = {
@@ -42,7 +41,9 @@ var RadarChart = {
             }
         }
         //cfg.maxTemp = Math.max(cfg.maxTemp, d3.max(d, function (i) { return d3.max(i.map(function (o) { return o.temp; })) }));
-        var allYear = (d[0].map(function (i, j) { return i.month }));
+        var allYear = (d[0].map(function (i, j) {
+            return i.month
+        }));
         var total = allYear.length;
         var radius = cfg.factor * Math.min(cfg.w / 2, cfg.h / 2);
         var Format = d => parseInt(d) + "°C";
@@ -64,10 +65,18 @@ var RadarChart = {
                 .data(allYear)
                 .enter()
                 .append("svg:line")
-                .attr("x1", function (d, i) { return levelFactor * (1 - cfg.factor * Math.sin(i * cfg.radians / total)); })
-                .attr("y1", function (d, i) { return levelFactor * (1 - cfg.factor * Math.cos(i * cfg.radians / total)); })
-                .attr("x2", function (d, i) { return levelFactor * (1 - cfg.factor * Math.sin((i + 1) * cfg.radians / total)); })
-                .attr("y2", function (d, i) { return levelFactor * (1 - cfg.factor * Math.cos((i + 1) * cfg.radians / total)); })
+                .attr("x1", function (d, i) {
+                    return levelFactor * (1 - cfg.factor * Math.sin(i * cfg.radians / total));
+                })
+                .attr("y1", function (d, i) {
+                    return levelFactor * (1 - cfg.factor * Math.cos(i * cfg.radians / total));
+                })
+                .attr("x2", function (d, i) {
+                    return levelFactor * (1 - cfg.factor * Math.sin((i + 1) * cfg.radians / total));
+                })
+                .attr("y2", function (d, i) {
+                    return levelFactor * (1 - cfg.factor * Math.cos((i + 1) * cfg.radians / total));
+                })
                 .attr("class", "line")
                 .style("stroke", "grey")
                 .style("stroke-opacity", "0.75")
@@ -86,8 +95,12 @@ var RadarChart = {
                 .data([1]) //dummy data
                 .enter()
                 .append("svg:text")
-                .attr("x", function (d) { return levelFactor * (1 - cfg.factor * Math.sin(0)); })
-                .attr("y", function (d) { return levelFactor * (1 - cfg.factor * Math.cos(0)); })
+                .attr("x", function (d) {
+                    return levelFactor * (1 - cfg.factor * Math.sin(0));
+                })
+                .attr("y", function (d) {
+                    return levelFactor * (1 - cfg.factor * Math.cos(0));
+                })
                 .attr("class", "legend")
                 .style("font-family", "sans-serif")
                 .style("font-size", "10px")
@@ -107,8 +120,12 @@ var RadarChart = {
         year.append("line")
             .attr("x1", cfg.w / 2)
             .attr("y1", cfg.h / 2)
-            .attr("x2", function (d, i) { return cfg.w / 2 * (1 - cfg.factor * Math.sin(i * cfg.radians / total)); })
-            .attr("y2", function (d, i) { return cfg.h / 2 * (1 - cfg.factor * Math.cos(i * cfg.radians / total)); })
+            .attr("x2", function (d, i) {
+                return cfg.w / 2 * (1 - cfg.factor * Math.sin(i * cfg.radians / total));
+            })
+            .attr("y2", function (d, i) {
+                return cfg.h / 2 * (1 - cfg.factor * Math.cos(i * cfg.radians / total));
+            })
             .attr("class", "line")
             .style("stroke", "grey")
             .style("stroke-width", "1px");
@@ -118,14 +135,22 @@ var RadarChart = {
 
         year.append("text")
             .attr("class", "legend")
-            .text(function (d) { return months[d - 1] })
+            .text(function (d) {
+                return months[d - 1]
+            })
             .style("font-family", "sans-serif")
             .style("font-size", "11px")
             .attr("text-anchor", "middle")
             .attr("dy", "1.5em")
-            .attr("transform", function (d, i) { return "translate(0, -10)" })
-            .attr("x", function (d, i) { return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin(i * cfg.radians / total)) - 60 * Math.sin(i * cfg.radians / total); })
-            .attr("y", function (d, i) { return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total); })
+            .attr("transform", function (d, i) {
+                return "translate(0, -10)"
+            })
+            .attr("x", function (d, i) {
+                return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin(i * cfg.radians / total)) - 60 * Math.sin(i * cfg.radians / total);
+            })
+            .attr("y", function (d, i) {
+                return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total);
+            })
 
         var i = 0;
         d.forEach(function (y, x) {
@@ -152,7 +177,9 @@ var RadarChart = {
                     }
                     return str;
                 })
-                .style("fill", function (j, i) { return cfg.color(series) })
+                .style("fill", function (j, i) {
+                    return cfg.color(series)
+                })
                 .style("fill-opacity", cfg.opacityArea)
             series++;
         });
@@ -165,7 +192,9 @@ var RadarChart = {
                 .data(y).enter()
                 .append("circle")
                 .attr('r', cfg.radius)
-                .attr("alt", function (j) { return Math.max(j.temp, 0) })
+                .attr("alt", function (j) {
+                    return Math.max(j.temp, 0)
+                })
                 .attr("cx", function (j, i) {
                     dataTemps.push([
                         cfg.w / 2 * (1 - (parseFloat(Math.max(j.temp, 0)) / cfg.maxTemp) * cfg.factor * Math.sin(i * cfg.radians / total)),
@@ -179,10 +208,14 @@ var RadarChart = {
                 .attr("class", "lowOpacityOnHover year" + years[i++])
                 .on("mouseover", onMouseOverLegend)
                 .on("mouseout", onMouseOutLegend)
-                .attr("data-id", function (j) { return j.month })
+                .attr("data-id", function (j) {
+                    return j.month
+                })
                 .style("fill", cfg.color(series)).style("fill-opacity", .9)
                 .append("title")
-                .text(function (j) { return Math.max(j.temp, 0) })
+                .text(function (j) {
+                    return Math.max(j.temp, 0)
+                })
 
             series++;
         });

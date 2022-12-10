@@ -329,25 +329,34 @@
 // }//RadarChart
 
 
-let data = [];
-let features = ["A", "B", "C", "D", "E", "F"];
-//generate the data
-for (var i = 0; i < 3; i++) {
-    var point = {}
-    //each feature will be a random number from 1-9
-    features.forEach(f => point[f] = 1 + Math.random() * 8);
-    data.push(point);
+function angleToCoordinate(angle, value) {
+    let x = Math.cos(angle) * radialScale(value);
+    let y = Math.sin(angle) * radialScale(value);
+    return {"x": 300 + x, "y": 300 - y};
 }
+
+
+// let  = ["A", "B", "C", "D", "E", "F"];
+let years = ["1993", "1997", "2001", "2005", "2009", "2013", "2017", "2021"];
+const features = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+//generate the data
+// for (var i = 0; i < years.length; i++) {
+//     var point = {}
+//     //each feature will be a random number from 1-9
+//     features.forEach(f => point[f] = 1 + Math.random() * 8);
+//     data.push(point);
+// }
 
 let svgA4T2 = d3.select("#A4task2").append("svg")
     .attr("width", 600)
     .attr("height", 600);
 
 let radialScale = d3.scaleLinear()
-    .domain([0, 10])
+    .domain([0, 20])
     .range([0, 250]);
-let ticks = [2, 4, 6, 8, 10];
-
+// let ticks = [2, 4, 6, 8, 10];
+let ticks = d3.range(0, 20, 1)
 ticks.forEach(t =>
     svgA4T2.append("circle")
         .attr("cx", 300)
@@ -363,16 +372,11 @@ ticks.forEach(t =>
         .text(t.toString())
 );
 
-function angleToCoordinate(angle, value){
-    let x = Math.cos(angle) * radialScale(value);
-    let y = Math.sin(angle) * radialScale(value);
-    return {"x": 300 + x, "y": 300 - y};
-}
 
 for (var i = 0; i < features.length; i++) {
     let ft_name = features[i];
     let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-    let line_coordinate = angleToCoordinate(angle, 10);
+    let line_coordinate = angleToCoordinate(angle, 20);
     let label_coordinate = angleToCoordinate(angle, 10.5);
 
     //draw axis line
@@ -381,7 +385,7 @@ for (var i = 0; i < features.length; i++) {
         .attr("y1", 300)
         .attr("x2", line_coordinate.x)
         .attr("y2", line_coordinate.y)
-        .attr("stroke","black");
+        .attr("stroke", "black");
 
     //draw axis label
     svgA4T2.append("text")
@@ -392,29 +396,61 @@ for (var i = 0; i < features.length; i++) {
 let line = d3.line()
     .x(d => d.x)
     .y(d => d.y);
-let colors = ["darkorange", "gray", "navy"];
-function getPathCoordinates(data_point){
+let colors = ["darkorange", "gray", "navy", "blue", "red", "green", "black", "yellow"];
+
+function getPathCoordinates(data_point) {
     let coordinates = [];
-    for (var i = 0; i < features.length; i++){
+    for (var i = 0; i < features.length; i++) {
         let ft_name = features[i];
         let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-        coordinates.push(angleToCoordinate(angle, data_point[ft_name]));
+        coordinates.push(angleToCoordinate(angle, parseFloat(data_point[ft_name])));
     }
     return coordinates;
 }
 
-for (var i = 0; i < data.length; i ++){
-    let d = data[i];
-    let color = colors[i];
-    let coordinates = getPathCoordinates(d);
+d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
 
-    //draw the path element
-    svgA4T2.append("path")
-        .datum(coordinates)
-        .attr("d",line)
-        .attr("stroke-width", 3)
-        .attr("stroke", color)
-        .attr("fill", color)
-        .attr("stroke-opacity", 1)
-        .attr("opacity", 0.5);
-}
+    function (d) {
+        return {
+            year: d.year,
+            month: d.month,
+            mean: d.mean,
+
+        }
+    },
+
+    function (data) {
+
+        for (i = 0; i < years.length; i++) {
+            let temp_year = data.filter(function (row) {
+                return row.year == years[i];
+            });
+            // for (var i = 0; i < data.length; i++) {
+            // temp_year.forEach(function (d) {
+            //     console.log(d.mean, d.year);
+            // let d = data[i];
+            // temp_year = d3.nest()
+            //     .key(function (d) {
+            //         return d.month;
+            //     })
+            //     .entries(temp_year);
+            let dict = {}
+            temp_year.forEach(function (d) {
+                dict[d.month] = d.mean;
+            });
+            console.log(dict);
+            let color = colors[i];
+            let coordinates = getPathCoordinates(dict);
+
+            //draw the path element
+            svgA4T2.append("path")
+                .datum(coordinates)
+                .attr("d", line)
+                .attr("stroke-width", 3)
+                .attr("stroke", color)
+                .attr("fill", "none")
+                .attr("stroke-opacity", 1)
+                .attr("opacity", 1);
+            // });
+        }
+    });

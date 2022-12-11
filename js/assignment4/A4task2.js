@@ -235,7 +235,6 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
                     .attr("cx", function () {
 
                         let angle = (Math.PI / 2) + (2 * Math.PI * count / features.length);
-                        console.log(value, angle)
                         return angleToCoordinate(angle, value).x
 
                     })
@@ -256,9 +255,6 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .on("mouseover", mouseoverA4T2_mean)
             .on("mousemove", mousemoveA4T2)
             .on("mouseleave", mouseleaveA4T2);
-
-
-
 
 
     });

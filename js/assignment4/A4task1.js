@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin = { top: 30, right: 80, bottom: 30, left: 50 },
-    width = 200 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = 580 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg1 = d3.select("#A4task1")
@@ -9,7 +9,7 @@ var svg1 = d3.select("#A4task1")
     .attr('id', 'SVG_ID_A4T1')
     // .attr("width", width + margin.left + margin.right)
     // .attr("height", height + margin.top + margin.bottom)
-    .attr("viewBox", `0 0 600 400`)
+    .attr("viewBox", `0 0 750 550`)
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -236,9 +236,9 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .on("mousemove", mousemoveA4T1)
             .on("mouseleave", mouseleaveA4T1);
 
-            let groups = ['Max', 'Mean', 'Min']
+            let groups = ['Max', 'Min']
 
-        var legend = d3.select("#task1Ass4_legend")
+        var legend = d3.select("#task3Ass4_legend")
             .append("svg")
             // .attr("viewBox", `0 0 50 50`)
             .attr('width', 300)
@@ -253,7 +253,7 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
 
             let color = d3.scaleOrdinal()
             .domain(groups)
-            .range(['#fd7e14', 'green', '#74c0fc'])
+            .range(['#fd7e14','#74c0fc'])
 
         legend.append("rect")
             .attr("width", 20)
@@ -317,20 +317,6 @@ d3.select("#yearsA4T1").on("change", function () {
 
 
             });
-
-            // console.log(data)
-            //group data based on each month and find max of each month:
-            // let byMont = d3.nest()
-            //     .key(function(d) { return d.date.getMonth(); })
-            //     .entries(data);
-
-            // console.log("ciao", byMont)
-
-            // Keep only the 90 first rows
-            // data = data.filter(function (d, i) {
-            //     return i < 90
-            // })
-
 
             // Add X axis --> it is a date format
             var x = d3.scaleBand()

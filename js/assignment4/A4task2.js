@@ -1,27 +1,15 @@
 //RadarChart
 
-
 function angleToCoordinate(angle, value) {
     let x = Math.cos(angle) * radialScale(value);
     let y = Math.sin(angle) * radialScale(value);
     return { "x": 300 + x, "y": 300 - y };
 }
 
-
-// let  = ["A", "B", "C", "D", "E", "F"];
 let years = ["1993", "1997", "2001", "2005", "2009", "2013", "2017", "2021"];
 const features = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 let colors = ["darkorange", "gray", "navy", "blue", "red", "green", "black", "yellow"];
-//generate the data
-// for (var i = 0; i < years.length; i++) {
-//     var point = {}
-//     //each feature will be a random number from 1-9
-//     features.forEach(f => point[f] = 1 + Math.random() * 8);
-//     data.push(point);
-// }
-// var margin = { top: 120, right: 30, bottom: 50, left: 110 },
-//   width = 600 - margin.left - margin.right,
-//   height = 420 - margin.top - margin.bottom;
+
 
 let svgA4T2 = d3.select("#A4task2").append("svg")
     .attr("viewBox", `0 0 950 950`)
@@ -33,7 +21,6 @@ let radialScale = d3.scaleLinear()
     .domain([-10, 30])
     .range([0, 250]);
 let ticks = [-10, 0, 10, 20, 30];
-// let ticks = d3.range(-10, 30, 10)
 ticks.forEach(t =>
     svgA4T2.append("circle")
         .attr("cx", 300)
@@ -75,7 +62,6 @@ let line = d3.line()
     .y(d => d.y);
 
 
-
 function getPathCoordinates(data_point) {
     let coordinates = [];
     for (var i = 0; i < features.length + 1; i++) {
@@ -94,15 +80,25 @@ function getPathCoordinates(data_point) {
 var highlight = function (d) {
     // reduce opacity of all groups
     d3.selectAll("path").style("opacity", .01)
+    d3.selectAll(".circle-mean").style("opacity", .01)
+
     // expect the one that is hovered
     console.log(d)
     d3.select(`#Year${d}`).style("opacity", 1)
+    d3.selectAll(`#mean${d}`).style("opacity", 1)
 }
 
 // And when it is not hovered anymore
 var noHighlight = function (d) {
     d3.selectAll("path").style("opacity", 1)
+    d3.selectAll(".circle-mean").style("opacity", 1)
 }
+
+// ---------------------------//
+//     INTERACTIVE LEGEND     //
+// ---------------------------//
+
+
 // Add one dot in the legend for each name.
 var size = 20
 var moveX = 300
@@ -118,7 +114,7 @@ svgA4T2.selectAll("myrect")
     .enter()
     .append("circle")
     .attr("cx", xCircle)
-    .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("cy", function (d, i) { return 10 + i * (size + 5) + 200 }) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("r", 7)
     .style("fill", function (d, i) { return colors[i] })
     .on("mouseover", highlight)
@@ -130,13 +126,16 @@ svgA4T2.selectAll("mylabels")
     .enter()
     .append("text")
     .attr("x", xCircle + size * .8)
-    .attr("y", function (d, i) { return i * (size + 5) + (size / 2) + 1 }) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("y", function (d, i) { return i * (size + 5) + (size / 2) + 202 }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d, i) { return colors[i] })
     .text(function (d) { return d })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
     .on("mouseover", highlight)
     .on("mouseleave", noHighlight)
+
+
+
 
 d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
 
@@ -151,25 +150,62 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
 
     function (data) {
 
+
+
+        //Tooltip
+        var tooltipA4T1 = d3.select("#A4task2")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+            .style("font-size", "16px");
+
+        let mouseoverA4T2_mean = function (d) {
+            console.log(d)
+            tooltipA4T1
+                .transition()
+                .duration(200)
+                .style("opacity", 1)
+            tooltipA4T1
+                .html("<span style='color:grey'>Year: </span> " + d.year + "<br><span style='color:grey'>Month: </span> " + d.month + "<br><span style='color:grey'>Mean Temp (°C): </span>" + d.mean)
+            d3.selectAll("path").style("opacity", .01)
+            d3.selectAll(".circle-mean").style("opacity", .01)
+
+            // expect the one that is hovered
+            console.log(d)
+            d3.select(`#Year${d.year}`).style("opacity", 1)
+            d3.selectAll(`#mean${d.year}`).style("opacity", 1)
+        }
+        let mousemoveA4T2 = function (d) {
+            tooltipA4T1
+                .style('left', (event.pageX + 20) + 'px')
+                .style('top', (event.pageY + 10) + 'px')
+
+        }
+        let mouseleaveA4T2 = function (d) {
+            tooltipA4T1
+                .transition()
+                .duration(200)
+                .style("opacity", 0);
+            d3.selectAll("path").style("opacity", 1)
+            d3.selectAll(".circle-mean").style("opacity", 1)
+        }
+        count = 0
         for (i = 0; i < years.length; i++) {
 
             let temp_year = data.filter(function (row) {
                 return row.year == years[i];
             });
-            // for (var i = 0; i < data.length; i++) {
-            // temp_year.forEach(function (d) {
-            //     console.log(d.mean, d.year);
-            // let d = data[i];
-            // temp_year = d3.nest()
-            //     .key(function (d) {
-            //         return d.month;
-            //     })
-            //     .entries(temp_year);
+
             let dict = {}
             temp_year.forEach(function (d) {
                 dict[d.month] = d.mean;
             });
-            console.log(dict);
+            // console.log(dict);
             let color = colors[i];
             let coordinates = getPathCoordinates(dict);
             //draw the path element
@@ -186,54 +222,41 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             for ([key, value] of Object.entries(dict)) {
 
                 svgA4T2
-                .append("circle")
-                           // it doubles line [*]
-                 
-                .attr("id", function(){return years[i]+key})             // full notation for the node    // [*] selection.classed() method for classes,
-                // but you can omit this line because you wrote .selectAll(".datapoints") above
-                .attr("fill", color)  // you must make big dots 
-                // to be clickable for people
-                .attr("stroke", "white")
-                .attr("stroke-width", "1")
-                .attr("cx", function () {
-                    
-                    let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-                    return angleToCoordinate(angle, value).x
-    
-                })
-                .attr("cy", function () {
+                    .append("circle")
+                    // it doubles line [*]
 
-                    let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-                    return angleToCoordinate(angle, value).y
-    
-                })
-                .attr("r", 3)
+                    .attr("id", function () { return "mean" + years[i] })
+                    .attr("class", "circle-mean")             // full notation for the node    // [*] selection.classed() method for classes,
+                    // but you can omit this line because you wrote .selectAll(".datapoints") above
+                    .attr("fill", color)  // you must make big dots 
+                    // to be clickable for people
+                    .attr("stroke", "white")
+                    // .attr("stroke-width", "1")
+                    .attr("cx", function () {
+
+                        let angle = (Math.PI / 2) + (2 * Math.PI * count / features.length);
+                        console.log(value, angle)
+                        return angleToCoordinate(angle, value).x
+
+                    })
+                    .attr("cy", function () {
+
+                        let angle = (Math.PI / 2) + (2 * Math.PI * count / features.length);
+                        return angleToCoordinate(angle, value).y
+
+                    })
+                    .attr("r", 3)
+
+                count++
             }
 
         }
 
-        // svgA4T2.selectAll("myCircles")           // it doubles line [*]
-        //     .data(data).enter()
-        //     .append("circle")   
-        //     .attr("id", function(d,i){return "ciao"+years[i]})             // full notation for the node    // [*] selection.classed() method for classes,
-        //     // but you can omit this line because you wrote .selectAll(".datapoints") above
-        //     .attr("fill", "black")  // you must make big dots 
-        //     // to be clickable for people
-        //     .attr("stroke", "white")
-        //     .attr("stroke-width", "1")
-        //     .attr("cx", function (d, i) {
-        //         console.log(i)
-        //         let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-        //         return angleToCoordinate(angle, d.mean).x
+        d3.selectAll(".circle-mean").data(data)
+            .on("mouseover", mouseoverA4T2_mean)
+            .on("mousemove", mousemoveA4T2)
+            .on("mouseleave", mouseleaveA4T2);
 
-        //     })
-        //     .attr("cy", function (d, i) {
-        //         console.log(i)
-        //         let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-        //         return angleToCoordinate(angle, d.mean).y
-
-        //     })
-        //     .attr("r", 3)
 
 
 

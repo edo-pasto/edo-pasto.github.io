@@ -13,7 +13,7 @@ let colors = ["darkorange", "gray", "navy", "blue", "red", "green", "black", "ye
 
 let svgA4T2 = d3.select("#A4task2").append("svg")
     .attr("viewBox", `0 0 950 950`)
-    .style("margin-bottom", -450 + "px")
+    // .style("margin-bottom", -450 + "px")
 // .attr("width", 600)
 // .attr("height", 600);
 

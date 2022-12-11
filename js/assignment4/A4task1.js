@@ -13,9 +13,9 @@ var svg1 = d3.select("#A4task1")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
+
 const categories = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-// const formatMonth = d3.timeFormat('%b');
 //Read the data
 d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
 
@@ -48,20 +48,6 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
 
 
         });
-
-        // console.log(data)
-        //group data based on each month and find max of each month:
-        // let byMont = d3.nest()
-        //     .key(function(d) { return d.date.getMonth(); })
-        //     .entries(data);
-
-        // console.log("ciao", byMont)
-
-        // Keep only the 90 first rows
-        // data = data.filter(function (d, i) {
-        //     return i < 90
-        // })
-
 
         // Add X axis --> it is a date format
         var x = d3.scaleBand()
@@ -107,9 +93,6 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
 
         // Three function that change the tooltip when user hover / move / leave a cell
         const mouseoverA4T1_max = function (d) {
-
-            
-
             tooltipA4T1
                 .transition()
                 .duration(200)
@@ -118,7 +101,6 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
                 .html("<span style='color:grey'>Year: </span> " + d.year + "<br><span style='color:grey'>Month: </span> " + d.month + "<br><span style='color:grey'>Max Temp (°C): </span>" + d.max)
         }
         let mouseoverA4T1_min = function (d) {
-
             tooltipA4T1
                 .transition()
                 .duration(200)
@@ -127,7 +109,6 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
                 .html("<span style='color:grey'>Year: </span> " + d.year + "<br><span style='color:grey'>Month: </span> " + d.month + "<br><span style='color:grey'>Min Temp (°C): </span>" + d.min)
         }
         let mouseoverA4T1_mean = function (d) {
-
             tooltipA4T1
                 .transition()
                 .duration(200)
@@ -151,6 +132,8 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
         // Add the line- Drawing the maximum
         svg1.append("path")
             .datum(data)
+            .attr("class", "path-line")
+            .attr("id", "pathMax")
             .attr("fill", "none")
             .attr("stroke", "#fd7e14")
             .attr("stroke-width", 4)
@@ -166,6 +149,8 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
         // //Drawing minimum
         svg1.append("path")
             .datum(data)
+            .attr("class", "path-line")
+            .attr("id", "pathMin")
             .attr("fill", "none")
             .attr("stroke", "#74c0fc")
             .attr("stroke-width", 4)
@@ -183,6 +168,8 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .data(data)
             .enter()
             .append("circle")
+            .attr("class", "circle-line")
+            .attr("id", "circleMax")
             .attr("fill", "#fd7e14")
             .attr("stroke", "white")
             .attr("cx", function (d) {
@@ -200,6 +187,8 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .data(data)
             .enter()
             .append("circle")
+            .attr("class", "circle-line")
+            .attr("id", "circleMin")
             .attr("fill", "#74c0fc")
             .attr("stroke", "white")
             .attr("cx", function (d) {
@@ -219,9 +208,11 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .data(data)
             .enter()
             .append("circle")
-            .attr("class", function (d) {
-                return "dot " + d.year
-            })
+            .attr("class", "circle-line")
+            // .attr("class", function (d) {
+            //     return "dot " + d.year
+            // })
+            .attr("id", "circleMean")
             .attr("cx", function (d) {
 
                 return x(d.month);
@@ -236,34 +227,55 @@ d3.csv("../../data/temp_data/grouped_cleaned_daily_temp_data.csv",
             .on("mousemove", mousemoveA4T1)
             .on("mouseleave", mouseleaveA4T1);
 
-            let groups = ['Max', 'Min']
+        var highlight = function (d) {
+            // reduce opacity of all groups
+            d3.selectAll(".path-line").style("opacity", .01)
+            d3.selectAll(`.circle-line`).style("opacity", .01)
 
-        var legend = d3.select("#task3Ass4_legend")
-            .append("svg")
-            // .attr("viewBox", `0 0 50 50`)
-            .attr('width', 300)
-            .attr('height', 100)
-            .append('g')
-            .attr("transform", `translate(50,0)`)
-            .selectAll("div")
-            .data(groups)
+            // expect the one that is hovered
+            console.log(d)
+            d3.selectAll(`#circle${d}`).style("opacity", 1)
+            d3.selectAll(`#path${d}`).style("opacity", 1)
+        }
+
+        // And when it is not hovered anymore
+        var noHighlight = function (d) {
+            d3.selectAll(".path-line").style("opacity", 1)
+            d3.selectAll(`.circle-line`).style("opacity", 1)
+        }
+
+        var allgroups = ["Max", "Mean", "Min"]
+        let color2 = ['#fd7e14', 'green', '#74c0fc']
+        var size = 20
+        var moveX = 100
+        var moveY = 50
+        var xCircle = 390 + moveX
+        var xLabel = 440 + moveX
+        svg1.selectAll("myrect")
+            .data(allgroups)
             .enter()
-            .append("g")
-            .attr('transform', function (d, i) { return "translate(0," + i * 30 + ")"; });
+            .append("circle")
+            .attr("cx", xCircle)
+            .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("r", 7)
+            .style("fill", function (d, i) { return color2[i] })
+            .on("mouseover", highlight)
+            .on("mouseleave", noHighlight)
 
-            let color = d3.scaleOrdinal()
-            .domain(groups)
-            .range(['#fd7e14','#74c0fc'])
+        // Add labels beside legend dots
+        svg1.selectAll("mylabels")
+            .data(allgroups)
+            .enter()
+            .append("text")
+            .attr("x", xCircle + size * .8)
+            .attr("y", function (d, i) { return i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+            .style("fill", function (d, i) { return color2[i] })
+            .text(function (d) { return d })
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+        .on("mouseover", highlight)
+        .on("mouseleave", noHighlight)
 
-        legend.append("rect")
-            .attr("width", 20)
-            .attr("height", 20)
-            .style("fill", function (d, i) { return color(i) });
-    
-        legend.append("text")
-            .attr("x", 25)
-            .attr("y", 15)
-            .text(function (d, i) { return d });
     });
 
 
@@ -272,14 +284,14 @@ d3.select("#yearsA4T1").on("change", function () {
     let selectedYear = this.value
     var margin = { top: 30, right: 80, bottom: 30, left: 50 },
         width = 580 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+        height = 320 - margin.top - margin.bottom;
 
     d3.select("#SVG_ID_A4T1").remove()
     // append the svg object to the body of the page
     var svg1 = d3.select("#A4task1")
         .append("svg")
         .attr('id', 'SVG_ID_A4T1')
-        .attr("viewBox", `0 0 600 400`)
+        .attr("viewBox", `0 0 620 480`)
         // .attr("width", width + margin.left + margin.right)
         // .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -302,10 +314,6 @@ d3.select("#yearsA4T1").on("change", function () {
 
         // Now I can use this dataset:
         function (data) {
-            // console.log(data[0])
-            // let  categories = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-
-
             data = data.filter(function (row) {
                 return row.year == selectedYear;
             });
@@ -314,7 +322,6 @@ d3.select("#yearsA4T1").on("change", function () {
                 d.mean = parseFloat(d.mean);
                 d.max = parseFloat(d.max);
                 d.min = parseFloat(d.min);
-
 
             });
 
@@ -330,7 +337,7 @@ d3.select("#yearsA4T1").on("change", function () {
                 .attr("x", 9)
                 .attr("dy", ".35em")
                 .attr("transform", "translate(-10,0)rotate(45)")
-                .style("text-anchor", "start");;
+                .style("text-anchor", "start");
 
             // Add Y axis
             var y = d3.scaleLinear()
@@ -361,7 +368,6 @@ d3.select("#yearsA4T1").on("change", function () {
 
             // Three function that change the tooltip when user hover / move / leave a cell
             const mouseoverA4T1_max = function (d) {
-
                 tooltipA4T1
                     .transition()
                     .duration(200)
@@ -370,7 +376,6 @@ d3.select("#yearsA4T1").on("change", function () {
                     .html("<span style='color:grey'>Year: </span> " + d.year + "<br><span style='color:grey'>Month: </span> " + d.month + "<br><span style='color:grey'>Max Temp (°C): </span>" + d.max)
             }
             let mouseoverA4T1_min = function (d) {
-                
                 tooltipA4T1
                     .transition()
                     .duration(200)
@@ -379,7 +384,6 @@ d3.select("#yearsA4T1").on("change", function () {
                     .html("<span style='color:grey'>Year: </span> " + d.year + "<br><span style='color:grey'>Month: </span> " + d.month + "<br><span style='color:grey'>Min Temp (°C): </span>" + d.min)
             }
             let mouseoverA4T1_mean = function (d) {
-
                 tooltipA4T1
                     .transition()
                     .duration(200)
@@ -403,6 +407,8 @@ d3.select("#yearsA4T1").on("change", function () {
             // Add the line- Drawing the maximum
             svg1.append("path")
                 .datum(data)
+                .attr("class", "path-line")
+                .attr("id", "pathMax")
                 .attr("fill", "none")
                 .attr("stroke", "#fd7e14")
                 .attr("stroke-width", 4)
@@ -418,6 +424,8 @@ d3.select("#yearsA4T1").on("change", function () {
             // //Drawing minimum
             svg1.append("path")
                 .datum(data)
+                .attr("class", "path-line")
+                .attr("id", "pathMin")
                 .attr("fill", "none")
                 .attr("stroke", "#74c0fc")
                 .attr("stroke-width", 4)
@@ -435,6 +443,8 @@ d3.select("#yearsA4T1").on("change", function () {
                 .data(data)
                 .enter()
                 .append("circle")
+                .attr("class", "circle-line")
+                .attr("id", "circleMax")
                 .attr("fill", "#fd7e14")
                 .attr('stroke', "white")
                 .attr("cx", function (d) {
@@ -448,12 +458,12 @@ d3.select("#yearsA4T1").on("change", function () {
                 .on("mousemove", mousemoveA4T1)
                 .on("mouseleave", mouseleaveA4T1);
 
-
-
             svg1.selectAll("myCircles")
                 .data(data)
                 .enter()
                 .append("circle")
+                .attr("class", "circle-line")
+                .attr("id", "circleMin")
                 .attr("fill", "#74c0fc")
                 .attr('stroke', "white")
                 .attr("cx", function (d) {
@@ -467,15 +477,13 @@ d3.select("#yearsA4T1").on("change", function () {
                 .on("mousemove", mousemoveA4T1)
                 .on("mouseleave", mouseleaveA4T1);
 
-
             svg1.append('g')
                 .selectAll("dot")
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("class", function (d) {
-                    return "dot " + d.year
-                })
+                .attr("class", "circle-line")
+                .attr("id", "circleMean")
                 .attr("cx", function (d) {
 
                     return x(d.month);
@@ -489,6 +497,57 @@ d3.select("#yearsA4T1").on("change", function () {
                 .on("mouseover", mouseoverA4T1_mean)
                 .on("mousemove", mousemoveA4T1)
                 .on("mouseleave", mouseleaveA4T1);
+
+
+            var highlight = function (d) {
+                // reduce opacity of all groups
+                d3.selectAll(".path-line").style("opacity", .01)
+                d3.selectAll(`.circle-line`).style("opacity", .01)
+
+                // expect the one that is hovered
+                console.log(d)
+                d3.selectAll(`#circle${d}`).style("opacity", 1)
+                d3.selectAll(`#path${d}`).style("opacity", 1)
+            }
+
+            // And when it is not hovered anymore
+            var noHighlight = function (d) {
+                d3.selectAll(".path-line").style("opacity", 1)
+                d3.selectAll(`.circle-line`).style("opacity", 1)
+            }
+
+            var allgroups = ["Max", "Mean", "Min"]
+            let color2 = ['#fd7e14', 'green', '#74c0fc']
+            var size = 20
+            var moveX = 40
+            var moveY = 50
+            var xCircle = 390 + moveX
+            var xLabel = 440 + moveX
+            svg1.selectAll("myrect")
+                .data(allgroups)
+                .enter()
+                .append("circle")
+                .attr("cx", xCircle)
+                .attr("cy", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("r", 6)
+                .style("fill", function (d, i) { return color2[i] })
+            .on("mouseover", highlight)
+            .on("mouseleave", noHighlight)
+
+            // Add labels beside legend dots
+            svg1.selectAll("mylabels")
+                .data(allgroups)
+                .enter()
+                .append("text")
+                .attr("font-size", 12 + "px")
+                .attr("x", xCircle + size * .8)
+                .attr("y", function (d, i) { return i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+                .style("fill", function (d, i) { return color2[i] })
+                .text(function (d) { return d })
+                .attr("text-anchor", "left")
+                .style("alignment-baseline", "middle")
+                .on("mouseover", highlight)
+                .on("mouseleave", noHighlight)
 
         });
 

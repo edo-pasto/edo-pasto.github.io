@@ -16,34 +16,63 @@ var svgA4T3 = d3.select("#A4task3")
   .attr("transform",
     "translate(" + margin.left + "," + margin.top + ")");
 
-    let groups = ['Max', 'Mean', 'Min']
+var highlight = function (d) {
+  // reduce opacity of all groups
+  d3.selectAll(".path-ridgline").style("opacity", .01)
+  // expect the one that is hovered
+  d3.selectAll(`#pathRidg${d}`).style("opacity", 1)
+}
+var highlightMax = function (d) {
+  // reduce opacity of all groups
+  d3.selectAll(".path-ridgline").style("opacity", .01)
+  // expect the one that is hovered
 
-    var legend = d3.select("#task1Ass4_legend")
-        .append("svg")
-        // .attr("viewBox", `0 0 50 50`)
-        .attr('width', 300)
-        .attr('height', 100)
-        .append('g')
-        .attr("transform", `translate(50,0)`)
-        .selectAll("div")
-        .data(groups)
-        .enter()
-        .append("g")
-        .attr('transform', function (d, i) { return "translate(0," + i * 30 + ")"; });
+  d3.selectAll(`#pathRidgMax`).style("opacity", 1)
+}
+var highlightMin = function (d) {
+  // reduce opacity of all groups
+  d3.selectAll(".path-ridgline").style("opacity", .01)
+  // expect the one that is hovered
 
-        let color = d3.scaleOrdinal()
-        .domain(groups)
-        .range(['#fd7e14', 'green', '#74c0fc'])
+  d3.selectAll(`#pathRidgMin`).style("opacity", 1)
+}
+// And when it is not hovered anymore
+var noHighlight = function (d) {
+  d3.selectAll(".path-ridgline").style("opacity", 1)
+  // d3.selectAll(`.circle-line`).style("opacity", 1)
+}
 
-    legend.append("rect")
-        .attr("width", 20)
-        .attr("height", 20)
-        .style("fill", function (d, i) { return color(i) });
+var allgroups = ["Max", "Min"]
+let color2 = ['#fd7e14', '#74c0fc']
+var size = 20
+var moveX = 100
+var moveY = 50
+var xCircle = 390 + moveX
+var xLabel = 440 + moveX
+svgA4T3.selectAll("myrect")
+  .data(allgroups)
+  .enter()
+  .append("circle")
+  .attr("cx", xCircle)
+  .attr("cy", function (d, i) { return 10 + i * (size + 5) - 100 }) // 100 is where the first dot appears. 25 is the distance between dots
+  .attr("r", 7)
+  .style("fill", function (d, i) { return color2[i] })
+  .on("mouseover", highlight)
+  .on("mouseleave", noHighlight)
 
-    legend.append("text")
-        .attr("x", 25)
-        .attr("y", 15)
-        .text(function (d, i) { return d });
+// Add labels beside legend dots
+svgA4T3.selectAll("mylabels")
+  .data(allgroups)
+  .enter()
+  .append("text")
+  .attr("x", xCircle + size * .8)
+  .attr("y", function (d, i) { return i * (size + 5) + (size / 2) - 100 }) // 100 is where the first dot appears. 25 is the distance between dots
+  .style("fill", function (d, i) { return color2[i] })
+  .text(function (d) { return d })
+  .attr("text-anchor", "left")
+  .style("alignment-baseline", "middle")
+  .on("mouseover", highlight)
+  .on("mouseleave", noHighlight)
 
 //read data
 d3.csv("../../data/temp_data/pivot_data_max_year_2021.csv", function (data) {
@@ -115,6 +144,8 @@ d3.csv("../../data/temp_data/pivot_data_max_year_2021.csv", function (data) {
     .data(allDensity)
     .enter()
     .append("path")
+    .attr("class", "path-ridgline")
+    .attr("id", "pathRidgMax")
     .attr("transform", function (d) { return ("translate(0," + (yName(d.key) - height) + ")") })
     .datum(function (d) { return (d.density) })
     .attr("fill", "#fc7e13")
@@ -126,6 +157,8 @@ d3.csv("../../data/temp_data/pivot_data_max_year_2021.csv", function (data) {
       .x(function (d) { return x(d[0]); })
       .y(function (d) { return y(d[1]); })
     )
+    .on("mouseover", highlightMax)
+    .on("mouseleave", noHighlight)
 
 });
 
@@ -197,6 +230,8 @@ d3.csv("../../data/temp_data/pivot_data_min_year_2021.csv", function (data) {
     .data(allDensity)
     .enter()
     .append("path")
+    .attr("class", "path-ridgline")
+    .attr("id", "pathRidgMin")
     .attr("transform", function (d) { return ("translate(0," + (yName(d.key) - height) + ")") })
     .datum(function (d) { return (d.density) })
     .attr("fill", "#73c0fb")
@@ -208,6 +243,8 @@ d3.csv("../../data/temp_data/pivot_data_min_year_2021.csv", function (data) {
       .x(function (d) { return x(d[0]); })
       .y(function (d) { return y(d[1]); })
     )
+    .on("mouseover", highlightMin)
+    .on("mouseleave", noHighlight)
 
 });
 
@@ -228,6 +265,64 @@ d3.select("#yearsA4T3").on("change", function () {
     .append("g")
     .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")");
+
+  var highlight = function (d) {
+    // reduce opacity of all groups
+    d3.selectAll(".path-ridgline").style("opacity", .01)
+    // expect the one that is hovered
+    d3.selectAll(`#pathRidg${d}`).style("opacity", 1)
+  }
+  var highlightMax = function (d) {
+    // reduce opacity of all groups
+    d3.selectAll(".path-ridgline").style("opacity", .01)
+    // expect the one that is hovered
+
+    d3.selectAll(`#pathRidgMax`).style("opacity", 1)
+  }
+  var highlightMin = function (d) {
+    // reduce opacity of all groups
+    d3.selectAll(".path-ridgline").style("opacity", .01)
+    // expect the one that is hovered
+
+    d3.selectAll(`#pathRidgMin`).style("opacity", 1)
+  }
+  // And when it is not hovered anymore
+  var noHighlight = function (d) {
+    d3.selectAll(".path-ridgline").style("opacity", 1)
+    // d3.selectAll(`.circle-line`).style("opacity", 1)
+  }
+
+  var allgroups = ["Max", "Min"]
+  let color2 = ['#fd7e14', '#74c0fc']
+  var size = 20
+  var moveX = 100
+  var moveY = 50
+  var xCircle = 390 + moveX
+  var xLabel = 440 + moveX
+  svgA4T3.selectAll("myrect")
+    .data(allgroups)
+    .enter()
+    .append("circle")
+    .attr("cx", xCircle)
+    .attr("cy", function (d, i) { return 10 + i * (size + 5) - 100 }) // 100 is where the first dot appears. 25 is the distance between dots
+    .attr("r", 7)
+    .style("fill", function (d, i) { return color2[i] })
+    .on("mouseover", highlight)
+    .on("mouseleave", noHighlight)
+
+  // Add labels beside legend dots
+  svgA4T3.selectAll("mylabels")
+    .data(allgroups)
+    .enter()
+    .append("text")
+    .attr("x", xCircle + size * .8)
+    .attr("y", function (d, i) { return i * (size + 5) + (size / 2) - 100 }) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function (d, i) { return color2[i] })
+    .text(function (d) { return d })
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .on("mouseover", highlight)
+    .on("mouseleave", noHighlight)
 
   d3.csv(`../../data/temp_data/pivot_data_max_year_${selectedYear}.csv`, function (data) {
 
@@ -288,34 +383,37 @@ d3.select("#yearsA4T3").on("change", function () {
 
     // Add areas
     svgA4T3.selectAll("areas")
-    .data(allDensity)
-    .enter()
-    .append("path")
-    .attr("transform", function (d) { return ("translate(0," + (yName(d.key) - height) + ")") })
-    .datum(function (d) { return (d.density) })
-    .attr("fill", "#fc7e13")
-    .attr("fill-opacity", "0.2")
-    .attr("stroke", "#fc7e13")
-    .attr("stroke-width", 2)
-    .attr("d", d3.line()
-      .curve(d3.curveBasis)
-      .x(function (d) { return x(d[0]); })
-      .y(function (d) { return y(d[1]); })
-      )
+      .data(allDensity)
+      .enter()
+      .append("path")
+      .attr("class", "path-ridgline")
+      .attr("id", "pathRidgMax")
+      .attr("transform", function (d) { return ("translate(0," + (yName(d.key) - height) + ")") })
+      .datum(function (d) { return (d.density) })
+      .attr("fill", "#fc7e13")
+      .attr("fill-opacity", "0.2")
+      .attr("stroke", "#fc7e13")
+      .attr("stroke-width", 2)
+      .attr("d", d3.line()
+        .curve(d3.curveBasis)
+        .x(function (d) { return x(d[0]); })
+        .y(function (d) { return y(d[1]); })
+      ).on("mouseover", highlightMax)
+      .on("mouseleave", noHighlight)
 
   });
 
   d3.csv(`../../data/temp_data/pivot_data_min_year_${selectedYear}.csv`, function (data) {
 
     // Get the different categories and count them
-  
+
     var categories = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var n = categories.length
-  
+
     // Compute the mean of each group
     allMeans = []
     for (i in categories) {
-  
+
       currentGroup = categories[i]
       mean = d3.mean(data, function (d) {
         console.log(d[currentGroup])
@@ -323,12 +421,12 @@ d3.select("#yearsA4T3").on("change", function () {
       })
       allMeans.push(mean)
     }
-  
+
     // Create a color scale using these means.
     var myColor = d3.scaleSequential()
       .domain([-15, 40])
       .interpolator(d3.interpolateViridis);
-  
+
     // Add X axis
     var x = d3.scaleLinear()
       .domain([-15, 40])
@@ -338,19 +436,19 @@ d3.select("#yearsA4T3").on("change", function () {
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x).tickValues([0, 10, 20, 30]).tickSize(-height))
       .select(".domain").remove()
-  
+
     // Add X axis label:
     svgA4T3.append("text")
       .attr("text-anchor", "end")
       .attr("x", width - (width / 2))
       .attr("y", height + 40)
       .text("Max & Min Montly Temperature (°C)");
-  
+
     // Create a Y scale for densities
     var y = d3.scaleLinear()
       .domain([0, 0.5])
       .range([height, 0]);
-  
+
     // Create the Y axis for names
     var yName = d3.scaleBand()
       .domain(categories)
@@ -358,7 +456,7 @@ d3.select("#yearsA4T3").on("change", function () {
       .paddingInner(1)
     svgA4T3.append("g")
       .call(d3.axisLeft(yName))
-  
+
     // Compute kernel density estimation for each column:
     var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40)) // increase this 40 for more accurate density.
     var allDensity = []
@@ -367,14 +465,15 @@ d3.select("#yearsA4T3").on("change", function () {
       density = kde(data.map(function (d) { return d[key]; }))
       allDensity.push({ key: key, density: density })
     }
-  
+
     // Add areas
     svgA4T3.selectAll("areas")
       .data(allDensity)
       .enter()
       .append("path")
+      .attr("class", "path-ridgline")
+      .attr("id", "pathRidgMin")
       .attr("transform", function (d) { return ("translate(0," + (yName(d.key) - height) + ")") })
-
       .datum(function (d) { return (d.density) })
       .attr("fill", "#73c0fb")
       .attr("fill-opacity", "0.2")
@@ -384,8 +483,9 @@ d3.select("#yearsA4T3").on("change", function () {
         .curve(d3.curveBasis)
         .x(function (d) { return x(d[0]); })
         .y(function (d) { return y(d[1]); })
-      )
-  
+      ).on("mouseover", highlightMin)
+      .on("mouseleave", noHighlight)
+
   });
 
 });

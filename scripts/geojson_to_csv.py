@@ -264,3 +264,44 @@ trees_type = df[['Name', 'Latitude', 'Longitude']][:-1]
 trees_type = trees_type[trees_type['Name'].isin(names)]
 # print(trees_type)
 trees_type.to_csv(f'{DATA_PATH}/mapTop_{top}_trees.csv', index=False)
+
+#------ Assignment 5 ------
+# Task 1
+
+top = 10
+
+dfass5 = df[['Name', 'Carbon Storage (kg)']][:-1] # remove the last line because is the total
+dfass5['Carbon Storage (kg)'] = dfass5['Carbon Storage (kg)'].apply(float) # cast string to float values
+
+# count the occurences of every tree
+top_trees = dfass5.groupby('Name').count().round(2).rename(columns={'Carbon Storage (kg)': 'Count'}).reset_index()
+# compute the mean of the canopy cover for each tree
+top_trees['Sum Carbon Storage (kg)'] = dfass5.groupby('Name').sum().round(2).values
+
+# select only the top X and save into csv
+top_trees = top_trees.sort_values(by='Count', ascending=False)[:top]
+# top_trees.to_csv(f'{DATA_PATH}/top_{top}_trees.csv', index=False)
+
+
+print(top_trees)
+
+
+
+dfass5V2= df[['Name', 'Carbon Storage (eur)']][:-1] # remove the last line because is the total
+dfass5V2['Carbon Storage (eur)'] = dfass5V2['Carbon Storage (eur)'].apply(float) # cast string to float values
+
+# count the occurences of every tree
+top_trees2 = dfass5V2.groupby('Name').count().round(2).rename(columns={'Carbon Storage (eur)': 'Count'}).reset_index()
+# compute the mean of the canopy cover for each tree
+top_trees2['Sum Carbon Storage (eur)'] = dfass5V2.groupby('Name').sum().round(2).values
+
+# select only the top X and save into csv
+top_trees2 = top_trees2.sort_values(by='Count', ascending=False)[:top]
+# top_trees.to_csv(f'{DATA_PATH}/top_{top}_trees.csv', index=False)
+print(top_trees2)
+
+
+result = top_trees.merge(top_trees2, left_on='Name', right_on='Name')
+# print(temp[['Name', 'Sum Carbon Storage (kg)', 'Sum Carbon Storage (eur)']])
+
+result[['Name', 'Sum Carbon Storage (kg)', 'Sum Carbon Storage (eur)']].to_csv(f'{DATA_PATH}/top_{top}_trees_FluxChart.csv', index=False)

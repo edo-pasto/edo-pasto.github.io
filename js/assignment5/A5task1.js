@@ -1,13 +1,14 @@
 
 // set the dimensions and margins of the graph
-var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-  width = 800 - margin.left - margin.right,
-  height = 800 - margin.top - margin.bottom;
+var margin = { top: 10, right: 100, bottom: 10, left: 10 },
+  width = 1000 - margin.left - margin.right,
+  height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#A5task1").append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+.attr("viewBox", `-200 -15 1300 700`)
+  // .attr("width", width + margin.left + margin.right)
+  // .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform",
     "translate(" + margin.left + "," + margin.top + ")");

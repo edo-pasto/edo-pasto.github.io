@@ -1,8 +1,8 @@
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 450 - margin.left - margin.right,
-    height = 480 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#A5task1").append("svg")
@@ -17,8 +17,8 @@ var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
-    .nodeWidth(36)
-    .nodePadding(290)
+    .nodeWidth(15)
+    .nodePadding(30)
     .size([width, height]);
 
 // load the data
